@@ -21,9 +21,9 @@ include("../php/capturas.php");
     <br><br>
     <label for="">Turno</label>
     <br><br>
-    <input type="checkbox" name="turno" id="TM" value="T.M">T.M
+    <input type="checkbox" name="turno" id="TM" value="T.M" class="turno">T.M
     <br><br>
-    <input type="checkbox" name="turno" id="TV" value="T.V">T.V
+    <input type="checkbox" name="turno" id="TV" value="T.V" class="turno">T.V
     <br><br>
     Aula
     <input type="text" name="aula" id="aula">
@@ -80,11 +80,11 @@ Docente
     <option value="">Seleccionar</option>
     <?php
     include('../php/connection.php');
-    $consul = "SELECT clave FROM maestros";
+    $consul = "SELECT nomenclatura FROM profesores";
     $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
     
     while($column = mysqli_fetch_array($resul)){
-        $optionname=$column['clave'];
+        $optionname=$column['nomenclatura'];
         echo "<option value='$optionname'>$optionname</option>";
     }
     ?> 
@@ -93,11 +93,11 @@ Docente
     Grupo
     <input type="text" name="grupo" id="grupo"> 
     <br><br>
-    <input type="checkbox" name="reporte" id="retardo" value="Retardo"> Retardo
+    <input type="checkbox" name="reporte" class="only-one" value="Retardo"> Retardo
     <br><br>
-    <input type="checkbox" name="reporte" id="falta" value="Falta"> Falta
+    <input type="checkbox" name="reporte" class="only-one" value="Falta"> Falta
     <br><br>
-    <input type="checkbox" name="reporte" id="salidaAntes" value="Salida Antes"> Salida Antes
+    <input type="checkbox" name="reporte" class="only-one" value="Salida Antes"> Salida Antes
 
     <br><br>
     Primera Revision 
@@ -122,8 +122,30 @@ Docente
     
 
 
-
-   
+<script>
+    let Checked = null;
+    //The class name can vary
+        for (let CheckBox of document.getElementsByClassName('only-one')){
+            CheckBox.onclick = function(){
+            if(Checked!=null){
+            Checked.checked = false;
+            Checked = CheckBox;
+            }
+            Checked = CheckBox;
+        }
+    }
+    let Checked_turno = null;
+    //The class name can vary
+        for (let CheckBox of document.getElementsByClassName('turno')){
+            CheckBox.onclick = function(){
+            if(Checked_turno!=null){
+            Checked_turno.checked = false;
+            Checked_turno = CheckBox;
+            }
+            Checked_turno = CheckBox;
+        }
+    }
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>

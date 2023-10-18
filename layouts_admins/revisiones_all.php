@@ -15,23 +15,21 @@
   <div>
     De: <input type="date" name="buscar_date1">
     A: <input type="date" name="buscar_date2">
-    <?php require_once '../php/backend-directores.php';?>
-      <form action="../php/backend-directores.php" method="POST">
           <!-- <label for="Director">Director</label> -->
-          <select id="docente" name="c_director">
-            <option value="">Seleccionar profesor</option>
-              <?php
-              include('../php/connection.php');
-              $consul = "SELECT nom_dir FROM dir_de_carrera";
-              $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
-              
-              while($column = mysqli_fetch_array($resul)){
-                  $optionname=$column['nom_dir'];
-                  echo "<option value='$optionname'>$optionname</option>";
-              }
-              ?>
-          </select>
-          <button type="submit" class="btn btn-primary" name="buscar_revi">Search</button>
+        <select id="docente" name="c_profesor">
+          <option value="">Seleccionar profesor</option>
+            <?php
+            include('../php/connection.php');
+            $consul = "SELECT nomenclatura FROM profesores";
+            $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
+            
+            while($column = mysqli_fetch_array($resul)){
+                $optionname=$column['nomenclatura'];
+                echo "<option value='$optionname'>$optionname</option>";
+            }
+            ?>
+        </select>
+        <button type="submit" class="btn btn-primary" name="buscar_revi">Search</button>
   </div>
 </form>
 
@@ -63,7 +61,7 @@ if(isset($_GET['buscar_revi'])){
   <?php
   $date_1 = $_GET['buscar_date1'];
   $date_2 = $_GET['buscar_date2'];
-  $profesor = $_GET['c_director'];
+  $profesor = $_GET['c_profesor'];
   $query = "SELECT * FROM revisiones WHERE fecha BETWEEN '$date_1' 
   AND '$date_2' OR profesor = '$profesor'";
   $query_run = mysqli_query($connection, $query);
