@@ -6,7 +6,7 @@
     <a class="nav-link" href="revisiones_all.php">Reportes</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Profesores</a>
+    <a class="nav-link" href="profesores.php">Profesores</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="carreras.php">Carreras</a>
