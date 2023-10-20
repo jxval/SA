@@ -14,7 +14,7 @@
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th scope="col">Clave</th> 
+                <th scope="col">Nomenclatura</th> 
                 <th scope="col">Nombres</th>
                 <th scope="col">Primer_apellido</th>
                 <th scope="col">Segundo_apellido</th>
@@ -26,24 +26,14 @@
         <tbody>
             <?php
             require_once("../php/connection.php");
-            $servername = "localhost";
-            $username = "root";
-            $password = "";
-            $dbname = "supervsionacad";
-
-            $conn = new mysqli($servername, $username, $password, $dbname);
-
-            // Verificar la conexión
-            if ($conn->connect_error) {
-                die("Error de conexión: " . $conn->connect_error);
-            }
+            
             // Consulta SQL para obtener los datos de la tabla (cambia 'tu_tabla' al nombre de tu tabla)
 
-            $result = mysqli_query($conn, "SELECT * FROM maestrE");
+            $result = mysqli_query($connection, "SELECT * FROM profesores");
             while ($row = mysqli_fetch_assoc($result)) :
             ?>
                 <tr>
-                    <td><?php echo $row["clave"]; ?></td>
+                    <td><?php echo $row["nomenclatura"]; ?></td>
                     <td><?php echo $row["nombres"];?></td>
                     <td><?php echo $row["primer_apellido"]; ?></td>
                     <td><?php echo $row["segundo_apellido"];?></td>
@@ -67,8 +57,8 @@
                             <div class="modal-body">
                             <form action="../php/editarprofesor.php" method="POST">
                                 <div class="mb-2">
-                                    <label for="recipient-name" class="col-form-label">Clave</label>
-                                    <input type="text" class="form-control" id="recipient-name" name="clave" value="<?php echo $row['clave']; ?>">
+                                    <label for="recipient-name" class="col-form-label">nomenclatura</label>
+                                    <input type="text" class="form-control" id="recipient-name" name="nomenclatura" value="<?php echo $row['nomenclatura']; ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Nombres</label>

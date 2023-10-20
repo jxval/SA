@@ -4,7 +4,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
 
     $id = $_POST['id'];
 
-    $sql = "DELETE FROM maestre WHERE id=$id";
+    $sql = "DELETE FROM profesores WHERE id=$id";
 
     if ($connection->query($sql) === TRUE) {
         header('Location: ../layouts_admins/profesores.php');

@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require_once("connection.php");
 
   
-    $clave = $_POST['clave'];
+    $nomenclatura = $_POST['nomenclatura'];
     $nombres = $_POST['nombres'];
     $primerapellido = $_POST['primerapellido'];
     $segundoapellido = $_POST['segundoapellido'];
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $director = $_POST['director'];
 
   
-    $sql = "UPDATE maestre SET nombres='$nombres', primer_apellido='$primerapellido', segundo_apellido='$segundoapellido', 
+    $sql = "UPDATE profesores SET nombres='$nombres', primer_apellido='$primerapellido', segundo_apellido='$segundoapellido', 
     correo='$correo', director='$director' WHERE id='$id'";
 
     if ($connection->query($sql) === TRUE) {
