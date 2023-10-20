@@ -18,7 +18,6 @@
                 <th scope="col">Nombres</th>
                 <th scope="col">Primer_apellido</th>
                 <th scope="col">Segundo_apellido</th>
-                <th scope="col">Id</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Director</th>
                 <th scope="col">Acción</th>
@@ -48,7 +47,6 @@
                     <td><?php echo $row["nombres"];?></td>
                     <td><?php echo $row["primer_apellido"]; ?></td>
                     <td><?php echo $row["segundo_apellido"];?></td>
-                    <td><?php echo $row["id"]; ?></td>
                     <td><?php echo $row["correo"];?></td>
                     <td><?php echo $row["director"]; ?></td>
                     <td>
@@ -83,10 +81,6 @@
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Segundo Apellido</label>
                                     <input type="text" class="form-control" id="recipient-name" name="segundoapellido" value="<?php echo $row['segundo_apellido']; ?>">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">ID</label>
-                                    <input type="text" class="form-control" id="recipient-name" name="id" value="<?php echo $row['id']; ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Correo</label>
