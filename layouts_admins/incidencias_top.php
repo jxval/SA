@@ -9,6 +9,7 @@
     <title>Top 10</title>
 </head>
 <body>
+    <?php include('navbar.php'); ?>
     <br><br><br>
 
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -20,7 +21,7 @@
       <th scope="col">Salida Antes</th>
       <th scope="col">Incidencias</th>
     </tr>
-    <?php foreach ($row AS $row){
+    <?php
         require_once("../php/connection.php");
 
         $sql = "SELECT CONCAT(maestros.primer_apellido, ' ', maestros.nombres) AS PROFESOR,
@@ -51,7 +52,7 @@
             echo "0 results";
         }
         $connection->close();
-    }
+    
         ?>
   
   

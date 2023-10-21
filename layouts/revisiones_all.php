@@ -89,7 +89,7 @@
   </thead>
   <?php 
     include('../php/connection.php');
-    $consul = "SELECT * FROM revisiones";
+    $consul = "SELECT * FROM revisiones ORDER BY fecha DESC";
     $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
     while($column = mysqli_fetch_array($resul)){
     echo "<tbody>";

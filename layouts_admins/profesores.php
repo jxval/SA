@@ -9,8 +9,54 @@
     <title>Profesores</title>
 </head>
 <body>
-    <br><br>
-   
+    <?php include('navbar.php'); ?>
+    <h1>Profesores</h1>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Agregar profesor
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">  
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Agregar profesor</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <?php require_once '../php/backend-directores.php';?>
+            <form action="../php/backend-directores.php" method="POST">
+                <input type="text" name="nomenclatura" placeholder="Ingrese nomenclatura">
+                <input type="text" name="nombre" placeholder="Ingrese nombre">
+                <input type="text" name="primer_apellido" placeholder="Ingrese primer apellido">
+                <input type="text" name="segundo_apellido" placeholder="Ingrese segundo apellido">
+                <input type="text" name="correo" placeholder="Ingrese correo">
+                <!-- <label for="Director">Director</label> -->
+                <select id="docente" name="c_director">
+                <option value="">Seleccionar director</option>
+                    <?php
+                    include('../php/connection.php');
+                    $consul = "SELECT nom_dir FROM dir_de_carrera";
+                    $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
+                    
+                    while($column = mysqli_fetch_array($resul)){
+                        $optionname=$column['nom_dir'];
+                        echo "<option value='$optionname'>$optionname</option>";
+                    }
+                    ?>
+                </select>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" name="guardar_profesor">Guardar cambios</button>
+        </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
+
+
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
             <tr>

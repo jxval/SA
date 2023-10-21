@@ -14,10 +14,10 @@
 
 <form action="" method="POST">
   <div>
-    De: <input type="date" name="buscar_date1">
-    A: <input type="date" name="buscar_date2">
+    De: <input type="date" name="buscar_date1" id="date1" onkeyup="mensajeChange();">
+    A: <input type="date" name="buscar_date2" id="date2" onkeyup="mensajeChange();">
           <!-- <label for="Director">Director</label> -->
-        <select id="docente" name="c_profesor">
+        <select id="docente" name="c_profesor" id="profesor" onkeyup="mensajeChange();">
           <option value="">Seleccionar profesor</option>
             <?php
             include('../php/connection.php');
@@ -30,12 +30,12 @@
             }
             ?>
         </select>
-        <select name="turno" id="" value="<?php echo $_POST["turno"]?>">
+        <select name="turno" id="turno" onkeyup="mensajeChange();">
           <option value="">Seleccionar turno</option>
           <option value="T.M">T.M</option>
           <option value="T.V">T.V</option>
         </select>
-        <button type="submit" class="btn btn-primary" name="buscar_revi">Search</button>
+        <button type="submit" class="btn btn-primary" name="buscar_revi" id="enviar">Buscar</button>
   </div>
 </form>
 
@@ -83,7 +83,7 @@ if($date_1 == '' AND $date_2 == '' AND $turno =='' AND $profesor ==''){$filtro;}
   if($date_1 == '' AND $date_2 == '' AND $turno !=='' AND $profesor !==''){$filtro = "WHERE profesor = '$profesor' AND turno = '$turno'";}
 }
 
-  $query = "SELECT * FROM revisiones $filtro";
+  $query = "SELECT * FROM revisiones $filtro ORDER BY fecha DESC";
   $query_run = mysqli_query($connection, $query);
 
   if(mysqli_num_rows($query_run) > 0){
@@ -138,7 +138,7 @@ if($date_1 == '' AND $date_2 == '' AND $turno =='' AND $profesor ==''){$filtro;}
   </thead>
   <?php 
     include('../php/connection.php');
-    $consul = "SELECT * FROM revisiones";
+    $consul = "SELECT * FROM revisiones ORDER BY fecha DESC";
     $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
     while($column = mysqli_fetch_array($resul)){
     echo "<tbody>";
@@ -162,7 +162,27 @@ if($date_1 == '' AND $date_2 == '' AND $turno =='' AND $profesor ==''){$filtro;}
 }
 
 ?>
+<!-- informacion requerida para habilitar boton -->
+<script>
+        
+  function mensajeChange() {
+    console.log("change");
+    const mensaje1 = document.getElementById("date1");
+    const mensaje2 = document.getElementById("date2");
+    const mensaje3 = document.getElementById("profesor");
+    const mensaje4 = document.getElementById("turno");
+    const boton = document.getElementById("enviar");
+    console.log(boton)
+    
+    if (mensaje1.value.trim() !== "" && mensaje2.value.trim() !== "" && mensaje3.value.trim() != "" && mensaje4.value.trim() != "") {
+      console.log("Se muestra")
+      boton.removeAttribute('disabled')
+    } else {
+      boton.setAttribute('disabled', "true");
+    }
+  }
 
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>

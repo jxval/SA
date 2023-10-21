@@ -35,5 +35,17 @@ if(isset($_POST['filtro_carrera'])){
     header('location:../layouts/filtro.php');
 }
 
+if(isset($_POST['guardar_profesor'])){
+    $nomenclatura = $_POST['nomenclatura'];
+    $nombres = $_POST['nombre'];
+    $primer_apellido = $_POST['primer_apellido'];
+    $segundo_apellido = $_POST['segundo_apellido'];
+    $correo = $_POST['correo'];
+    $c_director = $_POST['c_director'];
 
+    $connection->query("INSERT INTO profesores (nomenclatura, nombres, primer_apellido, segundo_apellido, correo, director) 
+    VALUES ('$nomenclatura', '$nombres', '$primer_apellido', '$segundo_apellido', '$correo', '$c_director')") or die($connection->error);
+
+    header('location:../layouts_admins/profesores.php');
+}
 ?>

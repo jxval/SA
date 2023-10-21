@@ -50,47 +50,6 @@
     </div>
   </div>
 </div>
-    <!-- Button trigger modal export -->
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Excel
-</button>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">  
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <?php require_once '../php/backend-directores.php';?>
-        <form action="../php/backend-directores.php" method="POST">
-            <input type="text" name="nom_car" placeholder="Ingrese nomenclatura">
-            <input type="text" name="nombre" placeholder="Ingrese nombre">
-            <!-- <label for="Director">Director</label> -->
-            <select id="docente" name="c_director">
-              <option value="">Seleccionar director</option>
-                <?php
-                include('../php/connection.php');
-                $consul = "SELECT nom_dir FROM dir_de_carrera";
-                $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
-                
-                while($column = mysqli_fetch_array($resul)){
-                    $optionname=$column['nom_dir'];
-                    echo "<option value='$optionname'>$optionname</option>";
-                }
-                ?>
-            </select>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="guardar_carrera">Save changes</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 
 <!-- barre de busqueda  -->
 <form action="" method="GET">

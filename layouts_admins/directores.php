@@ -12,7 +12,7 @@
 <h1>Directores</h1>
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Agregar
+  Agregar director
 </button>
 
 <!-- Modal -->
@@ -66,7 +66,7 @@
             echo "<td>".$column['nom_dir']."</td>";
             echo "<td>".$column['nombres']."</td>";
             echo "<td>".$column['primer_apellido']."</td>";
-            echo "<td>".$column['nom_dir']."</td>";
+            echo "<td>".$column['segundo_apellido']."</td>";
             echo "<td><a href=>Editar</td>";
             echo "<td><a href=>Eliminar</td>";
             echo "</tr>";
