@@ -17,7 +17,7 @@ if (isset($_POST['btn_login'])) {
     $pass = mysqli_fetch_array($queryusuario);
 
     if (($nr == 1 ) && (password_verify($contrasena, $pass['contrasena']))) {
-        echo "Bienvenido: $correo";
+        header('location:../layouts_admins/revisiones_all.php');
     }else{
         echo '<script>alert("Usuario o Contraseña Incorrecta:"); window.location = "../layouts/login.php";</script>';
         exit;

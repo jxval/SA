@@ -1,4 +1,5 @@
-<ul class="nav justify-content-center">
+<link rel="stylesheet" href="../css/style.css">
+<ul class="nav justify-content-center" id="navbar">
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="#">Inicio</a>
   </li>
@@ -15,6 +16,6 @@
     <a class="nav-link" href="directores.php">Directores</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#" aria-disabled="false">Cerrar sesión</a>
+    <a class="nav-link" href="../layouts/captura.php" aria-disabled="false">Cerrar sesión</a>
   </li>
 </ul>

@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     correo='$correo', director='$director' WHERE id='$id'";
 
     if ($connection->query($sql) === TRUE) {
-        header('Location: ../layouts_admins/profesores.php');
+        header('location: ../layouts_admins/profesores.php');
         exit;
     } else {
         echo '<script>alert("Error al Editar:"); window.location = "../layouts_admins/profesores.php";</script>';

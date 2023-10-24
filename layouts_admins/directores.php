@@ -9,7 +9,7 @@
 <body>
 <!-- navbar -->
 <?php include ("navbar.php");?>
-<h1>Directores</h1>
+<h1 class="h1-tittles text-muted">Directores</h1>
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Agregar director
@@ -46,8 +46,8 @@
 
 <!-- tabla -->
 
-    <table class="table table-striped-columns">
-    <thead>
+    <table class="table table-bordered">
+    <thead class="table-dark">
         <tr>
         <th scope="col">Nomenclatura</th>
         <th scope="col">Nombres</th>
@@ -67,8 +67,12 @@
             echo "<td>".$column['nombres']."</td>";
             echo "<td>".$column['primer_apellido']."</td>";
             echo "<td>".$column['segundo_apellido']."</td>";
-            echo "<td><a href=>Editar</td>";
-            echo "<td><a href=>Eliminar</td>";
+            ?>
+            <td>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_">Editar</button>
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_"> Eliminar</button>
+            </td>
+            <?php
             echo "</tr>";
         echo "</tbody>";
         }

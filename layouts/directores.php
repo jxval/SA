@@ -9,7 +9,7 @@
 <body>
 <!-- navbar -->
 <?php include ("navbar.php");?>
-<h1>Directores</h1>
+<h1 class="h1-tittles text-muted">Directores</h1>
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Filtrar

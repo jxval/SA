@@ -1,0 +1,132 @@
+/* navbar */
+#navbar{
+    background-color: #313131;
+    color: white;
+    padding: 1%;
+    margin-bottom: 1%;
+
+}
+.nav-link{
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    top: 10px;
+} 
+.nav-link:hover{
+    color: #eda002;
+}
+.nav_image{
+    height: 4%;
+    width: 4%;
+}
+
+/* titulos */
+.h1-tittles{
+    text-align: center;
+    color: white;
+    
+}
+
+
+/* captura */
+
+.div_fecha{
+    width: 45%;
+    float: left;
+    margin-bottom: 1%;
+    
+}
+.div_turno{
+    width: 50%;
+    margin-left: 50%; 
+    margin-bottom: 1%;
+}
+.div_aula{
+    width: 45%;
+    float: left;
+    margin-bottom: 1%;
+}
+.div_horario{
+    width: 50%;
+    margin-left: 50%; 
+    margin-bottom: 1%;
+}
+.div_profesor{
+    width: 45%;
+    float: left;
+    margin-bottom: 1%;
+    position: relative;
+    bottom: 70px;
+
+    
+}
+.div_grupo{
+    width: 50%;
+    margin-left: 50%; 
+    margin-bottom: 1%;
+
+}
+.div_incidencia{
+    width: 45%;
+    float: left;
+    margin-bottom: 1%;
+    position: relative;
+    bottom: 40px;
+
+
+}
+.div_revisiones{
+    width: 50%;
+    margin-left: 50%; 
+    margin-bottom: 1%;
+
+}
+.div_obs{
+    width: 45%;
+    position: relative;
+    bottom: 250px;
+}
+.div_buttons{
+    width: 45%;
+    position: relative;
+    bottom: 150px;
+}
+.btn_captura{
+    width: 150px;
+}
+
+.captura_background{
+    background-color: #5e9c97;
+}
+
+.div-captura{
+    background-color: #fff4dd;
+    padding: 3%;
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+
+.sub-div-captura{
+    border: solid 3px #5e9c97;
+    padding-top: 3%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 3%;
+    height: 750px;
+
+}
+hr{
+    border: solid 3px #ffffff;
+}
+
+/* concentrado general */
+.div-table{
+    margin-top: 1%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+}

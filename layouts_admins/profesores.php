@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php include('navbar.php'); ?>
-    <h1>Profesores</h1>
+    <h1 class="h1-tittles text-muted">Profesores</h1>
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Agregar profesor
@@ -58,7 +58,7 @@
 
 
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th scope="col">Nomenclatura</th> 
                 <th scope="col">Nombres</th>
@@ -111,7 +111,10 @@
                                     <input type="text" class="form-control" id="recipient-name" name="nombres" value="<?php echo $row['nombres']; ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for "recipient-name" class="col-form-label">Primer Apellido</label>
+                                    <input type="hidden" class="form-control" id="recipient-name" name="id" value="<?php echo $row['id']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Primer Apellido</label>
                                     <input type="text" class="form-control" id="recipient-name" name="primerapellido" value="<?php echo $row['primer_apellido']; ?>">
                                 </div>
                                 <div class="mb-3">

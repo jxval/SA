@@ -4,77 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Concentrado general</title>
 </head>
-<body>
+<body class="captura_background">
     <!-- navbar -->
 <?php include ("navbar.php");?>
-<h1>Concentrado general</h1>
-    <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Filtrar
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <?php require_once '../php/backend-directores.php';?>
-        <form action="../php/backend-directores.php" method="POST">
-            <!-- <h5>Top 10 con más incidencias</h5>
-            <select id="top_10_inc" name="top_10_inc">
-                <option value="">Seleccionar semana</option>
-                <option value="semana 1">semana 1</option>
-                <option value="semana 2">semana 2</option>
-                <option value="semana 3">semana 3</option>
-                <option value="semana 4">semana 4</option>
-                <option value="semana 5">semana 5</option>
-                <option value="semana 6">semana 6</option>
-                <option value="semana 7">semana 7</option>
-                <option value="semana 8">semana 8</option>
-                <option value="semana 9">semana 9</option>
-                <option value="semana 10">semana 10</option>
-                <option value="semana 11">semana 11</option>
-                <option value="semana 12">semana 12</option>
-                <option value="semana 13">semana 13</option>
-                <option value="semana 14">semana 14</option>
-            </select> -->
-            <h5>Profesor</h5>
-            <select id="docente" name="c_director">
-              <option value="">Seleccionar director</option>
-                <?php
-                include('../php/connection.php');
-                $consul = "SELECT nom_dir FROM dir_de_carrera";
-                $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
-                
-                while($column = mysqli_fetch_array($resul)){
-                    $optionname=$column['nom_dir'];
-                    echo "<option value='$optionname'>$optionname</option>";
-                }
-                ?>
-            </select>
-            <!-- <button type="submit" name="guardar">Agregar</button> -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="guardar">Save changes</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
+<h1 class="h1-tittles text-muted">Concentrado general</h1>
+<div class="div-table">
 <!-- tabla -->
-<table class="table table-striped-columns">
-  <thead>
+<table class="table table-bordered">
+  <thead class="table-dark">
     <tr>
       <th scope="col">Fecha</th>
+      <th scope="col">Turno</th>
       <th scope="col">Aula</th>
       <th scope="col">Hora inicio</th>
       <th scope="col">Hora final</th>
@@ -89,12 +32,13 @@
   </thead>
   <?php 
     include('../php/connection.php');
-    $consul = "SELECT * FROM revisiones ORDER BY fecha DESC";
+    $consul = "SELECT * FROM revisiones ORDER BY id DESC";
     $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
     while($column = mysqli_fetch_array($resul)){
     echo "<tbody>";
         echo "<tr>";
         echo "<td>".$column['fecha']."</td>";
+        echo "<td>".$column['turno']."</td>";
         echo "<td>".$column['aula']."</td>";
         echo "<td>".$column['hora_inicio']."</td>";
         echo "<td>".$column['hora_final']."</td>";
@@ -110,9 +54,7 @@
     }
   ?>
 </table>
-    </tr>
-  </tbody>
-</table>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script></body>
 </html>

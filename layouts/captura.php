@@ -6,123 +6,148 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Reporte de revisiones</title>
 </head>
-<body>
+<body class="captura_background">
 <!-- navbar -->
 <?php include ("navbar.php");?>
-<h1>Reporte de revisiones</h1>
+
 <?php
 include("../php/capturas.php");
 ?>
-    <form action="" method="POST">
+<h1 class="h1-tittles text-muted">Reporte de revisiones</h1>
+<div class="div-captura">
+    <div class="sub-div-captura">
+        <form action="" method="POST">
+        <div class="div_fecha">
+            <p class="lead">Fecha</p>
+            <input type="date" name="fecha" id="fecha" class="form-control" required>
+        </div>
+        <div class="div_turno">
+            <p class="lead">Turno</p>
+            <input type="radio" class="btn-check" name="turno" id="option5" autocomplete="off" value="T.M" required>
+            <label class="btn btn-outline-secondary" for="option5">Turno matutino</label>
+            <input type="radio" class="btn-check" name="turno" id="option6" autocomplete="off" value="T.V" required>
+            <label class="btn btn-outline-secondary" for="option6">Turno vespertino</label>  
+        </div>
+        <br>
+        <div class="div_aula">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Aula" name="aula" required>
+                <label for="floatingInput">Aula</label>
+            </div>
+        </div>
+        <div class="div_horario">
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="hora_inicio" name="hora_inicio" required>
+                    <option selected>Seleccionar hora inicial</option>
+                    <option value="07:00 a.m.">07:00 a.m.</option>
+                    <option value="08:00 a.m.">08:00 a.m.</option>
+                    <option value="09:00 a.m.">09:00 a.m.</option>
+                    <option value="10:00 a.m.">10:00 a.m.</option>
+                    <option value="11:00 a.m.">11:00 a.m.</option>
+                    <option value="12:00 p.m.">12:00 p.m.</option>
+                    <option value="01:00 p.m.">01:00 p.m.</option>
+                    <option value="02:00 p.m.">02:00 p.m.</option>
+                    <option value="03:00 p.m.">03:00 p.m.</option>
+                    <option value="04:00 p.m.">04:00 p.m.</option>
+                    <option value="05:00 p.m.">05:00 p.m.</option>
+                    <option value="06:00 p.m.">06:00 p.m.</option>
+                    <option value="07:00 p.m.">07:00 p.m.</option>
+                    <option value="08:00 p.m.">08:00 p.m.</option>
+                    <option value="09:00 p.m.">09:00 p.m.</option>
+                    <option value="10:00 p.m.">10:00 p.m.</option>
+                </select>
+                <label for="floatingSelect">Horario inicial</label>
+            </div>
+            <br>
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example"   id="hora_final" name="hora_final" required>
+                    <option selected>Seleccionar hora final</option>
+                    <option value="07:00 a.m.">07:00 a.m.</option>
+                    <option value="08:00 a.m.">08:00 a.m.</option>
+                    <option value="09:00 a.m.">09:00 a.m.</option>
+                    <option value="10:00 a.m.">10:00 a.m.</option>
+                    <option value="11:00 a.m.">11:00 a.m.</option>
+                    <option value="12:00 p.m.">12:00 p.m.</option>
+                    <option value="01:00 p.m.">01:00 p.m.</option>
+                    <option value="02:00 p.m.">02:00 p.m.</option>
+                    <option value="03:00 p.m.">03:00 p.m.</option>
+                    <option value="04:00 p.m.">04:00 p.m.</option>
+                    <option value="05:00 p.m.">05:00 p.m.</option>
+                    <option value="06:00 p.m.">06:00 p.m.</option>
+                    <option value="07:00 p.m.">07:00 p.m.</option>
+                    <option value="08:00 p.m.">08:00 p.m.</option>
+                    <option value="09:00 p.m.">09:00 p.m.</option>
+                    <option value="10:00 p.m.">10:00 p.m.</option>
+                </select>
+                <label for="floatingSelect">Horario final</label>
+            </div>
+        </div>
+        <div class="div_profesor">
+            <div class="form-floating">
+                <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="profesor" name="profesor" required>
+                    <option selected>Seleccionar profesor</option>
+                    <?php
+                        include('../php/connection.php');
+                        $consul = "SELECT nomenclatura FROM profesores";
+                        $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
+                        
+                        while($column = mysqli_fetch_array($resul)){
+                            $optionname=$column['nomenclatura'];
+                            echo "<option value='$optionname'>$optionname</option>";
+                        }
+                    ?> 
+                </select>
+                <label for="floatingSelect">Profesor</label>
+            </div>
+        </div>
+        <div class="div_grupo">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingInput" placeholder="Grupo" name="grupo" required>
+                <label for="floatingInput">Grupo</label>
+            </div>
+        </div>
+        <div class="div_incidencia">
+            <input type="radio" class="btn-check" name="reporte" id="option7" autocomplete="off" value="Retardo" required>
+            <label class="btn btn-outline-secondary" for="option7">Retardo</label>
+            <input type="radio" class="btn-check" name="reporte" id="option8" autocomplete="off" value="Falta" required>
+            <label class="btn btn-outline-secondary" for="option8">Falta</label>
+            <input type="radio" class="btn-check" name="reporte" id="option9" autocomplete="off" value="Salida antes" required>
+            <label class="btn btn-outline-secondary" for="option9">Salida antes</label>
+        </div>
+        <div class="div_revisiones">
+            <p class="lead">Primera revisión</p> 
+            <div class="cs-form">
+                <input type="time" name="primerarevision" class="form-control" required/>
+            </div>
+            <br>
+            <p class="lead">Segunda revisión</p> 
+            <div class="cs-form">
+                <input type="time" name="segundarevision" class="form-control" required/>
+            </div>
+            <br>
+            <p class="lead">Tercera revisión</p>
+            <div class="cs-form">
+                <input type="time" name="tercerarevision" class="form-control" required/>
+            </div>
+        </div>
+        <div class="div_obs">
+            <div class="form-floating">
+                <textarea class="form-control" name="observaciones" placeholder="Observaciones" id="floatingTextarea2" style="height: 100px" required></textarea>
+                <label for="floatingTextarea2">Observaciones</label>
+            </div>
+        </div>
+        <div class="div_buttons">
+            <input class="btn_captura btn btn-primary" type="submit" value="Enviar">
+            <input class="btn_captura btn btn-secondary" type="reset" value="Limpiar">
+        </div>
+        </form>
+    </div>
+ </div>    
 
     
-    Fecha
-    <input type="date" name="fecha" id="fecha">
-    <br><br>
-    <label for="">Turno</label>
-    <br><br>
-    <input type="checkbox" name="turno" id="TM" value="T.M" class="turno">T.M
-    <br><br>
-    <input type="checkbox" name="turno" id="TV" value="T.V" class="turno">T.V
-    <br><br>
-    Aula
-    <input type="text" name="aula" id="aula">
-    <br><br>
-    Horario Inicial
-    <select id="hora_inicio" name="hora_inicio">
-    <option value=""></option>
-    <option value="7:00">7:00</option>
-    <option value="8:00">8:00</option>
-    <option value="9:00">9:00</option>
-    <option value="10:00">10:00</option>
-    <option value="11:00">11:00</option>
-    <option value="12:00">12:00</option>
-    <option value="13:00">13:00</option>
-    <option value="14:00">14:00</option>
-    <option value="15:00">15:00</option>
-    <option value="16:00">16:00</option>
-    <option value="17:00">17:00</option>
-    <option value="18:00">18:00</option>
-    <option value="19:00">19:00</option>
-    <option value="20:00">20:00</option>
-    <option value="21:00">21:00</option>
-    <option value="22:00">22:00</option>
-</select>
-<br><br>
-Horario Final
-<select id="hora_final" name="hora_final">
-    <option value=""></option>
-    <option value="7:00">7:00</option>
-    <option value="8:00">8:00</option>
-    <option value="9:00">9:00</option>
-    <option value="10:00">10:00</option>
-    <option value="11:00">11:00</option>
-    <option value="12:00">12:00</option>
-    <option value="13:00">13:00</option>
-    <option value="14:00">14:00</option>
-    <option value="15:00">15:00</option>
-    <option value="16:00">16:00</option>
-    <option value="17:00">17:00</option>
-    <option value="18:00">18:00</option>
-    <option value="19:00">19:00</option>
-    <option value="20:00">20:00</option>
-    <option value="21:00">21:00</option>
-    <option value="22:00">22:00</option>
-</select>
-<br><br>
 
 
-Docente
-<!-- <select name="profesor" id="">
-    <option value="RODRIGUEZ ME">RODRIGUEZ ME</option>
-</select> -->
-<select id="docente" name="profesor">
-    <option value="">Seleccionar</option>
-    <?php
-    include('../php/connection.php');
-    $consul = "SELECT nomenclatura FROM profesores";
-    $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
-    
-    while($column = mysqli_fetch_array($resul)){
-        $optionname=$column['nomenclatura'];
-        echo "<option value='$optionname'>$optionname</option>";
-    }
-    ?> 
-</select>
-<br><br>
-    Grupo
-    <input type="text" name="grupo" id="grupo"> 
-    <br><br>
-    <input type="checkbox" name="reporte" class="only-one" value="Retardo"> Retardo
-    <br><br>
-    <input type="checkbox" name="reporte" class="only-one" value="Falta"> Falta
-    <br><br>
-    <input type="checkbox" name="reporte" class="only-one" value="Salida Antes"> Salida Antes
-
-    <br><br>
-    Primera Revision 
-    <input type="text" name="primerarevision" id="primerarevision">
-    <br><br>
-    Segunda Revision
-    <input type="text" name="segundarevision" id="segundarevision">
-    <br><br>
-    Tercera Revison
-    <input type="text" name="tercerarevision" id="tercerarevision">
-    <br><br>
-    Observaciones
-    <input type="text" name="observaciones" id="observaciones">
-
-    <br><br>
-
-    <input type="submit" value="guardar">
-
-    </form>
-     
-
-    
-
-
-<script>
+<!-- <script>
     let Checked = null;
     //The class name can vary
         for (let CheckBox of document.getElementsByClassName('only-one')){
@@ -145,7 +170,7 @@ Docente
             Checked_turno = CheckBox;
         }
     }
-</script>
+</script> -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>

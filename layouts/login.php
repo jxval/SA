@@ -12,9 +12,10 @@
     <title>Login</title>
 </head>
 <body>
+  <?php include('navbar.php') ?>
 <form action="../php/validarusuario.php" method="post" class="formulario">
         <img class="coverimg" src="" alt="">
-        <h3 class="tittle-2">Inicia sesión</h3>
+        <h3 class="tittle-2 text-muted">Inicia sesión</h3>
         <input class="input" type="text" name="db_correo" id="" placeholder="Correo" required>
         <br>
         <input class="input pass" type="password" name="db_contrasena" id="" placeholder="Contraseña" required>
@@ -24,7 +25,7 @@
     </form>
     <br><br>
     <br>
-        <a href="resgitro.php">regitrar</a>
+        <a href="registro.php">regitrar</a>
         
 </body>
 </html>

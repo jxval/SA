@@ -14,7 +14,7 @@
 <body>
 <form action="../php/registro_bd.php" method="post" class="formulario">
         <img class="coverimg" src="" alt="">
-        <h3 class="tittle-2">Registrar Administrador</h3>
+        <h3 class="tittle-2 text-muted">Registrar Administrador</h3>
         <input class="input" type="text" name="db_nombre" id="" placeholder="Nombre" required>
         <br>
         <input class="input" type="text" name="db_apellido" id="" placeholder="Apellido" required>
