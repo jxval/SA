@@ -16,6 +16,7 @@
     <a class="nav-link" href="directores.php">Directores</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="../layouts/captura.php" aria-disabled="false">Cerrar sesión</a>
+    <a class="nav-link" href="../php/logout.php" aria-disabled="false">Cerrar sesión</a>
   </li>
+  <strong><?php echo ucwords($_SESSION['usuario']." ");?></strong>
 </ul>

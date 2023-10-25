@@ -5,7 +5,7 @@ $nombre = $_POST['db_nombre'];
 $apellido = $_POST['db_apellido'];
 $correo = $_POST['db_correo'];
 $contrasena = $_POST['db_contrasena'];
-$contrasena = password_hash ($contrasena, PASSWORD_DEFAULT);
+$contrasena = hash('sha512', $contrasena);
 
 
 

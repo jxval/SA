@@ -30,78 +30,53 @@
 
 
 /* captura */
-
-.div_fecha{
-    width: 45%;
-    float: left;
-    margin-bottom: 1%;
+.div_captura1{
+    border-right: solid 3px rgb(129, 129, 129);
+    padding-right: 9%;
+    display: inline-block;
+    width: 40%;
+    margin-left: 9%;    
+    position: relative;
+    bottom: 50px;
+    
     
 }
-.div_turno{
-    width: 50%;
-    margin-left: 50%; 
-    margin-bottom: 1%;
-}
-.div_aula{
-    width: 45%;
-    float: left;
-    margin-bottom: 1%;
+.div_captura2{
+    display: inline-block;
+    padding-right: 10%;
+    width: 40%;
+    margin-left: 8%;
 }
 .div_horario{
-    width: 50%;
-    margin-left: 50%; 
-    margin-bottom: 1%;
-}
-.div_profesor{
-    width: 45%;
-    float: left;
-    margin-bottom: 1%;
-    position: relative;
-    bottom: 70px;
-
-    
-}
-.div_grupo{
-    width: 50%;
-    margin-left: 50%; 
-    margin-bottom: 1%;
-
-}
-.div_incidencia{
-    width: 45%;
-    float: left;
-    margin-bottom: 1%;
-    position: relative;
-    bottom: 40px;
-
-
+    margin-bottom: 1rem;
 }
 .div_revisiones{
-    width: 50%;
-    margin-left: 50%; 
-    margin-bottom: 1%;
-
+    margin-bottom: 1rem;
 }
-.div_obs{
-    width: 45%;
-    position: relative;
-    bottom: 250px;
+.btn-outline-secondary{
+    border: solid 1px #232323;
+    color: #232323;
 }
-.div_buttons{
-    width: 45%;
-    position: relative;
-    bottom: 150px;
+.btn_enviar{
+    background-color: #009286;
+    width: 100px;
+    border: #026058;
+    margin-left: 8%;
+}
+.btn_enviar:hover{
+    background-color: #00655d;
 }
 .btn_captura{
-    width: 150px;
+    width: 100px;
+    
 }
 
 .captura_background{
-    background-color: #5e9c97;
+    background-color: #0db8aa;
 }
 
 .div-captura{
-    background-color: #fff4dd;
+    background-color: #f3f3f3;
     padding: 3%;
     margin-left: 8%;
     margin-right: 8%;
@@ -111,16 +86,12 @@
 
 
 .sub-div-captura{
-    border: solid 3px #5e9c97;
+    border: solid 3px #0db8aa;
     padding-top: 3%;
     padding-left: 3%;
     padding-right: 3%;
     padding-bottom: 3%;
-    height: 750px;
 
-}
-hr{
-    border: solid 3px #ffffff;
 }
 
 /* concentrado general */
