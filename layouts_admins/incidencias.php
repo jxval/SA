@@ -32,8 +32,13 @@ if(!isset($_SESSION['usuario'])){
                 <p>Selecciona un rango de fechas para generar las 10 incidencias más destacadas</p>
             </blockquote>
         </figure>
-      De: <input type="date" name="buscar_date1" id="date1" onkeyup="mensajeChange();">
-      A: <input type="date" name="buscar_date2" id="date2" onkeyup="mensajeChange();">
+      De: <input type="date" name="buscar_date1" id="date1">
+      A: <input type="date" name="buscar_date2" id="date2">
+          <select name="turno" id="turno" required>
+            <option value="">Seleccionar turno</option>
+            <option value="T.M">T.M</option>
+            <option value="T.V">T.V</option>
+          </select>
           <button type="submit" class="btn btn-primary" name="top_incidencias" id="enviar">Buscar</button>
     </div>
   </form>
@@ -52,6 +57,7 @@ if(!isset($_SESSION['usuario'])){
       <tr>
         <th scope="col">Fecha</th>
         <th scope="col">Profesor</th>
+        <th scope="col">Turno</th>
         <th scope="col">Retardo</th>
         <th scope="col">Falta</th>
         <th scope="col">Salida antes</th>
@@ -63,8 +69,10 @@ if(!isset($_SESSION['usuario'])){
 
     $date_1 = $_POST['buscar_date1'];
     $date_2 = $_POST['buscar_date2'];
+    $turno = $_POST['turno'];
 
     $query = "SELECT revisiones.fecha AS fecha, CONCAT(profesores.primer_apellido, ' ', profesores.nombres) AS Profesor,
+                revisiones.turno AS turno,
                 SUM(CASE WHEN revisiones.reporte = 'Retardo' THEN 1 ELSE 0 END) AS Retardo,
                 SUM(CASE WHEN revisiones.reporte = 'Falta' THEN 1 ELSE 0 END) AS Falta,
                 SUM(CASE WHEN revisiones.reporte = 'Salida Antes' THEN 1 ELSE 0 END) AS Salida_antes,
@@ -73,6 +81,7 @@ if(!isset($_SESSION['usuario'])){
                 JOIN profesores
                 ON revisiones.profesor = profesores.nomenclatura
                 WHERE revisiones.fecha BETWEEN '$date_1' AND '$date_2'
+                AND turno = '$turno'
                 GROUP BY profesores.primer_apellido, profesores.nombres
                 ORDER BY total DESC
                 LIMIT 10";
@@ -85,6 +94,7 @@ if(!isset($_SESSION['usuario'])){
         <tr>
           <td><?= $items['fecha'];?></td>
           <td><?= $items['Profesor'];?></td>
+          <td><?= $items['turno'];?></td>
           <td><?= $items['Retardo'];?></td>
           <td><?= $items['Falta'];?></td>
           <td><?= $items['Salida_antes'];?></td>
@@ -100,7 +110,7 @@ if(!isset($_SESSION['usuario'])){
       <?php
     }
     ?>
-    <p>Incidencias del <strong><?php echo $date_1?></strong> al <strong> <?php echo $date_2?></strong></p>
+    <p>Incidencias del <strong><?php echo $date_1?></strong> al <strong><?php echo $date_2?></strong> del <strong><strong><?php echo $turno?></strong></strong></p>
     <a href="incidencias.php"><button type="submit" class="btn btn-danger">Borrar busqueda</button></a>
     <br><br>
     <?php
