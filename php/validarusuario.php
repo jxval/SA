@@ -12,7 +12,7 @@ $login_validation = mysqli_query($connection, "SELECT * FROM usuarios WHERE corr
 if(mysqli_num_rows($login_validation) > 0){
     $row = $login_validation->fetch_assoc();
     $_SESSION['usuario'] = $row['nombre'];
-    header("location: ../layouts_admins/revisiones_all.php");
+    header("location: ../layouts_admins/dashboard.php");
     exit;
 }else{
     echo '<script>
