@@ -17,24 +17,27 @@ if(isset($_SESSION['usuario'])){
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
     <title>Login</title>
 </head>
-<body>
-  <?php include('navbar.php') ?>
+<body class="loginbg">
+  
 <form action="../php/validarusuario.php" method="post" class="formulario">
-        <img class="coverimg" src="" alt="">
-        <h3 class="tittle-2 text-muted">Inicia sesión</h3>
+        <img class="coverimg" src="../images/LogoUTCJ.png" alt="">
+        <h3 class="tittle-2">Iniciar sesión</h3>
         <input class="input" type="text" name="db_correo" id="" placeholder="Correo" required>
         <br>
         <input class="input pass" type="password" name="db_contrasena" id="" placeholder="Contraseña" required>
         <br>
-        <button class="button btn-secondary" type="submit" name='btn_login'>Entrar</button>
+        <button class="button btn-login" type="submit" name='btn_login'>Entrar</button>
+        
+        <a href="registros.php" class="a-regi">Registrar</a>
+        <a href="captura.php" class="a-regi">Inicio</a>
         
     </form>
     <br><br>
     <br>
-        <a href="registro.php">regitrar</a>
+       
         
 </body>
 </html>
