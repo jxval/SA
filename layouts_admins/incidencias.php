@@ -19,12 +19,12 @@ if(!isset($_SESSION['usuario'])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Incidencias más destacadas</title>
 </head>
-<body>
+<body class="admin_background">
     <!-- navbar -->
 <?php include ("navbar.php");?>
 <?php include ("../php/connection.php");?>
 <h1 class="h1-tittles text-muted">Incidencias más destacadas</h1>
-<div class="div-table">
+<div class="div-table div-filtro">
   <form action="" method="POST">
     <div>
         <figure class="text-center">
@@ -32,19 +32,20 @@ if(!isset($_SESSION['usuario'])){
                 <p>Selecciona un rango de fechas para generar las 10 incidencias más destacadas</p>
             </blockquote>
         </figure>
-      De: <input type="date" name="buscar_date1" id="date1">
-      A: <input type="date" name="buscar_date2" id="date2">
-          <select name="turno" id="turno" required>
-            <option value="">Seleccionar turno</option>
-            <option value="T.M">T.M</option>
-            <option value="T.V">T.V</option>
-          </select>
-          <button type="submit" class="btn btn-primary" name="top_incidencias" id="enviar">Buscar</button>
+        <div class="lead">
+        De: <input type="date" name="buscar_date1" id="date1" class="form-control selectDateAdmin" required>
+        A: <input type="date" name="buscar_date2" id="date2" class="form-control selectDateAdmin" required>
+            <select class="form-select selectTurnoAdmin" name="turno" id="turno" required>
+              <option value="">Seleccionar turno</option>
+              <option value="T.M">T.M</option>
+              <option value="T.V">T.V</option>
+            </select>
+            <button type="submit" class="btn btn-primary btn-enviar-admin" name="top_incidencias" id="enviar">Buscar</button>
+
+        </div>
     </div>
   </form>
   <br>
-
-
 
   <!-- tabla -->
   <?php
@@ -105,13 +106,17 @@ if(!isset($_SESSION['usuario'])){
     }else{
       ?>
       <tr>
-        <td colspan="7">No se encontraron resultados</td>
+        <td class="else-results" colspan="7" style="color:red;">No se encontraron resultados</td>
       </tr>
       <?php
     }
     ?>
-    <p>Incidencias del <strong><?php echo $date_1?></strong> al <strong><?php echo $date_2?></strong> del <strong><strong><?php echo $turno?></strong></strong></p>
-    <a href="incidencias.php"><button type="submit" class="btn btn-danger">Borrar busqueda</button></a>
+    <figure class="text-left">
+      <blockquote class="blockquote">
+      Incidencias del <strong><?php echo $date_1?></strong> al <strong><?php echo $date_2?></strong> del <strong><strong><?php echo $turno?></strong></strong></p>
+      </blockquote>
+    </figure>
+      <a href="incidencias.php"><button type="submit" class="btn btn-danger">Borrar filtro</button></a>
     <br><br>
     <?php
 

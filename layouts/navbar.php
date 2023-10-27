@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="../css/style.css">
-<ul class="nav justify-content-center" id="navbar">
+<!-- <ul class="nav justify-content-center" id="navbar">
   <img class="nav_image" src="../images/LogoUTCJ.png" alt="">
   <li class="nav-item">
     <a class="nav-link active" aria-current="page" href="../layouts/captura.php">Reporte de revisiones</a>
@@ -10,4 +10,28 @@
   <li class="nav-item">
     <a class="nav-link" href="login.php" aria-disabled="false">Iniciar sesión como administrador</a>
   </li>
-</ul>
+</ul>  -->
+
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="../images/LogoUTCJ.png" alt="" width="50" height="50">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="../layouts/captura.php">Reporte de revisiones</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="revisiones_all.php">Concentrado general</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="login.php" aria-disabled="false">Iniciar sesión como administrador</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

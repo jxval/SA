@@ -23,13 +23,15 @@ if(!isset($_SESSION['usuario'])){
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <title>Profesores</title>
 </head>
-<body>
+<body class="admin_background">
     <?php include('navbar.php'); ?>
     <h1 class="h1-tittles text-muted">Profesores</h1>
+    <div class="div-table">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Agregar profesor
     </button>
+    <br><br>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">  
@@ -177,5 +179,6 @@ if(!isset($_SESSION['usuario'])){
             <?php endwhile; ?>
         </tbody>
     </table>
+    </div>
 </body>
 </html>

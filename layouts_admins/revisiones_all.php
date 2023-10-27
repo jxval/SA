@@ -19,36 +19,37 @@ if(!isset($_SESSION['usuario'])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Revisiones T.M</title>
 </head>
-<body>
+<body class="admin_background">
     <!-- navbar -->
 <?php include ("navbar.php");?>
 <?php include ("../php/connection.php");?>
 <h1 class="h1-tittles text-muted">Concentrado general</h1>
 <div class="div-table">
   <form action="" method="POST">
-    <div>
-      De: <input type="date" name="buscar_date1" id="date1" onkeyup="mensajeChange();">
-      A: <input type="date" name="buscar_date2" id="date2" onkeyup="mensajeChange();">
-            <!-- <label for="Director">Director</label> -->
-          <select id="docente" name="c_profesor" id="profesor" onkeyup="mensajeChange();">
-            <option value="">Seleccionar profesor</option>
-              <?php
-              include('../php/connection.php');
-              $consul = "SELECT nomenclatura FROM profesores";
-              $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
-              
-              while($column = mysqli_fetch_array($resul)){
-                  $optionname=$column['nomenclatura'];
-                  echo "<option value='$optionname'>$optionname</option>";
-              }
-              ?>
-          </select>
-          <select name="turno" id="turno" onkeyup="mensajeChange();">
-            <option value="">Seleccionar turno</option>
-            <option value="T.M">T.M</option>
-            <option value="T.V">T.V</option>
-          </select>
-          <button type="submit" class="btn btn-primary" name="buscar_revi" id="enviar">Buscar</button>
+    <div class="lead">
+      De: <input type="date" name="buscar_date1" id="date1" class="form-control selectDateAdmin">
+      A: <input type="date" name="buscar_date2" id="date2" class="form-control selectDateAdmin">
+    <!-- seleccionar profesor -->
+      <select class="form-select selectProfeAdmin" id="floatingSelect" aria-label="Floating label select example"  id="docente" name="c_profesor" id="profesor" onkeyup="mensajeChange();">
+        <option value="">Seleccionar profesor</option>
+          <?php
+          include('../php/connection.php');
+          $consul = "SELECT nomenclatura FROM profesores";
+          $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
+          
+          while($column = mysqli_fetch_array($resul)){
+              $optionname=$column['nomenclatura'];
+              echo "<option value='$optionname'>$optionname</option>";
+          }
+          ?>
+      </select>
+    <!-- seleccionar turno -->
+      <select class="form-select selectTurnoAdmin" id="floatingSelect" aria-label="Floating label select example" name="turno" id="turno">
+        <option value="">Seleccionar turno</option>
+        <option value="T.M">T.M</option>
+        <option value="T.V">T.V</option>
+      </select>
+    <button type="submit" class="btn btn-primary btn-enviar-admin" name="buscar_revi" id="enviar">Buscar</button>
     </div>
   </form>
   <br>
@@ -61,6 +62,8 @@ if(!isset($_SESSION['usuario'])){
 
   if(isset($_POST['buscar_revi'])){
     ?>
+    <a class="btn-delete-filter" href="revisiones_all.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
+    <br><br>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -125,13 +128,11 @@ if(!isset($_SESSION['usuario'])){
     }else{
       ?>
       <tr>
-        <td colspan="13">No se encontraron resultados</td>
+        <td class="else-results" colspan="13" style="color:red;">No se encontraron resultados</td>
       </tr>
       <?php
     }
     ?>
-    <a href="revisiones_all.php"><button type="submit" class="btn btn-danger">Borrar busqueda</button></a>
-    <br><br>
     <?php
   }else{
     ?>

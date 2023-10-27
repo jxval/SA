@@ -20,15 +20,16 @@ if(!isset($_SESSION['usuario'])){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Directores test</title>
 </head>
-<body>
+<body class="admin_background">
 <!-- navbar -->
 <?php include ("navbar.php");?>
 <h1 class="h1-tittles text-muted">Directores</h1>
+<div class="div-table">
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Agregar director
 </button>
-
+<br><br>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -55,43 +56,41 @@ if(!isset($_SESSION['usuario'])){
   </div>
 </div>
 
-
-
-
 <!-- tabla -->
 
-    <table class="table table-bordered">
-    <thead class="table-dark">
-        <tr>
-        <th scope="col">Nomenclatura</th>
-        <th scope="col">Nombres</th>
-        <th scope="col">Primer apellido</th>
-        <th scope="col">Segundo apellido</th>
-        <th colspan="2">Acción</th>
-        </tr>
-    </thead>
-    <?php 
-        include('../php/connection.php');
-        $consul = "SELECT * FROM dir_de_carrera";
-        $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
-        while($column = mysqli_fetch_array($resul)){
-        echo "<tbody>";
-            echo "<tr>";
-            echo "<td>".$column['nom_dir']."</td>";
-            echo "<td>".$column['nombres']."</td>";
-            echo "<td>".$column['primer_apellido']."</td>";
-            echo "<td>".$column['segundo_apellido']."</td>";
-            ?>
-            <td>
-              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_">Editar</button>
-              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_"> Eliminar</button>
-            </td>
-            <?php
-            echo "</tr>";
-        echo "</tbody>";
-        }
-    ?>
-    </table>
+      <table class="table table-bordered">
+      <thead class="table-dark">
+          <tr>
+          <th scope="col">Nomenclatura</th>
+          <th scope="col">Nombres</th>
+          <th scope="col">Primer apellido</th>
+          <th scope="col">Segundo apellido</th>
+          <th colspan="2">Acción</th>
+          </tr>
+      </thead>
+      <?php 
+          include('../php/connection.php');
+          $consul = "SELECT * FROM dir_de_carrera";
+          $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
+          while($column = mysqli_fetch_array($resul)){
+          echo "<tbody>";
+              echo "<tr>";
+              echo "<td>".$column['nom_dir']."</td>";
+              echo "<td>".$column['nombres']."</td>";
+              echo "<td>".$column['primer_apellido']."</td>";
+              echo "<td>".$column['segundo_apellido']."</td>";
+              ?>
+              <td>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_">Editar</button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_"> Eliminar</button>
+              </td>
+              <?php
+              echo "</tr>";
+          echo "</tbody>";
+          }
+      ?>
+      </table>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 </body>
