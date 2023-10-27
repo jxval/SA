@@ -17,7 +17,7 @@ if(!isset($_SESSION['usuario'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <title>Revisiones T.M</title>
+    <title>Revisiones </title>
 </head>
 <body>
     <!-- navbar -->
@@ -51,6 +51,9 @@ if(!isset($_SESSION['usuario'])){
           <button type="submit" class="btn btn-primary" name="buscar_revi" id="enviar">Buscar</button>
     </div>
   </form>
+  <form action="../php/exportacion_excel.php" method="POST">
+    <button type="submit" name="export" class="btn btn-success" >Exportar a Excel</button>  
+    </form>
   <br>
 
 
