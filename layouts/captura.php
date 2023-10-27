@@ -24,6 +24,7 @@ include("../php/capturas.php");
                 <p class="lead">Fecha</p>
                 <input type="date" name="fecha" id="fecha" class="form-control" required>
             </div>
+            <br>
             <div class="div_turno">
                 <p class="lead">Turno</p>
                 <input type="radio" class="btn-check" name="turno" id="option5" autocomplete="off" value="T.M" required>
@@ -112,6 +113,7 @@ include("../php/capturas.php");
                 </div>
             </div>
             <div class="div_incidencia">
+            <p class="lead">Reporte</p>
                 <input type="radio" class="btn-check" name="reporte" id="option7" autocomplete="off" value="Retardo" required>
                 <label class="btn btn-outline-secondary" for="option7">Retardo</label>
                 <input type="radio" class="btn-check" name="reporte" id="option8" autocomplete="off" value="Falta" required>
@@ -119,6 +121,7 @@ include("../php/capturas.php");
                 <input type="radio" class="btn-check" name="reporte" id="option9" autocomplete="off" value="Salida antes" required>
                 <label class="btn btn-outline-secondary" for="option9">Salida antes</label>
             </div>
+            <br>
             <div class="div_revisiones">
                 <p class="lead">Primera revisión</p> 
                 <div class="cs-form">
