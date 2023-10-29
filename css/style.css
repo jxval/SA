@@ -150,7 +150,20 @@
     font-weight: bold;
 
 }
-
+/* pagina profesores  */
+.modal-background{
+    background-color: #b7b7b7;
+}
+.btn-addprofe{
+    display: inline-block;
+}
+.form-buscarprofe{
+    display: inline;
+}
+.input-busquedaprofe{
+    display: inline-block;
+    width:15%;
+}
 /* login */
 .loginbg{
     background-color: #f3f2f2;

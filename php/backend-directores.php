@@ -46,6 +46,6 @@ if(isset($_POST['guardar_profesor'])){
     $connection->query("INSERT INTO profesores (nomenclatura, nombres, primer_apellido, segundo_apellido, correo, director) 
     VALUES ('$nomenclatura', '$nombres', '$primer_apellido', '$segundo_apellido', '$correo', '$c_director')") or die($connection->error);
 
-    header('location:../layouts_admins/profesores.php');
+    echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/profesores.php";</script>';
 }
 ?>

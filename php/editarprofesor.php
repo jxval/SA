@@ -1,6 +1,5 @@
 <?php
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     require_once("connection.php");
@@ -19,10 +18,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     correo='$correo', director='$director' WHERE id='$id'";
 
     if ($connection->query($sql) === TRUE) {
-        header('location: ../layouts_admins/profesores.php');
+        echo '<script>alert("Registro editado correctamente"); window.location = "../layouts_admins/profesores.php";</script>';
         exit;
     } else {
-        echo '<script>alert("Error al Editar:"); window.location = "../layouts_admins/profesores.php";</script>';
+        echo '<script>alert("Error al Editar"); window.location = "../layouts_admins/profesores.php";</script>';
         exit;
     }
 

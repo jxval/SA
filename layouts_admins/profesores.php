@@ -28,9 +28,14 @@ if(!isset($_SESSION['usuario'])){
     <h1 class="h1-tittles text-muted">Profesores</h1>
     <div class="div-table">
     <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    <button type="button" class="btn btn-primary btn-addprofe" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Agregar profesor
     </button>
+    <!-- buscar profesor -->
+    <form class="form-inline form-buscarprofe" method="post">
+        <input name="buscar-profe" class="form-control mr-sm-2 input-busquedaprofe" type="search" placeholder="Buscar" aria-label="Search">
+        <button name="buscar-profesor" class="btn btn-success" type="submit">Buscar</button>
+    </form>
     <br><br>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -40,16 +45,27 @@ if(!isset($_SESSION['usuario'])){
             <h5 class="modal-title" id="exampleModalLabel">Agregar profesor</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body modal-background">
         <?php require_once '../php/backend-directores.php';?>
             <form action="../php/backend-directores.php" method="POST">
-                <input type="text" name="nomenclatura" placeholder="Ingrese nomenclatura">
-                <input type="text" name="nombre" placeholder="Ingrese nombre">
-                <input type="text" name="primer_apellido" placeholder="Ingrese primer apellido">
-                <input type="text" name="segundo_apellido" placeholder="Ingrese segundo apellido">
-                <input type="text" name="correo" placeholder="Ingrese correo">
+                <label for="recipient-name" class="col-form-label">Nomenclatura</label>
+                <input class="form-control" type="text" name="nomenclatura" placeholder="Ingrese nomenclatura">
+                <br>
+                <label for="recipient-name" class="col-form-label">Nombre de profesor</label>
+                <input class="form-control" type="text" name="nombre" placeholder="Ingrese nombre">
+                <br>
+                <label for="recipient-name" class="col-form-label">Primer apellido</label>
+                <input class="form-control" type="text" name="primer_apellido" placeholder="Ingrese primer apellido">
+                <br>
+                <label for="recipient-name" class="col-form-label">Segundo apellido</label>
+                <input class="form-control" type="text" name="segundo_apellido" placeholder="Ingrese segundo apellido">
+                <br>
+                <label for="recipient-name" class="col-form-label">Correo</label>
+                <input class="form-control" type="text" name="correo" placeholder="Ingrese correo">
+                <br>
+                <label for="recipient-name" class="col-form-label">Director</label>
                 <!-- <label for="Director">Director</label> -->
-                <select id="docente" name="c_director">
+                <select class="form-select" id="docente" name="c_director">
                 <option value="">Seleccionar director</option>
                     <?php
                     include('../php/connection.php');
@@ -72,29 +88,36 @@ if(!isset($_SESSION['usuario'])){
     </div>
     </div>
 
-
-
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <?php
+    include ('../php/connection.php');
+    if(isset($_POST['buscar-profesor'])){
+        ?>
+        <a class="btn-delete-filter" href="profesores.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
+        <br><br>
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead class="table-dark">
             <tr>
                 <th scope="col">Nomenclatura</th> 
                 <th scope="col">Nombres</th>
-                <th scope="col">Primer_apellido</th>
-                <th scope="col">Segundo_apellido</th>
+                <th scope="col">Primer apellido</th>
+                <th scope="col">Segundo apellido</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Director</th>
                 <th scope="col">Acción</th>
             </tr>
         </thead>
         <tbody>
-            <?php
-            require_once("../php/connection.php");
-            
-            // Consulta SQL para obtener los datos de la tabla (cambia 'tu_tabla' al nombre de tu tabla)
+        <?php
+        $resultado = $_POST['buscar-profe'];
 
-            $result = mysqli_query($connection, "SELECT * FROM profesores");
-            while ($row = mysqli_fetch_assoc($result)) :
-            ?>
+        $query = "SELECT * FROM profesores WHERE nomenclatura LIKE '%$resultado%' 
+        OR nombres LIKE '%$resultado%' OR primer_apellido LIKE '%$resultado%' OR segundo_apellido 
+        LIKE '%$resultado%' OR correo LIKE '%$resultado%' OR director LIKE '%$resultado%'";
+        $query_run = mysqli_query($connection,$query);
+
+        if(mysqli_num_rows($query_run) > 0){
+            foreach($query_run as $row){
+                ?>
                 <tr>
                     <td><?php echo $row["nomenclatura"]; ?></td>
                     <td><?php echo $row["nombres"];?></td>
@@ -107,20 +130,19 @@ if(!isset($_SESSION['usuario'])){
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id']; ?>"> Eliminar</button>
                     </td>
                 </tr>
-
                 <!-- Modal editar -->
                 <div class="modal fade" id="exampleModal_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Actualizar</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
-                            <div class="modal-body">
+                            <div class="modal-body modal-background">
                             <form action="../php/editarprofesor.php" method="POST">
                                 <div class="mb-2">
-                                    <label for="recipient-name" class="col-form-label">nomenclatura</label>
+                                    <label for="recipient-name" class="col-form-label">Nomenclatura</label>
                                     <input type="text" class="form-control" id="recipient-name" name="nomenclatura" value="<?php echo $row['nomenclatura']; ?>">
                                 </div>
                                 <div class="mb-3">
@@ -146,6 +168,10 @@ if(!isset($_SESSION['usuario'])){
                                     <label for="recipient-name" class="col-form-label">Director</label>
                                     <input type="text" class="form-control" id="recipient-name" name="director" value="<?php echo $row['director']; ?>">
                                 </div>
+                                <!-- <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Director</label>
+                                    <input type="text" class="form-control" id="recipient-name" name="director" value="<?php echo $row['director']; ?>">
+                                </div> -->
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -161,11 +187,11 @@ if(!isset($_SESSION['usuario'])){
                 <div class="modal-dialog">
                     <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Borrar</h1>
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Seguro que quiere eliminar <?php echo $row['nombres']; ?>
+                            Seguro que desea eliminar a <?php echo $row['nombres']; ?>?
                         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                     </div>
                     <div class="modal-footer">
@@ -176,9 +202,135 @@ if(!isset($_SESSION['usuario'])){
                 </div>
                 </div>
                 </form>
-            <?php endwhile; ?>
+                <?php
+            }
+        }else{
+            ?>
+            <tr>
+              <td class="else-results" colspan="13" style="color:red;">No se encontraron resultados</td>
+            </tr>
+            <?php
+        }
+        ?>
+        <p class="lead">Resultados para <strong><?php echo $resultado?></strong></p>
+        <?php
+    }else{
+    ?>
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Nomenclatura</th> 
+                <th scope="col">Nombres</th>
+                <th scope="col">Primer_apellido</th>
+                <th scope="col">Segundo_apellido</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Director</th>
+                <th scope="col">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            require_once("../php/connection.php");
+            
+            // Consulta SQL para obtener los datos de la tabla (cambia 'tu_tabla' al nombre de tu tabla)
+
+            $result = mysqli_query($connection, "SELECT * FROM profesores");
+            while ($row = mysqli_fetch_assoc($result)) {
+            ?>
+                <tr>
+                    <td><?php echo $row["nomenclatura"]; ?></td>
+                    <td><?php echo $row["nombres"];?></td>
+                    <td><?php echo $row["primer_apellido"]; ?></td>
+                    <td><?php echo $row["segundo_apellido"];?></td>
+                    <td><?php echo $row["correo"];?></td>
+                    <td><?php echo $row["director"]; ?></td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">Editar</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id']; ?>"> Eliminar</button>
+                    </td>
+                </tr>
+
+                <!-- Modal editar -->
+                <div class="modal fade" id="exampleModal_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body modal-background">
+                            <form action="../php/editarprofesor.php" method="POST">
+                                <div class="mb-2">
+                                    <label for="recipient-name" class="col-form-label">Nomenclatura</label>
+                                    <input type="text" class="form-control" id="recipient-name" name="nomenclatura" value="<?php echo $row['nomenclatura']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Nombres</label>
+                                    <input type="text" class="form-control" id="recipient-name" name="nombres" value="<?php echo $row['nombres']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="hidden" class="form-control" id="recipient-name" name="id" value="<?php echo $row['id']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Primer Apellido</label>
+                                    <input type="text" class="form-control" id="recipient-name" name="primerapellido" value="<?php echo $row['primer_apellido']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Segundo Apellido</label>
+                                    <input type="text" class="form-control" id="recipient-name" name="segundoapellido" value="<?php echo $row['segundo_apellido']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Correo</label>
+                                    <input type="text" class="form-control" id="recipient-name" name="correo" value="<?php echo $row['correo']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Director</label>
+                                    <input type="text" class="form-control" id="recipient-name" name="director" value="<?php echo $row['director']; ?>">
+                                </div>
+                                <!-- <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Director</label>
+                                    <input type="text" class="form-control" id="recipient-name" name="director" value="<?php echo $row['director']; ?>">
+                                </div> -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal de eliminar  -->
+                <form action="../php/eliminar.php" method="post">
+                <div class="modal fade" id="borrar_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            Seguro que desea eliminar a <?php echo $row['nombres']; ?>?
+                        <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                </form>
+                <?php
+    }
+    ?>
         </tbody>
     </table>
     </div>
+
+    <?php 
+    }
+    ?>
 </body>
 </html>
