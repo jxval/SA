@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     $sql = "DELETE FROM carreras WHERE id=$id";
 
     if ($connection->query($sql) === TRUE) {
-        header('Location: ../layouts_admins/carreras.php');
+        echo '<script>alert("Registro eliminado correctamente"); window.location = "../layouts_admins/carreras.php";</script>';
         exit;
     } else {
         echo '<script>alert("Error al eliminar la carrera:"); window.location = "../layouts_admins/carreras.php";</script>';

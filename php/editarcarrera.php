@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     WHERE id='$id'";
 
     if ($connection->query($sql) === TRUE) {
-        header('location: ../layouts_admins/carreras.php');
+        echo '<script>alert("Registro editado correctamente"); window.location = "../layouts_admins/carreras.php";</script>';
         exit;
     } else {
         echo '<script>alert("Error al Editar:"); window.location = "../layouts_admins/carreras.php";</script>';

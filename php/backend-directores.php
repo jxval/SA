@@ -22,7 +22,7 @@ if(isset($_POST['guardar_carrera'])){
     $connection->query("INSERT INTO carreras (nom_car, nombre, nom_dir) 
     VALUES ('$nom_car', '$nombre', '$c_director')") or die($connection->error);
 
-    header('location:../layouts_admins/carreras.php');
+    echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/carreras.php";</script>';
 }
 
 if(isset($_POST['filtro_carrera'])){
