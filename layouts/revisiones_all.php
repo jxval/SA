@@ -32,7 +32,10 @@
   </thead>
   <?php 
     include('../php/connection.php');
-    $consul = "SELECT * FROM revisiones ORDER BY id DESC";
+    $consul = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, revisiones.hora_inicio, revisiones.hora_final, 
+    profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, 
+    revisiones.observaciones FROM revisiones
+    INNER JOIN profesores ON revisiones.profesor = profesores.id ORDER BY id DESC";
     $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
     while($column = mysqli_fetch_array($resul)){
     echo "<tbody>";
@@ -42,7 +45,7 @@
         echo "<td>".$column['aula']."</td>";
         echo "<td>".$column['hora_inicio']."</td>";
         echo "<td>".$column['hora_final']."</td>";
-        echo "<td>".$column['profesor']."</td>";
+        echo "<td>".$column['nomenclatura']."</td>";
         echo "<td>".$column['grupo']."</td>";
         echo "<td>".$column['reporte']."</td>";
         echo "<td>".$column['revision_1']."</td>";

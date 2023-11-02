@@ -34,7 +34,7 @@ if(!isset($_SESSION['usuario'])){
         <option value="">Seleccionar profesor</option>
           <?php
           include('../php/connection.php');
-          $consul = "SELECT nomenclatura FROM profesores";
+          $consul = "SELECT CONCAT(id, ' ', nomenclatura) AS nomenclatura FROM profesores";
           $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
           
           while($column = mysqli_fetch_array($resul)){
@@ -103,7 +103,10 @@ if(!isset($_SESSION['usuario'])){
     if($date_1 == '' AND $date_2 == '' AND $turno !=='' AND $profesor !==''){$filtro = "WHERE profesor = '$profesor' AND turno = '$turno'";}
   }
 
-    $query = "SELECT * FROM revisiones $filtro ORDER BY fecha DESC";
+    $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, revisiones.hora_inicio, revisiones.hora_final, 
+    profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, 
+    revisiones.observaciones FROM revisiones
+    INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro ORDER BY fecha DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -115,7 +118,7 @@ if(!isset($_SESSION['usuario'])){
           <td><?= $items['aula'];?></td>
           <td><?= $items['hora_inicio'];?></td>
           <td><?= $items['hora_final'];?></td>
-          <td><?= $items['profesor'];?></td>
+          <td><?= $items['nomenclatura'];?></td>
           <td><?= $items['grupo'];?></td>
           <td><?= $items['reporte'];?></td>
           <td><?= $items['revision_1'];?></td>
@@ -159,7 +162,10 @@ if(!isset($_SESSION['usuario'])){
     </thead>
     <?php 
       include('../php/connection.php');
-      $consul = "SELECT * FROM revisiones ORDER BY fecha DESC";
+      $consul = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, revisiones.hora_inicio, revisiones.hora_final, 
+      profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, 
+      revisiones.observaciones FROM revisiones
+      INNER JOIN profesores ON revisiones.profesor = profesores.id ORDER BY fecha DESC";
       $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
       while($column = mysqli_fetch_array($resul)){
       echo "<tbody>";
@@ -169,7 +175,7 @@ if(!isset($_SESSION['usuario'])){
           echo "<td>".$column['aula']."</td>";
           echo "<td>".$column['hora_inicio']."</td>";
           echo "<td>".$column['hora_final']."</td>";
-          echo "<td>".$column['profesor']."</td>";
+          echo "<td>".$column['nomenclatura']."</td>";
           echo "<td>".$column['grupo']."</td>";
           echo "<td>".$column['reporte']."</td>";
           echo "<td>".$column['revision_1']."</td>";

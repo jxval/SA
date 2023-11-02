@@ -69,11 +69,11 @@ if(!isset($_SESSION['usuario'])){
                 <option value="">Seleccionar director</option>
                     <?php
                     include('../php/connection.php');
-                    $consul = "SELECT nom_dir FROM dir_de_carrera";
+                    $consul = "SELECT CONCAT(id, ' ', nom_dir) AS director FROM dir_de_carrera";
                     $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
                     
                     while($column = mysqli_fetch_array($resul)){
-                        $optionname=$column['nom_dir'];
+                        $optionname=$column['director'];
                         echo "<option value='$optionname'>$optionname</option>";
                     }
                     ?>
@@ -110,9 +110,11 @@ if(!isset($_SESSION['usuario'])){
         <?php
         $resultado = $_POST['buscar-profe'];
 
-        $query = "SELECT * FROM profesores WHERE nomenclatura LIKE '%$resultado%' 
-        OR nombres LIKE '%$resultado%' OR primer_apellido LIKE '%$resultado%' OR segundo_apellido 
-        LIKE '%$resultado%' OR correo LIKE '%$resultado%' OR director LIKE '%$resultado%'";
+        $query = "SELECT profesores.id, profesores.nomenclatura, profesores.nombres, profesores.primer_apellido, profesores.segundo_apellido, profesores.correo, dir_de_carrera.nom_dir
+        FROM profesores
+        INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE profesores.nomenclatura LIKE '%$resultado%' 
+        OR profesores.nombres LIKE '%$resultado%' OR profesores.primer_apellido LIKE '%$resultado%' OR profesores.segundo_apellido 
+        LIKE '%$resultado%' OR profesores.correo LIKE '%$resultado%' OR profesores.director LIKE '%$resultado%'";
         $query_run = mysqli_query($connection,$query);
 
         if(mysqli_num_rows($query_run) > 0){
@@ -124,7 +126,7 @@ if(!isset($_SESSION['usuario'])){
                     <td><?php echo $row["primer_apellido"]; ?></td>
                     <td><?php echo $row["segundo_apellido"];?></td>
                     <td><?php echo $row["correo"];?></td>
-                    <td><?php echo $row["director"]; ?></td>
+                    <td><?php echo $row["nom_dir"]; ?></td>
                     <td>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">Editar</button>
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id']; ?>"> Eliminar</button>
@@ -166,7 +168,19 @@ if(!isset($_SESSION['usuario'])){
                                 </div>
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Director</label>
-                                    <input type="text" class="form-control" id="recipient-name" name="director" value="<?php echo $row['director']; ?>">
+                                    <select class="form-select" id="docente" name="director">
+                                        <option value="">Seleccionar director</option>
+                                            <?php
+                                            include('../php/connection.php');
+                                            $consul = "SELECT CONCAT(id, ' ', nom_dir) AS director FROM dir_de_carrera";
+                                            $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
+                                        
+                                            while($column = mysqli_fetch_array($resul)){
+                                                $optionname=$column['director'];
+                                                echo "<option value='$optionname'>$optionname</option>";
+                                            }
+                                            ?>
+                                    </select>
                                 </div>
                                 <!-- <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Director</label>
@@ -234,7 +248,9 @@ if(!isset($_SESSION['usuario'])){
             
             // Consulta SQL para obtener los datos de la tabla (cambia 'tu_tabla' al nombre de tu tabla)
 
-            $result = mysqli_query($connection, "SELECT * FROM profesores");
+            $result = mysqli_query($connection, "SELECT profesores.id, profesores.nomenclatura, profesores.nombres, profesores.primer_apellido, profesores.segundo_apellido, profesores.correo, dir_de_carrera.nom_dir
+            FROM profesores
+            INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id");
             while ($row = mysqli_fetch_assoc($result)) {
             ?>
                 <tr>
@@ -243,7 +259,7 @@ if(!isset($_SESSION['usuario'])){
                     <td><?php echo $row["primer_apellido"]; ?></td>
                     <td><?php echo $row["segundo_apellido"];?></td>
                     <td><?php echo $row["correo"];?></td>
-                    <td><?php echo $row["director"]; ?></td>
+                    <td><?php echo $row["nom_dir"]; ?></td>
                     <td>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">Editar</button>
                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id']; ?>"> Eliminar</button>
@@ -286,7 +302,19 @@ if(!isset($_SESSION['usuario'])){
                                 </div>
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Director</label>
-                                    <input type="text" class="form-control" id="recipient-name" name="director" value="<?php echo $row['director']; ?>">
+                                    <select class="form-select" id="docente" name="director">
+                                        <option value="">Seleccionar director</option>
+                                            <?php
+                                            include('../php/connection.php');
+                                            $consul = "SELECT CONCAT(id, ' ', nom_dir) AS director FROM dir_de_carrera";
+                                            $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
+                                        
+                                            while($column = mysqli_fetch_array($resul)){
+                                                $optionname=$column['director'];
+                                                echo "<option value='$optionname'>$optionname</option>";
+                                            }
+                                            ?>
+                                    </select>
                                 </div>
                                 <!-- <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Director</label>

@@ -39,28 +39,28 @@ if(!isset($_SESSION['usuario'])){
         </div>
         <div class="modal-body modal-background">
         <?php require_once '../php/backend-directores.php';?>
-          <form action="../php/backend-directores.php" method="POST">
-              <label for="recipient-name" class="col-form-label">Nomenclatura</label>
-              <input class="form-control" type="text" name="nom_car" placeholder="Ingrese nomenclatura">
-              <br>
-              <label for="recipient-name" class="col-form-label">Nombre de carrera</label>
-              <input class="form-control" type="text" name="nombre" placeholder="Ingrese nombre">
-              <br>
-              <label for="recipient-name" class="col-form-label">Director</label>
-              <!-- <label for="Director">Director</label> -->
-              <select class="form-select" id="docente" name="c_director">
-                <option value="">Seleccionar director</option>
-                  <?php
-                  include('../php/connection.php');
-                  $consul = "SELECT nom_dir FROM dir_de_carrera";
-                  $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
+            <form action="../php/backend-directores.php" method="POST">
+                <label for="recipient-name" class="col-form-label">Nomenclatura</label>
+                <input class="form-control" type="text" name="nom_car" placeholder="Ingrese nomenclatura">
+                <br>
+                <label for="recipient-name" class="col-form-label">Nombre de carrera</label>
+                <input class="form-control" type="text" name="nombre" placeholder="Ingrese nombre">
+                <br>
+                <label for="recipient-name" class="col-form-label">Director</label>
+                <!-- <label for="Director">Director</label> -->
+                <select class="form-select" id="docente" name="c_director">
+                    <option value="">Seleccionar director</option>
+                    <?php
+                    include('../php/connection.php');
+                    $consul = "SELECT CONCAT(id, ' ', nom_dir) AS director FROM dir_de_carrera";
+                    $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
                   
-                  while($column = mysqli_fetch_array($resul)){
-                      $optionname=$column['nom_dir'];
-                      echo "<option value='$optionname'>$optionname</option>";
-                  }
-                  ?>
-              </select>
+                    while($column = mysqli_fetch_array($resul)){
+                        $optionname=$column['director'];
+                        echo "<option value='$optionname'>$optionname</option>";
+                    }
+                    ?>
+                </select>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -88,7 +88,9 @@ if(!isset($_SESSION['usuario'])){
             
             // Consulta SQL para obtener los datos de la tabla (cambia 'tu_tabla' al nombre de tu tabla)
 
-            $result = mysqli_query($connection, "SELECT * FROM carreras");
+            $result = mysqli_query($connection, "SELECT carreras.id, carreras.nom_car, carreras.nombre, dir_de_carrera.nom_dir
+            FROM carreras
+            INNER JOIN dir_de_carrera ON carreras.nom_dir = dir_de_carrera.id;");
             while ($row = mysqli_fetch_assoc($result)) :
             ?>
                 <tr>
@@ -124,13 +126,21 @@ if(!isset($_SESSION['usuario'])){
                                     <input type="hidden" class="form-control" id="recipient-name" name="id" value="<?php echo $row['id']; ?>">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Director</label>
-                                    <input type="text" class="form-control" id="recipient-name" name="director" value="<?php echo $row['nom_dir']; ?>">
+                                <label for="recipient-name" class="col-form-label">Director</label>
+                                <select class="form-select" id="docente" name="director">
+                                    <option value="">Seleccionar director</option>
+                                        <?php
+                                        include('../php/connection.php');
+                                        $consul = "SELECT CONCAT(id, ' ', nom_dir) AS director FROM dir_de_carrera";
+                                        $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
+                                    
+                                        while($column = mysqli_fetch_array($resul)){
+                                            $optionname=$column['director'];
+                                            echo "<option value='$optionname'>$optionname</option>";
+                                        }
+                                        ?>
+                                </select>
                                 </div>
-                                <!-- <div class="mb-3">
-                                    <label for="recipient-name" class="col-form-label">Director</label>
-                                    <input type="text" class="form-control" id="recipient-name" name="director" value="<?php echo $row['director']; ?>">
-                                </div> -->
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>

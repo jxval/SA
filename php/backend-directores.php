@@ -11,7 +11,7 @@ if(isset($_POST['guardar'])){
     $connection->query("INSERT INTO dir_de_carrera (nom_dir, nombres, primer_apellido, segundo_apellido) 
     VALUES ('$nom_dir', '$nombres', '$primer_apellido', '$segundo_apellido')") or die($connection->error);
 
-    header('location:../layouts/directores.php');
+    echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/directores.php";</script>';
 }
 
 if(isset($_POST['guardar_carrera'])){
@@ -23,6 +23,7 @@ if(isset($_POST['guardar_carrera'])){
     VALUES ('$nom_car', '$nombre', '$c_director')") or die($connection->error);
 
     echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/carreras.php";</script>';
+
 }
 
 if(isset($_POST['filtro_carrera'])){

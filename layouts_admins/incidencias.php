@@ -80,7 +80,7 @@ if(!isset($_SESSION['usuario'])){
                 COUNT(revisiones.reporte) AS total
                 FROM revisiones
                 JOIN profesores
-                ON revisiones.profesor = profesores.nomenclatura
+                ON revisiones.profesor = profesores.id
                 WHERE revisiones.fecha BETWEEN '$date_1' AND '$date_2'
                 AND turno = '$turno'
                 GROUP BY profesores.primer_apellido, profesores.nombres

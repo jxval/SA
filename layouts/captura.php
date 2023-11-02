@@ -92,11 +92,11 @@ include("../php/capturas.php");
                         <option selected>Seleccionar profesor</option>
                         <?php
                             include('../php/connection.php');
-                            $consul = "SELECT nomenclatura FROM profesores";
+                            $consul = "SELECT CONCAT(id, ' ', nomenclatura) AS profesor FROM profesores";
                             $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
                             
                             while($column = mysqli_fetch_array($resul)){
-                                $optionname=$column['nomenclatura'];
+                                $optionname=$column['profesor'];
                                 echo "<option value='$optionname'>$optionname</option>";
                             }
                         ?> 
