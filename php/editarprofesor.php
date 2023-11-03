@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $director = $_POST['director'];
 
   
-    $sql = "UPDATE profesores SET nombres='$nombres', primer_apellido='$primerapellido', segundo_apellido='$segundoapellido', 
+    $sql = "UPDATE profesores SET nomenclatura = '$nomenclatura', nombres='$nombres', primer_apellido='$primerapellido', segundo_apellido='$segundoapellido', 
     correo='$correo', director='$director' WHERE id='$id'";
 
     if ($connection->query($sql) === TRUE) {

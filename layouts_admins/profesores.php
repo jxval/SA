@@ -114,7 +114,7 @@ if(!isset($_SESSION['usuario'])){
         FROM profesores
         INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE profesores.nomenclatura LIKE '%$resultado%' 
         OR profesores.nombres LIKE '%$resultado%' OR profesores.primer_apellido LIKE '%$resultado%' OR profesores.segundo_apellido 
-        LIKE '%$resultado%' OR profesores.correo LIKE '%$resultado%' OR profesores.director LIKE '%$resultado%'";
+        LIKE '%$resultado%' OR profesores.correo LIKE '%$resultado%' OR dir_de_carrera.nom_dir LIKE '%$resultado%' ORDER BY nomenclatura";
         $query_run = mysqli_query($connection,$query);
 
         if(mysqli_num_rows($query_run) > 0){
@@ -250,7 +250,7 @@ if(!isset($_SESSION['usuario'])){
 
             $result = mysqli_query($connection, "SELECT profesores.id, profesores.nomenclatura, profesores.nombres, profesores.primer_apellido, profesores.segundo_apellido, profesores.correo, dir_de_carrera.nom_dir
             FROM profesores
-            INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id");
+            INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id ORDER BY nomenclatura");
             while ($row = mysqli_fetch_assoc($result)) {
             ?>
                 <tr>
