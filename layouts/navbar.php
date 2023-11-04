@@ -31,6 +31,9 @@
         <li class="nav-item">
           <a class="nav-link" href="login.php" aria-disabled="false">Iniciar sesión como administrador</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../layouts_directores/login.php" aria-disabled="false">Iniciar sesión como director</a>
+        </li>
       </ul>
     </div>
   </div>
