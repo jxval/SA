@@ -53,6 +53,12 @@ if(!isset($_SESSION['usuario'])){
           <label for="recipient-name" class="col-form-label">Segundo apellido</label>
           <input class="form-control" type="text" name="segundo_apellido" placeholder="Ingrese segundo apellido">
             <!-- <button type="submit" name="guardar">Agregar</button> -->
+            <br>
+          <label for="recipient-name" class="col-form-label">Correo</label>
+          <input class="form-control" type="mail" name="correo" placeholder="Ingrese correo">
+          <br>
+          <label for="recipient-name" class="col-form-label">Contraseña</label>
+          <input class="form-control" type="password" name="contrasena" placeholder="Ingrese contraseña">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

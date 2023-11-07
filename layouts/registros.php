@@ -27,7 +27,7 @@
         <br>
         <button class="button btn-login" type="submit">Registrar</button>
         
-        <a href="login.php" class="a-regi">Regresar</a>
+        <a href="../layouts_admins/dashboard.php" class="a-regi">Regresar</a>
         
     </form>
     <br><br>

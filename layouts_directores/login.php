@@ -30,8 +30,6 @@ if(isset($_SESSION['usuario'])){
         <input class="input pass" type="password" name="db_contrasena" id="" placeholder="Contraseña" required>
         <br>
         <button class="button btn-login" type="submit" name='btn_login'>Entrar</button>
-        
-        <a href="../layouts_directores/registration.php" class="a-regi">Registrar</a>
         <a href="../layouts/captura.php" class="a-regi">Inicio</a>
         
     </form>

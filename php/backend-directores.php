@@ -7,9 +7,12 @@ if(isset($_POST['guardar'])){
     $nombres = $_POST['nombres'];
     $primer_apellido = $_POST['primer_apellido'];
     $segundo_apellido = $_POST['segundo_apellido'];
+    $correo = $_POST['correo'];
+    $password = $_POST['contrasena'];
+    $password = hash('sha512', $password);
 
-    $connection->query("INSERT INTO dir_de_carrera (nom_dir, nombres, primer_apellido, segundo_apellido) 
-    VALUES ('$nom_dir', '$nombres', '$primer_apellido', '$segundo_apellido')") or die($connection->error);
+    $connection->query("INSERT INTO dir_de_carrera (nom_dir, nombres, primer_apellido, segundo_apellido, correo, password) 
+    VALUES ('$nom_dir', '$nombres', '$primer_apellido', '$segundo_apellido', '$correo', '$password')") or die($connection->error);
 
     echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/directores.php";</script>';
 }
