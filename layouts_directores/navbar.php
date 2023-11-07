@@ -28,7 +28,7 @@
 
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="dashboard.php">
+    <a class="navbar-brand" href="../layouts_directores/revisiones.php">
       <img src="../images/LogoUTCJ.png" alt="" width="50" height="50">
     </a>
     <p class="lead nav_username">
@@ -40,22 +40,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="dashboard.php">Inicio</a>
+          <a class="nav-link" href="../layouts_directores/revisiones.php">Concentrado general</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="revisiones_all.php">Concentrado general</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="incidencias.php">Incidencias más destacadas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="profesores.php">Profesores</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="carreras.php">Carreras</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="directores.php">Directores</a>
+          <a class="nav-link" href="registration.php">Cambiar contraseña</a>
         </li>
         <li class="nav-item">
           <a class="nav-link nav-link-logout" href="../php/logout_director.php" aria-disabled="false">Cerrar sesión</a>

@@ -16,18 +16,16 @@
   
 <form action="../php/registro_directores.php" method="post" class="formRe">
         <img class="coverimg" src="../images/LogoUTCJ.png" alt="">
-        <h3 class="tittle-2">Registro | directores</h3>
-        <input class="input" type="text" name="db_nombre" id="" placeholder="Nomenclatura" required>
+        <h3 class="tittle-2">Cambiar contraseña</h3>
+        <input class="input" type="password" name="actual_pass" id="" placeholder="Contraseña actual" required>
         <br>
-        <input class="input" type="text" name="db_apellido" id="" placeholder="Apellido" required>
+        <input class="input" type="password" name="nueva_pass" id="" placeholder="Nueva contraseña" required>
         <br>
-        <input class="input" type="text" name="db_correo" id="" placeholder="Correo" required>
+        <input class="input" type="text" name="c_nueva_pass" id="" placeholder="Confirmar nueva contraseña" required>
         <br>
-        <input class="input pass" type="password" name="db_contrasena" id="" placeholder="Contraseña" required>
-        <br>
-        <button class="button btn-login" type="submit">Registrar</button>
+        <button class="button btn-login" type="submit">Cambiar</button>
         
-        <a href="login.php" class="a-regi">Regresar</a>
+        <a href="revisiones.php" class="a-regi">Regresar</a>
         
     </form>
     <br><br>
