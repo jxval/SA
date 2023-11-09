@@ -116,6 +116,12 @@
     margin-bottom: 2%;
 }
 
+/* admins dashboard */
+.card{
+    float: left;
+    
+}
+
 /* admin pages concentrado general*/
 .admin_background{
     background-color: #cafaed;

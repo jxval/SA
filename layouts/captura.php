@@ -15,7 +15,7 @@
 <?php
 include("../php/capturas.php");
 ?>
-<h1 class="h1-tittles text-muted">Reporte de revisiones</h1>
+<h1 class="h1-tittles text-muted">Reporte de revisiones presencial</h1>
 <div class="div-captura">
     <div class="sub-div-captura">
         <form action="" method="POST">

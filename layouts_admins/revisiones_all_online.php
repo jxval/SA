@@ -23,7 +23,7 @@ if(!isset($_SESSION['usuario'])){
     <!-- navbar -->
 <?php include ("navbar.php");?>
 <?php include ("../php/connection.php");?>
-<h1 class="h1-tittles text-muted">Concentrado general presencial</h1>
+<h1 class="h1-tittles text-muted">Concentrado general en línea</h1>
 <div class="div-table">
   <form action="" method="POST">
     <div class="lead">
@@ -72,7 +72,6 @@ if(!isset($_SESSION['usuario'])){
       <tr>
         <th scope="col">Fecha</th>
         <th scope="col">Turno</th>
-        <th scope="col">Aula</th>
         <th scope="col">Horario</th>
         <th scope="col">Profesor</th>
         <th scope="col">Grupo</th>
@@ -101,10 +100,10 @@ if(!isset($_SESSION['usuario'])){
     if($date_1 == '' AND $date_2 == '' AND $turno !=='' AND $profesor !==''){$filtro = "WHERE profesor = '$profesor' AND turno = '$turno'";}
   }
 
-    $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
+    $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ',revisiones.revision_2,', ',revisiones.revision_3) AS revisiones, 
     revisiones.observaciones, revisiones.justificado, revisiones.comentarios FROM revisiones
-    INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro AND modalidad = 'presencial' ORDER BY fecha DESC";
+    INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro AND modalidad = 'linea' ORDER BY fecha DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -113,7 +112,6 @@ if(!isset($_SESSION['usuario'])){
         <tr>
           <td><?= $items['fecha'];?></td>
           <td><?= $items['turno'];?></td>
-          <td><?= $items['aula'];?></td>
           <td><?= $items['horario'];?></td>
           <td><?= $items['nomenclatura'];?></td>
           <td><?= $items['grupo'];?></td>
@@ -141,7 +139,6 @@ if(!isset($_SESSION['usuario'])){
       <tr>
         <th scope="col">Fecha</th>
         <th scope="col">Turno</th>
-        <th scope="col">Aula</th>
         <th scope="col">Horario</th>
         <th scope="col">Profesor</th>
         <th scope="col">Grupo</th>
@@ -154,26 +151,24 @@ if(!isset($_SESSION['usuario'])){
     </thead>
     <?php 
       include('../php/connection.php');
-      $consul = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
+      $consul = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
       profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ',revisiones.revision_2,', ',revisiones.revision_3) AS revisiones, 
       revisiones.observaciones, revisiones.justificado, revisiones.comentarios FROM revisiones
-      INNER JOIN profesores ON revisiones.profesor = profesores.id AND modalidad = 'presencial' ORDER BY fecha DESC";
+      INNER JOIN profesores ON revisiones.profesor = profesores.id AND modalidad = 'linea' ORDER BY fecha DESC";
       $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
       while($column = mysqli_fetch_array($resul)){
       echo "<tbody>";
           echo "<tr>";
-          echo "<td>".$column['fecha']."</td>";
-          echo "<td>".$column['turno']."</td>";
-          echo "<td>".$column['aula']."</td>";
-          echo "<td>".$column['horario']."</td>";
-          echo "<td>".$column['nomenclatura']."</td>";
-          echo "<td>".$column['grupo']."</td>";
-          echo "<td>".$column['reporte']."</td>";
-          echo "<td>".$column['revisiones']."</td>";
-          echo "<td>".$column['observaciones']."</td>";
-          echo "<td>".$column['justificado']."</td>";
-          echo "<td>".$column['comentarios']."</td>";
-
+            echo "<td>".$column['fecha']."</td>";
+            echo "<td>".$column['turno']."</td>";
+            echo "<td>".$column['horario']."</td>";
+            echo "<td>".$column['nomenclatura']."</td>";
+            echo "<td>".$column['grupo']."</td>";
+            echo "<td>".$column['reporte']."</td>";
+            echo "<td>".$column['revisiones']."</td>";
+            echo "<td>".$column['observaciones']."</td>";
+            echo "<td>".$column['justificado']."</td>";
+            echo "<td>".$column['comentarios']."</td>";
           echo "</tr>";
       echo "</tbody>";
       }

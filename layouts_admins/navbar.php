@@ -42,9 +42,20 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="dashboard.php">Inicio</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="revisiones_all.php">Concentrado general</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Concentrado general
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="revisiones_all.php">Presencial</a></li>
+            <li><a class="dropdown-item" href="revisiones_all_online.php">En línea</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Concentrado universal</a></li>
+          </ul>
         </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" href="revisiones_all.php">Concentrado general</a>
+        </li> -->
         <li class="nav-item">
           <a class="nav-link" href="incidencias.php">Incidencias más destacadas</a>
         </li>
