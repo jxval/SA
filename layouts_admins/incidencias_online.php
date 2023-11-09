@@ -23,7 +23,7 @@ if(!isset($_SESSION['usuario'])){
     <!-- navbar -->
 <?php include ("navbar.php");?>
 <?php include ("../php/connection.php");?>
-<h1 class="h1-tittles text-muted">Incidencias más destacadas | Presencial</h1>
+<h1 class="h1-tittles text-muted">Incidencias más destacadas | En línea</h1>
 <div class="div-table div-filtro">
   <form action="" method="POST">
     <div>
@@ -85,7 +85,7 @@ if(!isset($_SESSION['usuario'])){
                 ON revisiones.profesor = profesores.id
                 WHERE revisiones.fecha BETWEEN '$date_1' AND '$date_2'
                 AND turno = '$turno'
-                AND modalidad = 'presencial'
+                AND modalidad = 'linea'
                 GROUP BY profesores.primer_apellido, profesores.nombres
                 ORDER BY total DESC
                 LIMIT $limite";
@@ -116,7 +116,7 @@ if(!isset($_SESSION['usuario'])){
     ?>
     <figure class="text-left">
       <blockquote class="blockquote">
-      Top <strong><?php echo $limite?></strong> de incidencias del <strong><?php echo $date_1?></strong> al <strong><?php echo $date_2?></strong> del <strong><strong><?php echo $turno?></strong></strong></p>
+      Top <strong><?php echo $limite?></strong>de incidencias del <strong><?php echo $date_1?></strong> al <strong><?php echo $date_2?></strong> del <strong><strong><?php echo $turno?></strong></strong></p>
       </blockquote>
     </figure>
       <a href="incidencias.php"><button type="submit" class="btn btn-danger">Borrar filtro</button></a>
