@@ -55,18 +55,18 @@
     
     
 }
-.div_captura2{
+.div_horario{
+    margin-bottom: 1rem;
+    
+}
+.div_revisiones{
+    margin-bottom: 1rem;
     display: inline-block;
     padding-right: 10%;
     width: 40%;
     margin-left: 8%;
 }
-.div_horario{
-    margin-bottom: 1rem;
-}
-.div_revisiones{
-    margin-bottom: 1rem;
-}
+
 .btn-outline-secondary{
     border: solid 1px #009286;
     color: #009286;
@@ -101,7 +101,7 @@
 
 .sub-div-captura{
     border: solid 3px #0db8aa;
-    padding-top: 3%;
+    padding-top: 0%;
     padding-left: 3%;
     padding-right: 3%;
     padding-bottom: 3%;
@@ -114,12 +114,6 @@
     margin-left: 2%;
     margin-right: 2%;
     margin-bottom: 2%;
-}
-
-/* admins dashboard */
-.card{
-    float: left;
-    
 }
 
 /* admin pages concentrado general*/
