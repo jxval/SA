@@ -23,7 +23,7 @@ if(!isset($_SESSION['usuario'])){
     <!-- navbar -->
 <?php include ("navbar.php");?>
 <?php include ("../php/connection.php");?>
-<h1 class="h1-tittles text-muted">Concentrado general presencial</h1>
+<h1 class="h1-tittles text-muted">Concentrado general | Presencial</h1>
 <div class="div-table">
   <form action="" method="POST">
     <div class="lead">

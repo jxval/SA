@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 09-11-2023 a las 00:48:57
+-- Tiempo de generación: 10-11-2023 a las 00:31:36
 -- Versión del servidor: 8.0.31
 -- Versión de PHP: 8.0.26
 
@@ -20,6 +20,26 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `supervsionacad`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `aulas`
+--
+
+DROP TABLE IF EXISTS `aulas`;
+CREATE TABLE IF NOT EXISTS `aulas` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `aula` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `aulas`
+--
+
+INSERT INTO `aulas` (`id`, `aula`) VALUES
+(11, 'H008');
 
 -- --------------------------------------------------------
 
@@ -60,7 +80,7 @@ CREATE TABLE IF NOT EXISTS `dir_de_carrera` (
   `correo` varchar(50) NOT NULL,
   `password` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `dir_de_carrera`
@@ -73,7 +93,28 @@ INSERT INTO `dir_de_carrera` (`id`, `nom_dir`, `nombres`, `primer_apellido`, `se
 (5, 'ROJO E', 'ERICK', 'ROJO', 'SIMENTAL', 'erick.rojo@utcj.edu.mx', '123456'),
 (6, 'SALCIDO B', 'BRENDA MARCELA', 'SALCIDO', 'TRILLO', '', ''),
 (9, 'VILLASENOR D', 'DIANA ELIZABETH', 'VILLASENOR', 'HERNANDEZ', '', ''),
-(10, 'Arellano A', 'Armando Vicente', 'Arellano', 'Blancas', 'arellano_blancas@utcj.edu.mx', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413');
+(10, 'Arellano A', 'Armando Vicente', 'Arellano', 'Blancas', 'arellano_blancas@utcj.edu.mx', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413'),
+(11, '', '', '', '', '', 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `grupos`
+--
+
+DROP TABLE IF EXISTS `grupos`;
+CREATE TABLE IF NOT EXISTS `grupos` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `grupo` varchar(20) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `grupos`
+--
+
+INSERT INTO `grupos` (`id`, `grupo`) VALUES
+(2, 'MTW31');
 
 -- --------------------------------------------------------
 
@@ -136,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `revisiones` (
   `comentarios` varchar(250) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `profesor` (`profesor`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Volcado de datos para la tabla `revisiones`
@@ -148,7 +189,13 @@ INSERT INTO `revisiones` (`id`, `fecha`, `turno`, `aula`, `hora_inicio`, `hora_f
 (13, '2023-10-06', 'T.V', 'I107', '09:00 p.m.', '10:00 p.m.', '', 22, 'tdw51', 'Falta', '21:11', '21:32', '21:49', 'No llego', '', ''),
 (16, '2023-10-06', 'T.V', 'J008', '07:00 p.m.', '09:00 p.m.', '', 4, 'idsw11', 'Retardo', '19:17', '19:49', '20:51', 'Llego tarde', '', ''),
 (17, '2023-10-06', 'T.V', 'I107', '05:00 p.m.', '06:00 p.m.', '', 6, 'PIM16', 'Salida antes', '17:18', '17:36', '17:57', 'Salió antes ', '', ''),
-(18, '2023-11-06', 'T.V', 'D004', '06:00 p.m.', '08:00 p.m.', '', 4, 'idsw51', 'Falta', '18:07', '18:30', '18:50', 'No se presento', '', '');
+(18, '2023-11-06', 'T.V', 'D004', '06:00 p.m.', '08:00 p.m.', '', 4, 'idsw51', 'Falta', '18:07', '18:30', '18:50', 'No se presento', '', ''),
+(19, '2023-11-08', 'T.M', 'N/A', '06:00 p.m.', '07:00 p.m.', 'Lineal', 6, 'IDSW11', 'Retardo', '18:12', '18:39', '18:50', 'No se conecto el professor ', '', ''),
+(20, '2023-11-08', 'T.V', 'N/A', '06:00 p.m.', '07:00 p.m.', 'Lineal', 6, 'IDSW11', 'Falta', '18:15', '18:31', '18:51', 'Paso lista y dejo actividad', '', ''),
+(21, '2023-11-08', 'T.V', 'N/A', '06:00 p.m.', '07:00 p.m.', 'Linea', 6, 'IDSW11', 'Falta', '18:15', '18:31', '18:51', 'Paso lista y dejo actividad', '', ''),
+(22, '2023-11-08', 'T.M', 'N/A', '10:00 a.m.', '11:00 a.m.', 'Linea', 8, 'IDSW51', 'Sin Alumnos', '10:15', '10:30', '10:49', 'Los alumnos no se conectaron', '', ''),
+(26, '2023-11-08', 'T.M', 'N/A', '10:00 a.m.', '11:00 a.m.', 'Linea', 8, 'IDSW51', 'Sin Alumnos', '10:15', '10:30', '10:49', 'Los alumnos no se conectaron', '', ''),
+(27, '2023-11-08', 'T.V', 'N/A', '11:00 a.m.', '12:00 p.m.', 'Linea', 7, 'MTW31', 'Otro', '11:15', '11:30', '11:47', 'El profesor no cuenta con internet', '', '');
 
 -- --------------------------------------------------------
 

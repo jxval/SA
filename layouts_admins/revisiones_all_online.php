@@ -23,7 +23,7 @@ if(!isset($_SESSION['usuario'])){
     <!-- navbar -->
 <?php include ("navbar.php");?>
 <?php include ("../php/connection.php");?>
-<h1 class="h1-tittles text-muted">Concentrado general en línea</h1>
+<h1 class="h1-tittles text-muted">Concentrado general | En línea</h1>
 <div class="div-table">
   <form action="" method="POST">
     <div class="lead">
@@ -65,7 +65,7 @@ if(!isset($_SESSION['usuario'])){
 
   if(isset($_POST['buscar_revi'])){
     ?>
-    <a class="btn-delete-filter" href="revisiones_all.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
+    <a class="btn-delete-filter" href="revisiones_all_online.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
     <br><br>
     <table class="table table-bordered">
     <thead class="table-dark">
