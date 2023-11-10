@@ -10,7 +10,7 @@
 <body class="captura_background">
     <!-- navbar -->
 <?php include ("navbar.php");?>
-<h1 class="h1-tittles text-muted">Concentrado general</h1>
+<h1 class="h1-tittles text-muted">Concentrado general presencial</h1>
 <div class="div-table">
 <!-- tabla -->
 <table class="table table-bordered">
@@ -19,8 +19,7 @@
       <th scope="col">Fecha</th>
       <th scope="col">Turno</th>
       <th scope="col">Aula</th>
-      <th scope="col">Hora inicio</th>
-      <th scope="col">Hora final</th>
+      <th scope="col">Horario</th>
       <th scope="col">Profesor</th>
       <th scope="col">Grupo</th>
       <th scope="col">Reporte</th>
@@ -28,36 +27,114 @@
       <th scope="col">Revisión 2</th>
       <th scope="col">Revisión 3</th>
       <th scope="col">Observaciones</th>
+      <th scope="col">Acción</th>
     </tr>
   </thead>
-  <?php 
+  <tbody>
+    <?php 
     include('../php/connection.php');
-    $consul = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, revisiones.hora_inicio, revisiones.hora_final, 
+    $consul = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, 
     revisiones.observaciones FROM revisiones
-    INNER JOIN profesores ON revisiones.profesor = profesores.id ORDER BY id DESC";
-    $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
-    while($column = mysqli_fetch_array($resul)){
-    echo "<tbody>";
-        echo "<tr>";
-        echo "<td>".$column['fecha']."</td>";
-        echo "<td>".$column['turno']."</td>";
-        echo "<td>".$column['aula']."</td>";
-        echo "<td>".$column['hora_inicio']."</td>";
-        echo "<td>".$column['hora_final']."</td>";
-        echo "<td>".$column['nomenclatura']."</td>";
-        echo "<td>".$column['grupo']."</td>";
-        echo "<td>".$column['reporte']."</td>";
-        echo "<td>".$column['revision_1']."</td>";
-        echo "<td>".$column['revision_2']."</td>";
-        echo "<td>".$column['revision_3']."</td>";
-        echo "<td>".$column['observaciones']."</td>";
-        echo "</tr>";
-    echo "</tbody>";
+    INNER JOIN profesores ON revisiones.profesor = profesores.id WHERE modalidad = 'presencial' ORDER BY id DESC";
+    $result = mysqli_query($connection, $consul) or die ("Algo salio mal");
+    
+    if(mysqli_num_rows($result) > 0){
+        foreach($result as $row){
+          ?>
+            <tr>
+              <td><?php echo $row["fecha"]; ?></td>
+              <td><?php echo $row["turno"];?></td>
+              <td><?php echo $row["aula"]; ?></td>
+              <td><?php echo $row["horario"];?></td>
+              <td><?php echo $row["nomenclatura"];?></td>
+              <td><?php echo $row["grupo"]; ?></td>
+              <td><?php echo $row["reporte"]; ?></td>
+              <td><?php echo $row["revision_1"]; ?></td>
+              <td><?php echo $row["revision_2"]; ?></td>
+              <td><?php echo $row["revision_3"]; ?></td>
+              <td><?php echo $row["observaciones"]; ?></td>
+              <td>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">Editar</button>
+              </td>
+            </tr>
+                <!-- Modal editar -->
+                <div class="modal fade" id="exampleModal_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body modal-background">
+                            <form action="../php/editar_concentrado.php" method="POST">
+                                <div class="mb-2">
+                                    <label for="recipient-name" class="col-form-label">Profesor</label>
+                                    <div class="form-floating">
+                                      <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="profesor" value="<?php echo $row['nomenclatura']; ?>" name="profesor" required>
+                                          <option selected>Seleccionar profesor</option>
+                                          <?php
+                                              include('../php/connection.php');
+                                              $consul = "SELECT CONCAT(id, ' ', nomenclatura) AS profesor FROM profesores ORDER BY nomenclatura ASC";
+                                              $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
+                                              
+                                              while($column = mysqli_fetch_array($resul)){
+                                                  $optionname=$column['profesor'];
+                                                  echo "<option value='$optionname'>$optionname</option>";
+                                              }
+                                          ?> 
+                                      </select>
+                                      <label for="floatingSelect">Profesor</label>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                  <label for="recipient-name" class="col-form-label">Reporte</label>
+                                  <div class="form-floating">
+                                    <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="profesor" value="<?php echo $row['reporte']; ?>" name="reporte" required>
+                                      <option selected>Seleccionar reporte</option>
+                                      <option value="Retardo"<?php if($row['reporte']=="Retardo") echo 'selected="selected"';?>>Retardo</option>
+                                      <option value="Falta"<?php if($row['reporte']=="Falta") echo 'selected="selected"';?>>Falta</option>
+                                      <option value="Salida antes"<?php if($row['reporte']=="Salida antes") echo 'selected="selected"';?>>Salida antes</option>
+                                    </select>
+                                    <label for="floatingSelect">Reporte</label>
+                                  </div>
+                                </div>
+                                <div class="mb-3">
+                                    <input type="hidden" class="form-control" id="recipient-name" name="id" value="<?php echo $row['id']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Revision 2</label>
+                                    <input type="time" class="form-control" id="recipient-name" name="revision_2" value="<?php echo $row['revision_2']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Revision 3</label>
+                                    <input type="time" class="form-control" id="recipient-name" name="revision_3" value="<?php echo $row['revision_3']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Observaciones</label>
+                                    <input type="text" class="form-control" id="recipient-name" name="observaciones" value="<?php echo $row['observaciones']; ?>">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <?php
     }
-  ?>
-</table>
-</div>
+    ?>
+        </tbody>
+    </table>
+    </div>
+
+    <?php 
+    }
+    ?>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script></body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+</body>
 </html>

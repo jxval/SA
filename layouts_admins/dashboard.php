@@ -21,8 +21,41 @@ if(!isset($_SESSION['usuario'])){
 </head>
 <body class="admin_background">
     <?php include ('navbar.php')?>
-    <h1>Página en desarrollo</h1>
-    
+    <div>
+        <h1>Página en desarrollo</h1>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Concentrado general</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit odit obcaecati cupiditate ex distinctio aut earum maxime tempore exercitationem, sapiente commodi inventore, doloribus nam mollitia id laborum adipisci voluptatem necessitatibus?</p>
+                <a href="revisiones_all.php" class="btn btn-primary">Ir a la página </a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Incidencias más destacadas</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit odit obcaecati cupiditate ex distinctio aut earum maxime tempore exercitationem, sapiente commodi inventore, doloribus nam mollitia id laborum adipisci voluptatem necessitatibus?</p>
+                <a href="incidencias.php" class="btn btn-primary">Ir a la página </a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Profesores</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit odit obcaecati cupiditate ex distinctio aut earum maxime tempore exercitationem, sapiente commodi inventore, doloribus nam mollitia id laborum adipisci voluptatem necessitatibus?</p>
+                <a href="profesores.php" class="btn btn-primary">Ir a la página </a>
+            </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Directores</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit odit obcaecati cupiditate ex distinctio aut earum maxime tempore exercitationem, sapiente commodi inventore, doloribus nam mollitia id laborum adipisci voluptatem necessitatibus?</p>
+                <a href="directores.php" class="btn btn-primary">Ir a la página </a>
+            </div>
+        </div>
+    </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>

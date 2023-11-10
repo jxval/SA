@@ -29,11 +29,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $observaciones = $_POST["observaciones"];
 
     // Preparar y ejecutar la consulta SQL para insertar los datos en la base de datos
-    $sql = "INSERT INTO revisiones (id, fecha, turno, aula, hora_inicio, hora_final, profesor, grupo, reporte, revision_1, revision_2, revision_3, observaciones)
-            VALUES ('', '$fecha', '$turno', '$aula', '$hora_inicio', '$hora_final', '$profesor', '$grupo', '$reporte', '$primerarevision', '$segundarevision', '$tercerarevision', '$observaciones')";
+    $sql = "INSERT INTO revisiones (id, fecha, turno, aula, hora_inicio, hora_final, modalidad, profesor, grupo, reporte, revision_1, revision_2, revision_3, observaciones)
+            VALUES ('', '$fecha', '$turno', '$aula', '$hora_inicio', '$hora_final', 'presencial', '$profesor', '$grupo', '$reporte', '$primerarevision', '$segundarevision', '$tercerarevision', '$observaciones')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Los datos se han guardado correctamente.";
+        echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts/captura.php";</script>';
     } else {
         echo "Error al guardar los datos: " . $conn->error;
     }
