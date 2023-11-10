@@ -25,11 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $primerarevision = $_POST["primerarevision"];
     $segundarevision = $_POST["segundarevision"];
     $tercerarevision = $_POST["tercerarevision"];
+    $cuartarevision = $_POST["cuartarevision"];
     $observaciones = $_POST["observaciones"];
 
     // Preparar y ejecutar la consulta SQL para insertar los datos en la base de datos
-    $sql = "INSERT INTO revisiones (id, fecha, turno, aula, hora_inicio, hora_final, modalidad, profesor, grupo, reporte, revision_1, revision_2, revision_3, observaciones)
-            VALUES ('', '$fecha', '$turno', 'N/A', '$hora_inicio', '$hora_final', 'Linea' ,'$profesor', '$grupo', '$reporte', '$primerarevision', '$segundarevision', '$tercerarevision', '$observaciones')";
+    $sql = "INSERT INTO revisiones (id, fecha, turno, aula, hora_inicio, hora_final, modalidad, profesor, grupo, reporte, revision_1, revision_2, revision_3, revision_4, observaciones, justificado)
+            VALUES ('', '$fecha', '$turno', 'N/A', '$hora_inicio', '$hora_final', 'Linea' ,'$profesor', '$grupo', '$reporte', '$primerarevision', '$segundarevision', '$tercerarevision', '$cuartarevision', '$observaciones', 'no')";
 
     if ($conn->query($sql) === TRUE) {
         echo '<script>alert("Los datos se han guardado correctamente."); window.location = "../layouts/captura_en_linea.php";</script>';

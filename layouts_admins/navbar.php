@@ -70,8 +70,8 @@
             <li><a class="dropdown-item" href="profesores.php">Profesores</a></li>
             <li><a class="dropdown-item" href="carreras.php">Carreras</a></li>
             <li><a class="dropdown-item" href="directores.php">Directores</a></li>
-            <li><a class="dropdown-item" href="#">Grupos</a></li>
-            <li><a class="dropdown-item" href="#">Aulas</a></li>
+            <li><a class="dropdown-item" href="grupos.php">Grupos</a></li>
+            <li><a class="dropdown-item" href="aulas.php">Aulas</a></li>
           </ul>
         </li>
         <li class="nav-item">

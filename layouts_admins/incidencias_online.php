@@ -86,6 +86,7 @@ if(!isset($_SESSION['usuario'])){
                 WHERE revisiones.fecha BETWEEN '$date_1' AND '$date_2'
                 AND turno = '$turno'
                 AND modalidad = 'linea'
+                AND justificado = 'no'
                 GROUP BY profesores.primer_apellido, profesores.nombres
                 ORDER BY total DESC
                 LIMIT $limite";
@@ -116,7 +117,7 @@ if(!isset($_SESSION['usuario'])){
     ?>
     <figure class="text-left">
       <blockquote class="blockquote">
-      Top <strong><?php echo $limite?></strong>de incidencias del <strong><?php echo $date_1?></strong> al <strong><?php echo $date_2?></strong> del <strong><strong><?php echo $turno?></strong></strong></p>
+      Top <strong><?php echo $limite?></strong> de incidencias del <strong><?php echo $date_1?></strong> al <strong><?php echo $date_2?></strong> del <strong><strong><?php echo $turno?></strong></strong></p>
       </blockquote>
     </figure>
       <a href="incidencias.php"><button type="submit" class="btn btn-danger">Borrar filtro</button></a>
