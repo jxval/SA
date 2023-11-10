@@ -1,0 +1,232 @@
+/* navbar */
+.navbar{
+    background-color: #313131;
+    color: black;
+    margin-bottom: 1%;
+
+}
+.nav_username{
+    margin-right: 30px;
+    position: relative;
+    top: 10px;
+    
+}
+.nav-link{
+    font-size: 16px;
+    position: relative;
+    top: 3px;
+}
+.nav-register,.nav-link-logout{
+    font-weight: bold;
+}
+.nav-link:hover{
+    color: #b87c05;
+}
+.nav-link-logout:hover{
+    color: rgb(201, 2, 45);
+}
+.nav_image{
+    height: 4%;
+    width: 4%;
+}
+.nav-item{
+    margin-right: 10px;
+}
+
+/* titulos */
+.h1-tittles{
+    text-align: center;
+    color: white;
+    
+}
+
+
+/* captura */
+.div_captura1{
+    border-right: solid 3px rgb(129, 129, 129);
+    padding-right: 9%;
+    display: inline-block;
+    width: 40%;
+    margin-left: 10%;    
+    position: relative;
+    bottom: 50px;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    
+    
+}
+.div_horario{
+    margin-bottom: 1rem;
+    
+}
+.div_revisiones{
+    margin-bottom: 1rem;
+    display: inline-block;
+    padding-right: 10%;
+    width: 40%;
+    margin-left: 8%;
+}
+
+.btn-outline-secondary{
+    border: solid 1px #009286;
+    color: #009286;
+}
+.btn_enviar{
+    background-color: #009286;
+    width: 100px;
+    border: #026058;
+    margin-left: 8%;
+}
+.btn_enviar:hover{
+    background-color: #00655d;
+}
+.btn_captura{
+    width: 100px;
+    
+}
+
+.captura_background{
+    background-color: #0db8aa;
+}
+
+.div-captura{
+    background-color: #f3f3f3;
+    padding: 3%;
+    margin-left: 8%;
+    margin-right: 8%;
+    margin-bottom: 1%;
+    margin-top: 1%;
+}
+
+
+.sub-div-captura{
+    border: solid 3px #0db8aa;
+    padding-top: 0%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-bottom: 3%;
+
+}
+
+/* concentrado general */
+.div-table{
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+    margin-bottom: 2%;
+}
+
+/* admin pages concentrado general*/
+.admin_background{
+    background-color: #cafaed;
+}
+.selectDateAdmin{
+    width: 15%;
+    display: inline-block;
+}
+.selectProfeAdmin{
+    width: 15%;
+    display: inline-block;
+}
+.selectTurnoAdmin{
+    width: 15%;
+    display: inline-block;
+}
+.btn-enviar-admin{
+    background-color: #009286;
+    width: 100px;
+    border: #026058;
+    display: inline-block;
+}
+.btn-enviar-admin:hover{
+    background-color: #00655d;
+}
+
+/* pagina top 10 */
+.div-filtro{
+    text-align: center;
+    
+}
+.else-results{
+    text-align: center;
+    font-weight: bold;
+
+}
+/* pagina profesores  */
+.modal-background{
+    background-color: #b7b7b7;
+}
+.btn-addprofe{
+    display: inline-block;
+}
+.form-buscarprofe{
+    display: inline;
+}
+.input-busquedaprofe{
+    display: inline-block;
+    width:15%;
+}
+/* login */
+.loginbg{
+    background-color: #f3f2f2;
+}
+.tittle-2{
+    color: black;
+}
+.formulario{
+    position: relative;
+    margin: auto;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 16px;
+    text-align: center;
+    height: 380px;
+    width: 250px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+}
+.coverimg{
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin: 0 auto;
+    height: 150px;
+    width: 150px;
+}
+.btn-login{
+    border-radius: 5px;
+    background-color: #0db8aa;
+    color: #ffff;
+    border-color: white;
+}
+.btn-login:hover{
+    background-color: #009286;
+}
+.input{
+    
+}
+.a-regi{
+    color:#2b413f;
+}
+.a-regi:hover{
+    color: #0db8aa;
+}
+.formRe{
+    position: relative;
+    margin: auto;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 16px;
+    text-align: center;
+    height: 480px;
+    width: 250px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+
+}

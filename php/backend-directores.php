@@ -52,4 +52,20 @@ if(isset($_POST['guardar_profesor'])){
 
     echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/profesores.php";</script>';
 }
+if(isset($_POST['guardar_grupo'])){
+    $grupo = $_POST['grupo'];
+
+    $connection->query("INSERT INTO grupos (grupo) 
+    VALUES ('$grupo')") or die($connection->error);
+
+    echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/grupos.php";</script>';
+}
+if(isset($_POST['guardar_aula'])){
+    $aula = $_POST['aula'];
+
+    $connection->query("INSERT INTO aulas (aula) 
+    VALUES ('$aula')") or die($connection->error);
+
+    echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/aulas.php";</script>';
+}
 ?>

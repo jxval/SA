@@ -22,11 +22,23 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="../layouts/captura.php">Reporte de revisiones</a>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Reporte de Rvisiones
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="captura.php">Presencial</a></li>
+            <li><a class="dropdown-item" href="captura_en_linea.php">En línea</a></li>
+          </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="revisiones_all.php">Concentrado general</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Concentrado general
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="revisiones_all.php">Presencial</a></li>
+            <li><a class="dropdown-item" href="revisinoes_all_linea.php">En línea</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="login.php" aria-disabled="false">Iniciar sesión como administrador</a>
