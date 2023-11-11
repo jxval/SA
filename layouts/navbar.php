@@ -24,7 +24,7 @@
       <ul class="navbar-nav">
       <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Reporte de Rvisiones
+            Reporte de revisiones
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="captura.php">Presencial</a></li>

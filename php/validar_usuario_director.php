@@ -12,7 +12,7 @@ $login_validation = mysqli_query($connection, "SELECT * FROM dir_de_carrera WHER
 if(mysqli_num_rows($login_validation) > 0){
     $row = $login_validation->fetch_assoc();
     $_SESSION['usuario'] = $row['nom_dir'];
-    header("location: ../layouts_directores/revisiones.php");
+    header("location: ../layouts_directores/dashboard.php");
     exit;
 }else{
     echo '<script>

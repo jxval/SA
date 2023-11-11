@@ -21,22 +21,35 @@ if(!isset($_SESSION['usuario'])){
 </head>
 <body class="admin_background">
     <?php include ('navbar.php')?>
-    <div>
-        <h1>Página en desarrollo</h1>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Concentrado general presencial</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit odit obcaecati cupiditate ex distinctio aut earum maxime tempore exercitationem, sapiente commodi inventore, doloribus nam mollitia id laborum adipisci voluptatem necessitatibus?</p>
-                <a href="revisiones_all.php" class="btn btn-primary">Ir a la página </a>
+    <div class="dashboard-directores">
+        <div class="card" style="width: 35rem;">
+            <img src="../images/logodashboardDirectores1.png" class="card-img-top" alt="...">
+            <div class="card-body card-dashboard-directores">
+                <?php include ('../php/connection.php');
+                $director = $_SESSION['usuario'];
+                $consul = "SELECT COUNT(revisiones.profesor) AS total FROM revisiones
+                INNER JOIN profesores ON revisiones.profesor = profesores.id
+                INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND revisiones.modalidad = 'presencial' AND justificado = 'no'";
+                $resul = mysqli_query($connection, $consul);
+                $row = mysqli_fetch_array($resul);?>
+                <h1 class="display-5">Concentrado general presencial</h1>
+                <h4>Incidencias sin justificar <span class="badge bg-secondary"><?php echo $row['total'];?></span></h4>
+                <a href="revisiones.php" class="btn btn-primary">Ir a la página </a>
             </div>
         </div>
-        <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Concentrado general en línea</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit odit obcaecati cupiditate ex distinctio aut earum maxime tempore exercitationem, sapiente commodi inventore, doloribus nam mollitia id laborum adipisci voluptatem necessitatibus?</p>
-                <a href="incidencias.php" class="btn btn-primary">Ir a la página </a>
+        <div class="card" style="width: 35rem;">
+        <img src="../images/logodashboardDirectores2.png" class="card-img-top" alt="...">
+            <div class="card-body card-dashboard-directores">
+                <?php include ('../php/connection.php');
+                $director = $_SESSION['usuario'];
+                $consul = "SELECT COUNT(revisiones.profesor) AS total FROM revisiones
+                INNER JOIN profesores ON revisiones.profesor = profesores.id
+                INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND revisiones.modalidad = 'linea' AND justificado = 'no'";
+                $resul = mysqli_query($connection, $consul);
+                $row = mysqli_fetch_array($resul);?>
+                <h1 class="display-5">Concentrado general en línea </h1>
+                <h4>Incidencias sin justificar <span class="badge bg-secondary"><?php echo $row['total'];?></span></h4>
+                <a href="revisiones_online.php" class="btn btn-primary">Ir a la página </a>
             </div>
         </div>
     </div>

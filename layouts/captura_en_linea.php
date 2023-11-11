@@ -122,11 +122,11 @@ include("../php/capturas_en_linea.php");
                     <input type="time" name="tercerarevision" class="form-control" required/>
                 </div>
                 <br>
-                <br>
                 <p class="lead">Cuarta revisión</p>
                 <div class="cs-form">
                     <input type="time" name="cuartarevision" class="form-control" required/>
                 </div>
+                <br>
                 <div class="div_incidencia">
             <p class="lead">Reporte</p>
                 <input type="radio" class="btn-check" name="reporte" id="option7" autocomplete="off" value="No conectado" required>

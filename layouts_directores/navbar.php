@@ -28,7 +28,7 @@
 
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="../layouts_directores/revisiones.php">
+    <a class="navbar-brand" href="../layouts_directores/dashboard.php">
       <img src="../images/LogoUTCJ.png" alt="" width="50" height="50">
     </a>
     <p class="lead nav_username">

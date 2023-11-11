@@ -119,6 +119,20 @@
 /* admins dashboard */
 .card{
     float: left;
+    margin-right: 20px;
+    padding: 1%;
+    
+}
+/* directores dashboard */
+.dashboard-directores{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.card-img-top{
+    height: 35%;
+    width: 35%;
+    display: block;
+    margin: auto;
     
 }
 

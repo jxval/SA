@@ -82,7 +82,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
-        <th scope="col">Comentarios</th>
+        <th scope="col">Justificante</th>
         <th scope="col">Acción</th>
       </tr>
     </thead>
@@ -141,8 +141,8 @@ if(!isset($_SESSION['usuario'])){
                             <div class="modal-body modal-background">
                             <form action="../php/justificarprofesor.php" method="POST">
                                 <div class="mb-2">
-                                    <label for="recipient-name" class="col-form-label">Comentarios</label>
-                                    <textarea name="comentarios" class="form-control" id="" cols="5" rows="5" value="<?php echo $items['comentarios']; ?>"></textarea>
+                                    <label for="recipient-name" class="lead">Comentarios</label>
+                                    <textarea name="comentarios" class="form-control" id="" value="<?php echo $items['comentarios']; ?>" placeholder="Agrege un comentario de justificación"></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <input type="hidden" class="form-control" id="recipient-name" name="id" value="<?php echo $items['id']; ?>">
@@ -180,7 +180,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
-        <th scope="col">Comentarios</th>
+        <th scope="col">Justificante</th>
         <th scope="col">Acción</th>
       </tr>
     </thead>
@@ -221,8 +221,8 @@ if(!isset($_SESSION['usuario'])){
                             <div class="modal-body modal-background">
                             <form action="../php/justificarprofesor_online.php" method="POST">
                                 <div class="mb-2">
-                                    <label for="recipient-name" class="col-form-label">Comentarios</label>
-                                    <textarea name="comentarios" class="form-control" id="" cols="5" rows="5" value="<?php echo $column['comentarios']; ?>"></textarea>
+                                    <label for="recipient-name" class="lead">Comentarios</label>
+                                    <textarea name="comentarios" class="form-control" id="" value="<?php echo $column['comentarios']; ?>" placeholder="Agrege un comentario de justificación"></textarea>
                                 </div>
                                 <div class="mb-3">
                                     <input type="hidden" class="form-control" id="recipient-name" name="id" value="<?php echo $column['id']; ?>">

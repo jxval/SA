@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['usuario'])){
-  header("location: ../layouts_directores/revisiones.php");
+  header("location: ../layouts_directores/dashboard.php");
 }
 ?>
 
