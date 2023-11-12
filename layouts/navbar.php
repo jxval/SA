@@ -37,7 +37,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="revisiones_all.php">Presencial</a></li>
-            <li><a class="dropdown-item" href="revisinoes_all_linea.php">En línea</a></li>
+            <li><a class="dropdown-item" href="revisiones_all_linea.php">En línea</a></li>
           </ul>
         </li>
         <li class="nav-item">

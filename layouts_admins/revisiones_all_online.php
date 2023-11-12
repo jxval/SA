@@ -49,7 +49,7 @@ if(!isset($_SESSION['usuario'])){
         <option value="T.M">T.M</option>
         <option value="T.V">T.V</option>
       </select>
-    <button type="submit" class="btn btn-primary btn-enviar-admin" name="buscar_revi" id="enviar">Buscar</button>
+    <button type="submit" class="btn btn-primary btn-enviar-admin" name="buscar_revi" id="enviar">Buscar justificados</button>
     </div>
   </form>
   <form action="../php/exportacion_excel.php" method="POST">
@@ -57,7 +57,7 @@ if(!isset($_SESSION['usuario'])){
     </form>
   <br>
 
-
+<hr class="hr-line">
 
   <!-- tabla -->
   <?php
@@ -66,7 +66,8 @@ if(!isset($_SESSION['usuario'])){
   if(isset($_POST['buscar_revi'])){
     ?>
     <a class="btn-delete-filter" href="revisiones_all_online.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
-    <br><br>
+    <br>
+    <center><strong><h3 class="lead table-tittle">Justificado</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -78,8 +79,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
-        <th scope="col">Justificado</th>
-        <th scope="col">Comentarios</th>
+        <th scope="col">Justificante</th>
       </tr>
     </thead>
     <tbody>
@@ -101,9 +101,9 @@ if(!isset($_SESSION['usuario'])){
   }
 
     $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
-    profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ',revisiones.revision_2,', ',revisiones.revision_3) AS revisiones, 
-    revisiones.observaciones, revisiones.justificado, revisiones.comentarios FROM revisiones
-    INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro AND modalidad = 'linea' ORDER BY fecha DESC";
+    profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ',revisiones.revision_2,', ',revisiones.revision_3,', ',revisiones.revision_4) AS revisiones, 
+    revisiones.observaciones, revisiones.comentarios FROM revisiones
+    INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro AND modalidad = 'linea' AND justificado = 'si' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -118,8 +118,7 @@ if(!isset($_SESSION['usuario'])){
           <td><?= $items['reporte'];?></td>
           <td><?= $items['revisiones'];?></td>
           <td><?= $items['observaciones'];?></td>
-          <td><?= $items['justificado'];?></td>
-          <td><?= $items['comentarios'];?></td>
+          <td class="justify"><?= $items['comentarios'];?></td>
         </tr>
         <?php
       }
@@ -134,6 +133,7 @@ if(!isset($_SESSION['usuario'])){
     <?php
   }else{
     ?>
+    <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -145,16 +145,14 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
-        <th scope="col">Justificado</th>
-        <th scope="col">Comentarios</th>
       </tr>
     </thead>
     <?php 
       include('../php/connection.php');
       $consul = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
-      profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ',revisiones.revision_2,', ',revisiones.revision_3) AS revisiones, 
-      revisiones.observaciones, revisiones.justificado, revisiones.comentarios FROM revisiones
-      INNER JOIN profesores ON revisiones.profesor = profesores.id AND modalidad = 'linea' ORDER BY fecha DESC";
+      profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ',revisiones.revision_2,', ',revisiones.revision_3,', ',revisiones.revision_4) AS revisiones, 
+      revisiones.observaciones FROM revisiones
+      INNER JOIN profesores ON revisiones.profesor = profesores.id AND modalidad = 'linea' AND justificado = 'no' ORDER BY id DESC";
       $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
       while($column = mysqli_fetch_array($resul)){
       echo "<tbody>";
@@ -167,8 +165,6 @@ if(!isset($_SESSION['usuario'])){
             echo "<td>".$column['reporte']."</td>";
             echo "<td>".$column['revisiones']."</td>";
             echo "<td>".$column['observaciones']."</td>";
-            echo "<td>".$column['justificado']."</td>";
-            echo "<td>".$column['comentarios']."</td>";
           echo "</tr>";
       echo "</tbody>";
       }

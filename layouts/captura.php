@@ -39,6 +39,7 @@ include("../php/capturas.php");
                     <label for="floatingInput">Aula</label>
                 </div>
             </div>
+            <br>
             <div class="div_horario">
                 <div class="form-floating">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="hora_inicio" name="hora_inicio" required>
@@ -62,7 +63,6 @@ include("../php/capturas.php");
                     </select>
                     <label for="floatingSelect">Horario inicial</label>
                 </div>
-                <br>
                 <div class="form-floating">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example"   id="hora_final" name="hora_final" required>
                         <option selected>Seleccionar hora final</option>
@@ -86,6 +86,7 @@ include("../php/capturas.php");
                     <label for="floatingSelect">Horario final</label>
                 </div>
             </div>
+            <br>
             <div class="div_profesor">
                 <div class="form-floating">
                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="profesor" name="profesor" required>
@@ -125,17 +126,17 @@ include("../php/capturas.php");
             <div class="div_revisiones">
                 <p class="lead">Primera revisión</p> 
                 <div class="cs-form">
-                    <input type="time" name="primerarevision" class="form-control" required/>
+                    <input type="time" name="primerarevision" class="form-control" />
                 </div>
                 <br>
                 <p class="lead">Segunda revisión</p> 
                 <div class="cs-form">
-                    <input type="time" name="segundarevision" class="form-control" required/>
+                    <input type="time" name="segundarevision" class="form-control" />
                 </div>
                 <br>
                 <p class="lead">Tercera revisión</p>
                 <div class="cs-form">
-                    <input type="time" name="tercerarevision" class="form-control" required/>
+                    <input type="time" name="tercerarevision" class="form-control" />
                 </div>
             </div>
             <div class="div_obs">

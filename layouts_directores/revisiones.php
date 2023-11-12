@@ -53,16 +53,14 @@ if(!isset($_SESSION['usuario'])){
         <option value="T.M">T.M</option>
         <option value="T.V">T.V</option>
       </select>
-    <button type="submit" class="btn btn-primary btn-enviar-admin" name="buscar_revi" id="enviar">Buscar</button>
+    <button type="submit" class="btn btn-primary btn-enviar-admin" name="buscar_revi" id="enviar">Buscar justificados</button>
     </div>
   </form>
   <form action="../php/exportacion_excel.php" method="POST">
     <button type="submit" name="export" class="btn btn-success" >Exportar a Excel</button>  
     </form>
   <br>
-
-
-
+  <hr class="hr-line">
   <!-- tabla -->
   <?php
   include ('../php/connection.php');
@@ -70,7 +68,8 @@ if(!isset($_SESSION['usuario'])){
   if(isset($_POST['buscar_revi'])){
     ?>
     <a class="btn-delete-filter" href="../layouts_directores/revisiones.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
-    <br><br>
+    <br>
+    <center><strong><h3 class="lead table-tittle">Justificado</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -109,7 +108,7 @@ if(!isset($_SESSION['usuario'])){
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3) AS revisiones, 
     revisiones.observaciones, revisiones.comentarios FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id
-    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'presencial' AND justificado = 'si' ORDER BY fecha DESC";
+    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'presencial' AND justificado = 'si' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -125,7 +124,7 @@ if(!isset($_SESSION['usuario'])){
           <td><?= $items['reporte'];?></td>
           <td><?= $items['revisiones'];?></td>
           <td><?= $items['observaciones'];?></td>
-          <td><?= $items['comentarios'];?></td>
+          <td class="justify"><?= $items['comentarios'];?></td>
         </tr>
         <?php
       }
@@ -140,6 +139,7 @@ if(!isset($_SESSION['usuario'])){
     <?php
   }else{
     ?>
+    <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -162,7 +162,7 @@ if(!isset($_SESSION['usuario'])){
       profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3) AS revisiones, 
       revisiones.observaciones, revisiones.comentarios FROM revisiones
       INNER JOIN profesores ON revisiones.profesor = profesores.id
-      INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'presencial' AND justificado = 'no' ORDER BY fecha DESC";
+      INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'presencial' AND justificado = 'no' ORDER BY id DESC";
       $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
       while($column = mysqli_fetch_array($resul)){
       echo "<tbody>";
@@ -190,12 +190,13 @@ if(!isset($_SESSION['usuario'])){
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Justificar profesor</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Justificar profesor <?php echo $column['nomenclatura']; ?></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
                             <div class="modal-body modal-background">
                             <form action="../php/justificarprofesor.php" method="POST">
+                            <p class="justify">"<?php echo $column['observaciones'];?>"</p>
                                 <div class="mb-2">
                                     <label for="recipient-name" class="lead">Comentarios</label>
                                     <textarea name="comentarios" class="form-control" id="" value="<?php echo $column['comentarios']; ?>" placeholder="Agrege un comentario de justificación"></textarea>

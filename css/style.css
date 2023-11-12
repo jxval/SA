@@ -158,14 +158,20 @@
 }
 .btn-enviar-admin{
     background-color: #009286;
-    width: 100px;
+    width: 155px;
     border: #026058;
     display: inline-block;
 }
 .btn-enviar-admin:hover{
     background-color: #00655d;
 }
-
+.table-tittle{
+    font-weight: bold;
+    color: #767676;
+}
+.justify{
+    font-style: italic;
+}
 /* pagina top 10 */
 .div-filtro{
     text-align: center;
