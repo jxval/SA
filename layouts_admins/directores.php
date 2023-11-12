@@ -144,7 +144,11 @@ if(!isset($_SESSION['usuario'])){
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                Seguro que desea eliminar <?php echo $row['nombres'];?>?
+                <strong>Se eliminarán todos los registros relacionados con este director.
+                  Se recomienda primero modificar el director de cada profesor antes de proceder.
+                </strong>
+                <br>
+                Seguro que desea eliminar a <?php echo $row['nombres'];?>? 
                 <input type="hidden" name="id" value="<?php echo $row['id'];?>">
               </div>
               <div class="modal-footer">

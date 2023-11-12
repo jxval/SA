@@ -1,3 +1,16 @@
+<?php
+session_start();
+if(!isset($_SESSION['usuario'])){
+    echo '<script>
+    alert ("Por favor inicia una una sesión");
+    window.location = "../layouts_directores/login.php";
+    </script>';
+    session_destroy();
+    die();
+}
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,17 +27,15 @@
 </head>
 <body class="loginbg">
   
-<form action="../php/registro_directores.php" method="post" class="formRe">
+<form action="../php/changeDirPassword.php" method="post" class="formRe">
         <img class="coverimg" src="../images/LogoUTCJ.png" alt="">
         <h3 class="tittle-2">Cambiar contraseña</h3>
-        <input class="input" type="password" name="actual_pass" id="" placeholder="Contraseña actual" required>
         <br>
-        <input class="input" type="password" name="nueva_pass" id="" placeholder="Nueva contraseña" required>
+        <input class="input" type="password" name="nueva_pass1" id="" placeholder="Ingrese nueva contraseña" required>
         <br>
-        <input class="input" type="text" name="c_nueva_pass" id="" placeholder="Confirmar nueva contraseña" required>
+        <input class="input" type="password" name="nueva_pass" id="" placeholder="Confirmar nueva contraseña" required>
         <br>
         <button class="button btn-login" type="submit">Cambiar</button>
-        
         <a href="revisiones.php" class="a-regi">Regresar</a>
         
     </form>

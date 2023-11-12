@@ -69,24 +69,9 @@
 
                             <div class="modal-body modal-background">
                             <form action="../php/editar_concentrado.php" method="POST">
-                                <div class="mb-2">
+                                <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Profesor</label>
-                                    <div class="form-floating">
-                                      <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="profesor" value="<?php echo $row['nomenclatura']; ?>" name="profesor" required>
-                                          <option selected>Seleccionar profesor</option>
-                                          <?php
-                                              include('../php/connection.php');
-                                              $consul = "SELECT CONCAT(id, ' ', nomenclatura) AS profesor FROM profesores ORDER BY nomenclatura ASC";
-                                              $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
-                                              
-                                              while($column = mysqli_fetch_array($resul)){
-                                                  $optionname=$column['profesor'];
-                                                  echo "<option value='$optionname'>$optionname</option>";
-                                              }
-                                          ?> 
-                                      </select>
-                                      <label for="floatingSelect">Profesor</label>
-                                    </div>
+                                    <input type="text" class="form-control" id="recipient-name" name="profesor" value="<?php echo $row['nomenclatura']; ?>">
                                 </div>
                                 <div class="mb-3">
                                   <label for="recipient-name" class="col-form-label">Reporte</label>

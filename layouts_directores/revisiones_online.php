@@ -83,7 +83,6 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
         <th scope="col">Justificante</th>
-        <th scope="col">Acción</th>
       </tr>
     </thead>
     <tbody>
@@ -109,7 +108,7 @@ if(!isset($_SESSION['usuario'])){
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3,', ',revisiones.revision_4) AS revisiones, 
     revisiones.observaciones, revisiones.comentarios FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id
-    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'linea' ORDER BY fecha DESC";
+    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'linea' AND justificado = 'si' ORDER BY fecha DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -125,9 +124,6 @@ if(!isset($_SESSION['usuario'])){
           <td><?= $items['revisiones'];?></td>
           <td><?= $items['observaciones'];?></td>
           <td><?= $items['comentarios'];?></td>
-          <td>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $items['id'];?>">Justificar</button>
-          </td>
         </tr>
         <!-- modal editar -->
         <div class="modal fade" id="exampleModal_<?php echo $items['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -180,7 +176,6 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
-        <th scope="col">Justificante</th>
         <th scope="col">Acción</th>
       </tr>
     </thead>
@@ -191,23 +186,27 @@ if(!isset($_SESSION['usuario'])){
       profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3,', ',revisiones.revision_4) AS revisiones, 
       revisiones.observaciones, revisiones.comentarios FROM revisiones
       INNER JOIN profesores ON revisiones.profesor = profesores.id
-      INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'linea' ORDER BY fecha DESC";
+      INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'linea' AND justificado = 'no' ORDER BY fecha DESC";
       $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
       while($column = mysqli_fetch_array($resul)){
       echo "<tbody>";
           echo "<tr>";
-          echo "<td>".$column['fecha']."</td>";
-          echo "<td>".$column['turno']."</td>";
-          echo "<td>".$column['horario']."</td>";
-          echo "<td>".$column['nomenclatura']."</td>";
-          echo "<td>".$column['grupo']."</td>";
-          echo "<td>".$column['reporte']."</td>";
-          echo "<td>".$column['revisiones']."</td>";
-          echo "<td>".$column['observaciones']."</td>";
-          echo "<td>".$column['comentarios']."</td>";
+          echo "<td class=toJustify>".$column['fecha']."</td>";
+          echo "<td class=toJustify>".$column['turno']."</td>";
+          echo "<td class=toJustify>".$column['horario']."</td>";
+          echo "<td class=toJustify>".$column['nomenclatura']."</td>";
+          echo "<td class=toJustify>".$column['grupo']."</td>";
+          echo "<td class=toJustify>".$column['reporte']."</td>";
+          echo "<td class=toJustify>".$column['revisiones']."</td>";
+          echo "<td class=toJustify>".$column['observaciones']."</td>";
           ?>
           <td>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">Justificar</button>
+            <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
+              Justificar
+              <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            </button>
           </td>
                   <!-- modal editar -->
                 <div class="modal fade" id="exampleModal_<?php echo $column['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

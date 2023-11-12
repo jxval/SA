@@ -135,6 +135,10 @@
     margin: auto;
     
 }
+.toJustify{
+    font-style: italic;
+    font-weight: bold;
+}
 
 /* admin pages concentrado general*/
 .admin_background{

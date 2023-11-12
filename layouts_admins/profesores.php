@@ -168,7 +168,7 @@ if(!isset($_SESSION['usuario'])){
                                 </div>
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Director</label>
-                                    <select class="form-select" id="docente" name="director" value="<?php echo $row['director']; ?>">
+                                    <select class="form-select" id="docente" name="director">
                                         <option value="">Seleccionar director</option>
                                             <?php
                                             include('../php/connection.php');
