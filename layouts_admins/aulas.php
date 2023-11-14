@@ -35,14 +35,14 @@ if(!isset($_SESSION['usuario'])){
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Nueva aula</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body modal-background">
       <?php require_once '../php/backend-directores.php';?>
         <form action="../php/backend-directores.php" method="POST">
-          <label for="recipient-name" class="col-form-label">Grupo</label>
-          <input class="form-control" type="text" name="aula" placeholder="Ingrese el Grupo">
+          <label for="recipient-name" class="col-form-label">Aula</label>
+          <input class="form-control" type="text" name="aula" placeholder="Ingrese el aula">
           <br>
       </div>
       <div class="modal-footer">
