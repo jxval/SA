@@ -25,7 +25,11 @@ if(!isset($_SESSION['usuario'])){
 </head>
 <body class="admin_background">
     <?php include('navbar.php'); ?>
-    <h1 class="h1-tittles text-muted">Profesores</h1>
+    <?php include('../php/connection.php');
+        $consul = "SELECT COUNT(*) AS total_profes FROM profesores";
+        $resul = mysqli_query($connection, $consul);
+        $row = mysqli_fetch_array($resul);?>
+    <h1 class="h1-tittles text-muted display-6">Profesores <span class="badge bg-light text-dark"><?php echo $row['total_profes'];?></span></h1>
     <div class="div-table">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary btn-addprofe" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -87,6 +91,11 @@ if(!isset($_SESSION['usuario'])){
         </div>
     </div>
     </div>
+
+
+
+
+    
 
     <?php
     include ('../php/connection.php');

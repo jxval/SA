@@ -23,7 +23,11 @@ if(!isset($_SESSION['usuario'])){
 <body class="admin_background">
 <!-- navbar -->
 <?php include ("navbar.php");?>
-<h1 class="h1-tittles text-muted">Carreras</h1>
+<?php include('../php/connection.php');
+    $consul = "SELECT COUNT(*) AS total_carreras FROM carreras";
+    $resul = mysqli_query($connection, $consul);
+    $row = mysqli_fetch_array($resul);?>
+<h1  class="h1-tittles text-muted display-6">Carreras <span class="badge bg-light text-dark"><?php echo $row['total_carreras'];?></span></h1>
 <div class="div-table">
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -71,7 +75,6 @@ if(!isset($_SESSION['usuario'])){
     </div>
   </div>
   <br><br>
-
 
   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead class="table-dark">

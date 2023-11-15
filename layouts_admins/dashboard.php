@@ -22,7 +22,7 @@ if(!isset($_SESSION['usuario'])){
 <body class="admin_background">
     <?php include ('navbar.php')?>
     <div class="dashboard_admins">
-        <div class="card" style="width: 30rem; height: 31rem">
+        <div class="card" style="width: 30rem; height: 30rem">
             <img src="../images/logodashboardDirectores1.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <?php include('../php/connection.php');
@@ -43,7 +43,7 @@ if(!isset($_SESSION['usuario'])){
                 <a href="revisiones_all.php" class="btn btn-primary">Ir a la página</a>
             </div>
         </div>
-        <div class="card" style="width: 30rem; height: 31rem">
+        <div class="card" style="width: 30rem; height: 30rem">
             <img src="../images/logodashboardDirectores2.png" class="card-img-top" alt="...">
             <div class="card-body">
                 <?php include('../php/connection.php');
@@ -64,9 +64,10 @@ if(!isset($_SESSION['usuario'])){
                 <a href="revisiones_all_online.php" class="btn btn-primary">Ir a la página </a>
             </div>
         </div>
-        <div class="card" style="width: 30rem; height: 31rem">
+        <div class="card" style="width: 30rem; height: 30rem">
             <div class="card-body">
-            <h1 class="display-6">10 profesores con más incidencias (universal)</h1>
+            <h1 class="display-6">5 profesores con más incidencias (universal)</h1>
+            <p class="lead">Mes en curso</p>
             <table class="">
                 <thead class="">
                     <tr>
@@ -82,9 +83,10 @@ if(!isset($_SESSION['usuario'])){
                     FROM revisiones
                     INNER JOIN profesores ON revisiones.profesor = profesores.id
                     WHERE justificado = 'no'
+                    -- AND MONTH(fecha) = MONTH(NOW())
                     GROUP BY profesores.primer_apellido, profesores.nombres
                     ORDER BY total DESC
-                    LIMIT 10;";
+                    LIMIT 5;";
                     $resul = mysqli_query($connection, $consul);
                     if(mysqli_num_rows($resul) > 0){
                         foreach($resul as $row){
@@ -99,68 +101,9 @@ if(!isset($_SESSION['usuario'])){
                     ?>
                 </tbody>
             </table>
+            <br>
                 <a href="incidencias.php" class="btn btn-primary">Ver detalles (presencial)</a>
                 <a href="incidencias_online.php" class="btn btn-primary">Ver detalles (en línea)</a>
-            </div>
-        </div>
-        <div class="card" style="width: 30rem; height: 15rem">
-            <div class="card-body">
-                <!-- php code -->
-                <?php include('../php/connection.php');
-                $consul = "SELECT COUNT(*) AS total_profes FROM profesores";
-                $resul = mysqli_query($connection, $consul);
-                $row = mysqli_fetch_array($resul);?>
-                <h1 class="display-6">Profesores</h1>
-                <h4>Profesores registrados <span class="badge bg-secondary"><?php echo $row['total_profes'];?></span></h4>
-                <a href="profesores.php" class="btn btn-primary">Ir a la página</a>
-            </div>
-        </div>
-        <div class="card" style="width: 30rem; height: 15rem">
-            <div class="card-body">
-                <!-- php code -->
-                <?php include('../php/connection.php');
-                $consul = "SELECT COUNT(*) AS total_carreras FROM carreras";
-                $resul = mysqli_query($connection, $consul);
-                $row = mysqli_fetch_array($resul);?>
-                <h1 class="display-6">Carreras</h1>
-                <h4>Carreras registradas <span class="badge bg-secondary"><?php echo $row['total_carreras'];?></span></h4>
-                <a href="carreras.php" class="btn btn-primary">Ir a la página</a>
-            </div>
-        </div>
-        <div class="card" style="width: 30rem; height: 15rem">
-            <div class="card-body">
-                <!-- php code -->
-                <?php include('../php/connection.php');
-                $consul = "SELECT COUNT(*) AS total_directores FROM dir_de_carrera";
-                $resul = mysqli_query($connection, $consul);
-                $row = mysqli_fetch_array($resul);?>
-                <h1 class="display-6">Directores</h1>
-                <h4>Directores registrados <span class="badge bg-secondary"><?php echo $row['total_directores'];?></span></h4>
-                <a href="directores.php" class="btn btn-primary">Ir a la página</a>
-            </div>
-        </div>
-        <div class="card" style="width: 30rem; height: 15rem">
-            <div class="card-body">
-                <!-- php code -->
-                <?php include('../php/connection.php');
-                $consul = "SELECT COUNT(*) AS total_grupos FROM grupos";
-                $resul = mysqli_query($connection, $consul);
-                $row = mysqli_fetch_array($resul);?>
-                <h1 class="display-6">Grupos</h1>
-                <h4>Grupos registrados <span class="badge bg-secondary"><?php echo $row['total_grupos'];?></span></h4>
-                <a href="grupos.php" class="btn btn-primary">Ir a la página</a>
-            </div>
-        </div>
-        <div class="card" style="width: 30rem; height: 15rem">
-            <div class="card-body">
-                <!-- php code -->
-                <?php include('../php/connection.php');
-                $consul = "SELECT COUNT(*) AS total_aulas FROM aulas";
-                $resul = mysqli_query($connection, $consul);
-                $row = mysqli_fetch_array($resul);?>
-                <h1 class="display-6">Aulas</h1>
-                <h4>Aulas registradas <span class="badge bg-secondary"><?php echo $row['total_aulas'];?></span></h4>
-                <a href="aulas.php" class="btn btn-primary">Ir a la página</a>
             </div>
         </div>
     </div>

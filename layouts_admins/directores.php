@@ -23,7 +23,11 @@ if(!isset($_SESSION['usuario'])){
 <body class="admin_background">
 <!-- navbar -->
 <?php include ("navbar.php");?>
-<h1 class="h1-tittles text-muted">Directores</h1>
+<?php include('../php/connection.php');
+  $consul = "SELECT COUNT(*) AS total_directores FROM dir_de_carrera";
+  $resul = mysqli_query($connection, $consul);
+  $row = mysqli_fetch_array($resul);?>
+<h1 class="h1-tittles text-muted display-6">Directores <span class="badge bg-light text-dark"><?php echo $row['total_directores'];?></span></h1>
 <div class="div-table">
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
