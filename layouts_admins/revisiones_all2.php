@@ -56,7 +56,6 @@ if(!isset($_SESSION['usuario'])){
     <button type="submit" name="export" class="btn btn-success" >Exportar a Excel</button>  
     </form>
   <br>
-  <hr class="hr-line">
   <!-- tabla -->
   <?php
   include ('../php/connection.php');

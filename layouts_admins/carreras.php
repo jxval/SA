@@ -87,7 +87,7 @@ if(!isset($_SESSION['usuario'])){
         </thead>
         <tbody>
             <?php
-            require_once("../php/connection.php");
+            include('../php/connection.php');
             
             // Consulta SQL para obtener los datos de la tabla (cambia 'tu_tabla' al nombre de tu tabla)
 
@@ -116,7 +116,7 @@ if(!isset($_SESSION['usuario'])){
                             </div>
 
                             <div class="modal-body modal-background">
-                            <form action="../php/editarcarrera.php" method="POST">
+                            <form action="" method="POST">
                                 <div class="mb-2">
                                     <label for="recipient-name" class="col-form-label">Nomenclatura</label>
                                     <input type="text" class="form-control" id="recipient-name" name="nomenclatura" value="<?php echo $row['nom_car']; ?>">
@@ -147,14 +147,14 @@ if(!isset($_SESSION['usuario'])){
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                <button type="submit" class="btn btn-primary" name="editar_carrera">Guardar Cambios</button>
                             </div>
                             </form>
                         </div>
                     </div>
                 </div>
                 <!-- Modal de eliminar  -->
-                <form action="../php/eliminarcarrera.php" method="post">
+                <form action="" method="post">
                 <div class="modal fade" id="borrar_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -168,7 +168,7 @@ if(!isset($_SESSION['usuario'])){
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                        <button type="submit" class="btn btn-primary" name="eliminar_carrera">Eliminar</button>
                     </div>
                     </div>
                 </div>

@@ -49,16 +49,13 @@ if(!isset($_SESSION['usuario'])){
         <option value="T.M">T.M</option>
         <option value="T.V">T.V</option>
       </select>
-    <button type="submit" class="btn btn-primary btn-enviar-admin" name="buscar_revi" id="enviar">Buscar justificados</button>
+    <button type="submit" class="btn btn-primary btn-enviar-admin" name="buscar_revi" id="enviar">Buscar</button>
     </div>
   </form>
   <form action="../php/exportacion_excel.php" method="POST">
     <button type="submit" name="export" class="btn btn-success" >Exportar a Excel</button>  
     </form>
   <br>
-
-<hr class="hr-line">
-
   <!-- tabla -->
   <?php
   include ('../php/connection.php');

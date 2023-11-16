@@ -66,7 +66,7 @@ if(!isset($_SESSION['usuario'])){
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary" name="guardar">Guardar cambios</button>
+        <button type="submit" class="btn btn-primary" name="guardar_director">Guardar cambios</button>
       </div>
       </form>
     </div>
@@ -82,6 +82,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Nombres</th>
         <th scope="col">Primer apellido</th>
         <th scope="col">Segundo apellido</th>
+        <th scope="col">Correo</th>
         <th colspan="2">Acción</th>
       </tr>
     </thead>
@@ -95,6 +96,7 @@ if(!isset($_SESSION['usuario'])){
         <td><?php echo $row["nombres"];?></td>
         <td><?php echo $row["primer_apellido"];?></td>
         <td><?php echo $row["segundo_apellido"];?></td>
+        <td><?php echo $row["correo"];?></td>
         <td>
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id'];?>">Editar</button>
           <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id'];?>"> Eliminar</button>
@@ -109,7 +111,7 @@ if(!isset($_SESSION['usuario'])){
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body modal-background">
-              <form action="../php/editardirector.php" method="post">
+              <form action="" method="post">
                 <div class="mb-2">
                   <label for="recipient-name" class="col-form-label">Nomenclatura</label>
                   <input type="text" class="form-control" id="recipient-name" name="nomenclatura" value="<?php echo $row['nom_dir'];?>">
@@ -129,22 +131,26 @@ if(!isset($_SESSION['usuario'])){
                   <label for="recipient-name" class="col-form-label">Segundo apellido</label>
                   <input type="text" class="form-control" id="recipient-name" name="segundo_apellido" value="<?php echo $row['segundo_apellido'];?>">
                 </div>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">Correo</label>
+                  <input type="text" class="form-control" id="recipient-name" name="correo" value="<?php echo $row['correo'];?>">
+                </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                  <button type="submit" class="btn btn-primary" name="editar_director">Guardar Cambios</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <!-- modal editar -->
-      <form action="../php/eliminardirector.php" method="post">
+      <!-- modal eliminar -->
+      <form action="" method="post">
         <div class="modal fade" id="borrar_<?php echo $row['id'];?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar director</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -157,7 +163,7 @@ if(!isset($_SESSION['usuario'])){
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Eliminar</button>
+                <button type="submit" class="btn btn-primary" name="eliminar_director">Eliminar</button>
               </div>
             </div>
           </div>

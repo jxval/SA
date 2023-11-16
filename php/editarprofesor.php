@@ -18,13 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     correo='$correo', director='$director' WHERE id='$id'";
 
     if ($connection->query($sql) === TRUE) {
-        echo '<script>alert("Registro editado correctamente"); window.location = "../layouts_admins/profesores.php";</script>';
-        exit;
+        echo '<div class="alert alert-success">Registro editado correctamente!</div>';        
     } else {
-        echo '<script>alert("Error al Editar"); window.location = "../layouts_admins/profesores.php";</script>';
-        exit;
+        echo '<div class="alert alert-danger">Favor de completar el formulario</div>';
     }
 
     $connection->close();
 }
+
+
 ?>
