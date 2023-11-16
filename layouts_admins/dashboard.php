@@ -66,8 +66,8 @@ if(!isset($_SESSION['usuario'])){
         </div>
         <div class="card" style="width: 30rem; height: 30rem">
             <div class="card-body">
-            <h1 class="display-6">5 profesores con más incidencias (universal)</h1>
-            <p class="lead">Mes en curso</p>
+            <h1 class="display-6">Top 5: Incidencias del mes en curso (universal)</h1>
+            <br>
             <table class="">
                 <thead class="">
                     <tr>

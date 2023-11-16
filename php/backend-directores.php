@@ -11,10 +11,9 @@ if(isset($_POST['guardar'])){
     $password = $_POST['contrasena'];
     $password = hash('sha512', $password);
 
-    $connection->query("INSERT INTO dir_de_carrera (nom_dir, nombres, primer_apellido, segundo_apellido, correo, password) 
+    $sql = ("INSERT INTO dir_de_carrera (nom_dir, nombres, primer_apellido, segundo_apellido, correo, password) 
     VALUES ('$nom_dir', '$nombres', '$primer_apellido', '$segundo_apellido', '$correo', '$password')") or die($connection->error);
 
-    echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/directores.php";</script>';
 }
 
 if(isset($_POST['guardar_carrera'])){
@@ -22,21 +21,15 @@ if(isset($_POST['guardar_carrera'])){
     $nombre = $_POST['nombre'];
     $c_director = $_POST['c_director'];
 
-    $connection->query("INSERT INTO carreras (nom_car, nombre, nom_dir) 
+    $sql = ("INSERT INTO carreras (nom_car, nombre, nom_dir) 
     VALUES ('$nom_car', '$nombre', '$c_director')") or die($connection->error);
 
-    echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/carreras.php";</script>';
-
-}
-
-if(isset($_POST['filtro_carrera'])){
-    $ord_nom = $_POST['ord_nom'];
-    $ord_nombre = $_POST['ord_nombre'];
-    $c_director_c = $_POST['c_director_c'];
-
-    $connection->query("SELECT * FROM carreras ORDER BY '$ord_nom' ASC") or die($connection->error);
-
-    header('location:../layouts/filtro.php');
+    if ($connection->query($sql) === TRUE) {
+        echo '<div class="alert alert-success">Registro agregado correctamente!</div>';        
+    } else {
+        echo '<div class="alert alert-danger">Favor de completar el formulario</div>';
+        
+    }
 }
 
 if(isset($_POST['guardar_profesor'])){
@@ -47,10 +40,15 @@ if(isset($_POST['guardar_profesor'])){
     $correo = $_POST['correo'];
     $c_director = $_POST['c_director'];
 
-    $connection->query("INSERT INTO profesores (nomenclatura, nombres, primer_apellido, segundo_apellido, correo, director) 
+    $sql = ("INSERT INTO profesores (nomenclatura, nombres, primer_apellido, segundo_apellido, correo, director) 
     VALUES ('$nomenclatura', '$nombres', '$primer_apellido', '$segundo_apellido', '$correo', '$c_director')") or die($connection->error);
 
-    echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/profesores.php";</script>';
+    if ($connection->query($sql) === TRUE) {
+        echo '<div class="alert alert-success">Registro agregado correctamente!</div>';        
+    } else {
+        echo '<div class="alert alert-danger">Favor de completar el formulario</div>';
+        
+    }
 }
 if(isset($_POST['guardar_grupo'])){
     $grupo = $_POST['grupo'];

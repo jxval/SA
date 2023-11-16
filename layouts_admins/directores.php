@@ -23,6 +23,7 @@ if(!isset($_SESSION['usuario'])){
 <body class="admin_background">
 <!-- navbar -->
 <?php include ("navbar.php");?>
+<?php include('../php/backend-directores.php');?>
 <?php include('../php/connection.php');
   $consul = "SELECT COUNT(*) AS total_directores FROM dir_de_carrera";
   $resul = mysqli_query($connection, $consul);
@@ -43,26 +44,25 @@ if(!isset($_SESSION['usuario'])){
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body modal-background">
-      <?php require_once '../php/backend-directores.php';?>
-        <form action="../php/backend-directores.php" method="POST">
+        <form action="" method="POST">
           <label for="recipient-name" class="col-form-label">Nomenclatura</label>
-          <input class="form-control" type="text" name="nom_dir" placeholder="Ingrese nomenclatura">
+          <input class="form-control" type="text" name="nom_dir" placeholder="Ingrese nomenclatura" required>
           <br>
           <label for="recipient-name" class="col-form-label">Nombres</label>
-          <input class="form-control" type="text" name="nombres" placeholder="Ingrese nombre(s)">
+          <input class="form-control" type="text" name="nombres" placeholder="Ingrese nombre(s)" required>
           <br>
           <label for="recipient-name" class="col-form-label">Primer apellido</label>
-          <input class="form-control" type="text" name="primer_apellido" placeholder="Ingrese primer apellido">
+          <input class="form-control" type="text" name="primer_apellido" placeholder="Ingrese primer apellido" required>
           <br>
           <label for="recipient-name" class="col-form-label">Segundo apellido</label>
-          <input class="form-control" type="text" name="segundo_apellido" placeholder="Ingrese segundo apellido">
+          <input class="form-control" type="text" name="segundo_apellido" placeholder="Ingrese segundo apellido" required>
             <!-- <button type="submit" name="guardar">Agregar</button> -->
             <br>
           <label for="recipient-name" class="col-form-label">Correo</label>
-          <input class="form-control" type="mail" name="correo" placeholder="Ingrese correo">
+          <input class="form-control" type="mail" name="correo" placeholder="Ingrese correo" required>
           <br>
           <label for="recipient-name" class="col-form-label">Contraseña</label>
-          <input class="form-control" type="password" name="contrasena" placeholder="Ingrese contraseña">
+          <input class="form-control" type="password" name="contrasena" placeholder="Ingrese contraseña" requires>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

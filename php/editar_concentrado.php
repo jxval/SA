@@ -14,13 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "UPDATE revisiones SET profesor = '$profesor', reporte ='$reporte', revision_2='$revision_2', revision_3='$revision_3', 
     observaciones ='$observaciones' WHERE id='$id'";
-
+    
     if ($connection->query($sql) === TRUE) {
-        echo '<script>alert("Registro editado correctamente"); window.location = "../layouts/revisiones_all.php";</script>';
-        exit;
+        echo '<div class="alert alert-success">Registro editado correctamente!</div>';        
     } else {
-        echo '<script>alert("Error al Editar, por favor verifique nombre de profesor y reporte"); window.location = "../layouts/revisiones_all.php";</script>';
-        exit;
+        echo '<div class="alert alert-danger">Hubo un error al editar, favor de seleccionar datos requeridos</div>';
+        
     }
 
     $connection->close();

@@ -10,6 +10,7 @@
 <body class="captura_background">
     <!-- navbar -->
 <?php include ("navbar.php");?>
+<?php include('../php/editar_concentrado.php');?>
 <h1 class="h1-tittles text-muted">Concentrado general presencial</h1>
 <div class="div-table">
 <!-- tabla -->
@@ -68,7 +69,7 @@
                             </div>
 
                             <div class="modal-body modal-background">
-                            <form action="../php/editar_concentrado.php" method="POST">
+                            <form action="" method="POST">
                                 <div class="mb-2">
                                     <label for="recipient-name" class="col-form-label">Profesor</label>
                                     <div class="form-floating">

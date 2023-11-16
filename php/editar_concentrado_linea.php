@@ -17,11 +17,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     observaciones ='$observaciones' WHERE id='$id'";
 
     if ($connection->query($sql) === TRUE) {
-        echo '<script>alert("Registro editado correctamente"); window.location = "../layouts/revisiones_all_linea.php";</script>';
-        exit;
+        echo '<div class="alert alert-success">Registro editado correctamente!</div>';        
     } else {
-        echo '<script>alert("Error al Editar, por favor verifique nombre de profesor"); window.location = "../layouts/revisiones_all_linea.php";</script>';
-        exit;
+        echo '<div class="alert alert-danger">Hubo un error al guardar los datos, favor de seleccionar datos</div>';
+        
     }
 
     $connection->close();

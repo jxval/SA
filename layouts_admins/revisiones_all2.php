@@ -63,9 +63,9 @@ if(!isset($_SESSION['usuario'])){
 
   if(isset($_POST['buscar_revi'])){
     ?>
-    <a class="btn-delete-filter" href="revisiones_all.php"><button type="submit" class="btn btn-danger btn-delete-filter btn-sm">Borrar busqueda</button></a>
+    <a class="btn-delete-filter" href="revisiones_all2.php"><button type="submit" class="btn btn-danger btn-delete-filter  btn-sm">Borrar busqueda</button></a>
     <br>
-    <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
+    <center><strong><h3 class="lead table-tittle">Justificados</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -78,6 +78,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
+        <th class="justify" scope="col">Justificación</th>
       </tr>
     </thead>
     <tbody>
@@ -100,8 +101,8 @@ if(!isset($_SESSION['usuario'])){
 
     $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ',revisiones.revision_2,', ',revisiones.revision_3) AS revisiones, 
-    revisiones.observaciones FROM revisiones
-    INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro AND modalidad = 'presencial' AND justificado = 'no' ORDER BY id DESC";
+    revisiones.observaciones, revisiones.comentarios FROM revisiones
+    INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro AND modalidad = 'presencial' AND justificado = 'si' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -117,6 +118,7 @@ if(!isset($_SESSION['usuario'])){
           <td><?= $items['reporte'];?></td>
           <td><?= $items['revisiones'];?></td>
           <td><?= $items['observaciones'];?></td>
+          <td class="justify"><?= $items['comentarios'];?></td>
         </tr>
         <?php
       }
@@ -132,9 +134,9 @@ if(!isset($_SESSION['usuario'])){
   }else{
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-primary btn-sm" href="revisiones_all2.php" role="button">Ver justificados</a>
+      <a class="btn btn-primary btn-sm" href="revisiones_all.php" role="button">Ver sin justificación</a>
     </div>
-    <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
+    <center><strong><h3 class="lead table-tittle">Justificados</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -147,6 +149,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
+        <th class="justify" scope="col">Justificacion</th>
       </tr>
     </thead>
     <?php 
@@ -154,7 +157,7 @@ if(!isset($_SESSION['usuario'])){
       $consul = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
       profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ',revisiones.revision_2,', ',revisiones.revision_3) AS revisiones, 
       revisiones.observaciones, revisiones.justificado, revisiones.comentarios FROM revisiones
-      INNER JOIN profesores ON revisiones.profesor = profesores.id AND modalidad = 'presencial' AND justificado = 'no' ORDER BY id DESC";
+      INNER JOIN profesores ON revisiones.profesor = profesores.id AND modalidad = 'presencial' AND justificado = 'si' ORDER BY id DESC";
       $resul = mysqli_query($connection, $consul) or die ("Algo salio mal");
       while($column = mysqli_fetch_array($resul)){
       echo "<tbody>";
@@ -168,6 +171,7 @@ if(!isset($_SESSION['usuario'])){
           echo "<td>".$column['reporte']."</td>";
           echo "<td>".$column['revisiones']."</td>";
           echo "<td>".$column['observaciones']."</td>";
+          echo "<td class=justify>".$column['comentarios']."</td>";
           echo "</tr>";
       echo "</tbody>";
       }

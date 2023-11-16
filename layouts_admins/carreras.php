@@ -23,6 +23,7 @@ if(!isset($_SESSION['usuario'])){
 <body class="admin_background">
 <!-- navbar -->
 <?php include ("navbar.php");?>
+<?php include('../php/backend-directores.php');?>
 <?php include('../php/connection.php');
     $consul = "SELECT COUNT(*) AS total_carreras FROM carreras";
     $resul = mysqli_query($connection, $consul);
@@ -42,17 +43,16 @@ if(!isset($_SESSION['usuario'])){
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body modal-background">
-        <?php require_once '../php/backend-directores.php';?>
-            <form action="../php/backend-directores.php" method="POST">
+            <form action="" method="POST">
                 <label for="recipient-name" class="col-form-label">Nomenclatura</label>
-                <input class="form-control" type="text" name="nom_car" placeholder="Ingrese nomenclatura">
+                <input class="form-control" type="text" name="nom_car" placeholder="Ingrese nomenclatura" required>
                 <br>
                 <label for="recipient-name" class="col-form-label">Nombre de carrera</label>
-                <input class="form-control" type="text" name="nombre" placeholder="Ingrese nombre">
+                <input class="form-control" type="text" name="nombre" placeholder="Ingrese nombre" required>
                 <br>
                 <label for="recipient-name" class="col-form-label">Director</label>
                 <!-- <label for="Director">Director</label> -->
-                <select class="form-select" id="docente" name="c_director">
+                <select class="form-select" id="docente" name="c_director" required>
                     <option value="">Seleccionar director</option>
                     <?php
                     include('../php/connection.php');

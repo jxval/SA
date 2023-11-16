@@ -33,11 +33,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('', '$fecha', '$turno', 'N/A', '$hora_inicio', '$hora_final', 'Linea' ,'$profesor', '$grupo', '$reporte', '$primerarevision', '$segundarevision', '$tercerarevision', '$cuartarevision', '$observaciones', 'no')";
 
     if ($conn->query($sql) === TRUE) {
-        echo '<script>alert("Los datos se han guardado correctamente."); window.location = "../layouts/captura_en_linea.php";</script>';
-        exit;
+        echo '<div class="alert alert-success">Registro guardado correctamente!</div>';
     } else {
-        echo '<script>alert("Error al guardar los datos"); window.location = "../layouts/captura_en_linea.php";</script>';
-        exit;
+        echo '<div class="alert alert-danger">Hubo un error al guardar los datos, por favor verifica</div>';
         
     }
 
