@@ -65,7 +65,6 @@ if(!isset($_SESSION['usuario'])){
     ?>
     </div>
   </form>
-
   <form action="../php/exportacion_excel.php" method="POST">
     <button type="submit" name="export" class="btn btn-success" >Exportar a Excel</button>  
     </form>
@@ -77,9 +76,9 @@ if(!isset($_SESSION['usuario'])){
   if(isset($_POST['buscar_revi'])){
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-primary btn-sm" href="revisiones1.php" role="button">Ver justificados</a>
+        <a class="btn btn-primary btn-sm" href="revisiones.php" role="button">Ver sin justificante</a>
     </div>
-    <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
+    <center><strong><h3 class="lead table-tittle">Justificados</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -92,7 +91,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
-        <th scope="col">Acción</th>
+        <th scope="col" class="justify">Justificante</th>
       </tr>
     </thead>
     <tbody>
@@ -118,60 +117,23 @@ if(!isset($_SESSION['usuario'])){
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3) AS revisiones, 
     revisiones.observaciones, revisiones.comentarios FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id
-    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'presencial' AND justificado = 'no' ORDER BY id DESC";
+    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'presencial' AND justificado = 'si' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
       foreach($query_run as $column){
         ?>
         <tr>
-          <td class="toJustify"><?= $column['fecha'];?></td>
-          <td class="toJustify"><?= $column['turno'];?></td>
-          <td class="toJustify"><?= $column['aula'];?></td>
-          <td class="toJustify"><?= $column['horario'];?></td>
-          <td class="toJustify"><?= $column['nomenclatura'];?></td>
-          <td class="toJustify"><?= $column['grupo'];?></td>
-          <td class="toJustify"><?= $column['reporte'];?></td>
-          <td class="toJustify"><?= $column['revisiones'];?></td>
-          <td class="toJustify"><?= $column['observaciones'];?></td>
-          <td>
-            <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
-              Justificar
-              <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-                <span class="visually-hidden">New alerts</span>
-              </span>
-            </button>
-          </td>
-
-          <!-- modal editar -->
-          <div class="modal fade" id="exampleModal_<?php echo $column['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Justificar profesor <?php echo $column['nomenclatura']; ?></h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body modal-background">
-                    <form action="" method="POST">
-                    <p class="justify">"<?php echo $column['observaciones'];?>"</p>
-                        <div class="mb-2">
-                            <label for="recipient-name" class="lead">Comentarios</label>
-                            <textarea name="comentarios" class="form-control" id="" value="<?php echo $column['comentarios']; ?>" placeholder="Agrege un comentario de justificación" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <input type="hidden" class="form-control" id="recipient-name" name="id" value="<?php echo $column['id']; ?>">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary" name="guardar_justificacion">Guardar Cambios</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
+          <td class=""><?= $column['fecha'];?></td>
+          <td class=""><?= $column['turno'];?></td>
+          <td class=""><?= $column['aula'];?></td>
+          <td class=""><?= $column['horario'];?></td>
+          <td class=""><?= $column['nomenclatura'];?></td>
+          <td class=""><?= $column['grupo'];?></td>
+          <td class=""><?= $column['reporte'];?></td>
+          <td class=""><?= $column['revisiones'];?></td>
+          <td class=""><?= $column['observaciones'];?></td>
+          <td class="justify"><?= $column['comentarios'];?></td>
         </tr>
         <?php
       }
@@ -187,12 +149,12 @@ if(!isset($_SESSION['usuario'])){
   }else{
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-primary btn-sm" href="revisiones1.php" role="button">Ver justificados</a>
+        <a class="btn btn-primary btn-sm" href="revisiones.php" role="button">Ver sin justificante</a>
     </div>
-    <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
+    <center><strong><h3 class="lead table-tittle">Justificados</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
-      <tr>
+    <tr>
         <th scope="col">Fecha</th>
         <th scope="col">Turno</th>
         <th scope="col">Aula</th>
@@ -202,7 +164,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
-        <th scope="col">Acción</th>
+        <th scope="col" class="justify">Justificante</th>
       </tr>
     </thead>
     <tbody>
@@ -212,67 +174,30 @@ if(!isset($_SESSION['usuario'])){
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3) AS revisiones, 
     revisiones.observaciones, revisiones.comentarios FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id
-    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'presencial' AND justificado = 'no' ORDER BY id DESC";
+    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'presencial' AND justificado = 'si' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
       foreach($query_run as $column){
         ?>
         <tr>
-          <td class="toJustify"><?= $column['fecha'];?></td>
-          <td class="toJustify"><?= $column['turno'];?></td>
-          <td class="toJustify"><?= $column['aula'];?></td>
-          <td class="toJustify"><?= $column['horario'];?></td>
-          <td class="toJustify"><?= $column['nomenclatura'];?></td>
-          <td class="toJustify"><?= $column['grupo'];?></td>
-          <td class="toJustify"><?= $column['reporte'];?></td>
-          <td class="toJustify"><?= $column['revisiones'];?></td>
-          <td class="toJustify"><?= $column['observaciones'];?></td>
-          <td>
-            <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
-              Justificar
-              <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
-                <span class="visually-hidden">New alerts</span>
-              </span>
-            </button>
-          </td>
-
-          <!-- modal editar -->
-          <div class="modal fade" id="exampleModal_<?php echo $column['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Justificar profesor <?php echo $column['nomenclatura']; ?></h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-
-                    <div class="modal-body modal-background">
-                    <form action="" method="POST">
-                    <p class="justify">"<?php echo $column['observaciones'];?>"</p>
-                        <div class="mb-2">
-                            <label for="recipient-name" class="lead">Comentarios</label>
-                            <textarea name="comentarios" class="form-control" id="" value="<?php echo $column['comentarios']; ?>" placeholder="Agrege un comentario de justificación" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <input type="hidden" class="form-control" id="recipient-name" name="id" value="<?php echo $column['id']; ?>">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary" name="guardar_justificacion">Guardar Cambios</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
+          <td class=""><?= $column['fecha'];?></td>
+          <td class=""><?= $column['turno'];?></td>
+          <td class=""><?= $column['aula'];?></td>
+          <td class=""><?= $column['horario'];?></td>
+          <td class=""><?= $column['nomenclatura'];?></td>
+          <td class=""><?= $column['grupo'];?></td>
+          <td class=""><?= $column['reporte'];?></td>
+          <td class=""><?= $column['revisiones'];?></td>
+          <td class=""><?= $column['observaciones'];?></td>
+          <td class="justify"><?= $column['comentarios'];?></td>
         </tr>
         <?php
       }
     }else{
       ?>
       <tr>
-        <td class="else-results" colspan="13" style="color:green;">No hay registros que justificar</td>
+        <td class="else-results" colspan="13" style="color:green;">No hay registros justificados</td>
       </tr>
       <?php
     }

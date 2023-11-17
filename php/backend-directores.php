@@ -183,4 +183,20 @@ if(isset($_POST['guardar_aula'])){
 
     echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/aulas.php";</script>';
 }
+
+if(isset($_POST['guardar_justificacion'])){
+    $comentarios = $_POST['comentarios'];
+    $id = $_POST['id'];
+
+  
+    $sql = "UPDATE revisiones SET justificado = 'si', comentarios ='$comentarios' WHERE id='$id'";
+
+    if ($connection->query($sql) === TRUE) {
+        echo '<div class="alert alert-success">Se justificó correctamente!</div>';        
+    } else {
+        echo '<div class="alert alert-danger">Error al justificar, favor de verificar</div>';
+    }
+
+    $connection->close();
+}
 ?>

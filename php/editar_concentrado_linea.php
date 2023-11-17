@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($connection->query($sql) === TRUE) {
         echo '<div class="alert alert-success">Registro editado correctamente!</div>';        
     } else {
-        echo '<div class="alert alert-danger">Hubo un error al guardar los datos, favor de seleccionar datos</div>';
+        echo '<div class="alert alert-danger">Hubo un error al guardar los datos, favor de seleccionar la información solicitada</div>';
         
     }
 
