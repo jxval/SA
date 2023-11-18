@@ -170,19 +170,96 @@ if(isset($_POST['borrar_profesor'])){
 if(isset($_POST['guardar_grupo'])){
     $grupo = $_POST['grupo'];
 
-    $connection->query("INSERT INTO grupos (grupo) 
-    VALUES ('$grupo')") or die($connection->error);
+    $query = "SELECT * FROM grupos WHERE grupo = '$grupo'";
+    $result = $connection->query($query);
 
-    echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/grupos.php";</script>';
+    if($result->num_rows > 0){
+        echo '<div class="alert alert-danger">Ya existe el grupo ingresado</div>';        
+    }else{
+        $sql = ("INSERT INTO grupos (grupo) 
+        VALUES ('$grupo')") or die($connection->error);
+        if ($connection->query($sql) === TRUE) {
+            echo '<div class="alert alert-success">Registro agregado correctamente!</div>';        
+        } else {
+            echo '<div class="alert alert-danger">Error: Favor de verificar los datos ingresados</div>';
+        }
+    }
+
+    $connection->close();
 }
+if(isset($_POST['eliminar_grupo'])){
+    $id = $_POST['id'];
+
+    $sql = "DELETE FROM grupos WHERE id=$id";
+
+    if ($connection->query($sql) === TRUE) {
+        echo '<div class="alert alert-success">Registro eliminado correctamente!</div>';        
+    } else {
+        echo '<div class="alert alert-danger">Error: Favor de verificar</div>';
+    }
+    $connection->close();
+}
+
+
 if(isset($_POST['guardar_aula'])){
     $aula = $_POST['aula'];
 
-    $connection->query("INSERT INTO aulas (aula) 
-    VALUES ('$aula')") or die($connection->error);
+    $query = "SELECT * FROM aulas WHERE aula = '$aula'";
+    $result = $connection->query($query);
 
-    echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts_admins/aulas.php";</script>';
+    if($result->num_rows > 0){
+        echo '<div class="alert alert-danger">Ya existe el aula ingresada</div>';
+    }else{
+        $sql = ("INSERT INTO aulas (aula) 
+        VALUES ('$aula')") or die($connection->error);
+
+        if ($connection->query($sql) === TRUE) {
+            echo '<div class="alert alert-success">Registro agregado correctamente!</div>';        
+        } else {
+            echo '<div class="alert alert-danger">Error: Favor de verificar los datos ingresados</div>';
+        }    
+    }
+    $connection->close();
 }
+if(isset($_POST['eliminar_aula'])){
+    $id = $_POST['id'];
+
+    $sql = "DELETE FROM aulas WHERE id=$id";
+
+    if ($connection->query($sql) === TRUE) {
+        echo '<div class="alert alert-success">Registro eliminado correctamente!</div>';    
+    } else {
+        echo '<div class="alert alert-danger">Error: Favor de verificar</div>';
+    }
+    $connection->close();
+}
+
+
+
+if(isset($_POST['validar_admin'])){
+    $nombre = $_POST['db_nombre'];
+    $apellido = $_POST['db_apellido'];
+    $correo = $_POST['db_correo'];
+    $contrasena = $_POST['db_contrasena'];
+    $contrasena = hash('sha512', $contrasena);
+
+    $query = "SELECT * FROM usuarios WHERE correo = '$correo'";
+    $result = $connection->query($query);
+
+    if($result->num_rows > 0){
+        echo '<div class="alert alert-danger">Ya existe un usuario con el correo ingresado</div>';        
+    }else{
+        $sql = "INSERT INTO usuarios (id, nombre, apellido, correo, contrasena) 
+        Values ('', '$nombre', '$apellido', '$correo', '$contrasena')";
+         if ($connection->query($sql) === TRUE) {
+            echo '<div class="alert alert-success">¡Se registro administrador correctamente!</div>';    
+        } else {
+            echo '<div class="alert alert-danger">Error: Favor de verificar</div>';
+        }
+    }
+
+}
+
 
 if(isset($_POST['guardar_justificacion'])){
     $comentarios = $_POST['comentarios'];
@@ -199,4 +276,6 @@ if(isset($_POST['guardar_justificacion'])){
 
     $connection->close();
 }
+
+
 ?>

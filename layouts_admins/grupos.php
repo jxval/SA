@@ -23,6 +23,7 @@ if(!isset($_SESSION['usuario'])){
 <body class="admin_background">
 <!-- navbar -->
 <?php include ("navbar.php");?>
+<?php include('../php/backend-directores.php');?>
 <?php include('../php/connection.php');
   $consul = "SELECT COUNT(*) AS total_grupos FROM grupos";
   $resul = mysqli_query($connection, $consul);
@@ -43,10 +44,9 @@ if(!isset($_SESSION['usuario'])){
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body modal-background">
-      <?php require_once '../php/backend-directores.php';?>
-        <form action="../php/backend-directores.php" method="POST">
+        <form action="" method="POST">
           <label for="recipient-name" class="col-form-label">Grupo</label>
-          <input class="form-control" type="text" name="grupo" placeholder="Ingrese el Grupo">
+          <input class="form-control" type="text" name="grupo" placeholder="Ingrese el Grupo" required>
           <br>
       </div>
       <div class="modal-footer">
@@ -64,7 +64,7 @@ if(!isset($_SESSION['usuario'])){
     <thead class="table-dark">
       <tr>
         <th scope="col">Grupos</th>
-        <th scope="col">Accion</th>
+        <th scope="col" style="width:10rem;">Accion</th>
       </tr>
     </thead>
     <tbody>
@@ -80,8 +80,8 @@ if(!isset($_SESSION['usuario'])){
       </tr>
       
       </div>
-      <!-- Modal de eliminar  -->
-    <form action="../php/eliminargrupo.php" method="post">
+    <!-- Modal de eliminar  -->
+    <form action="" method="post">
                 <div class="modal fade" id="borrar_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -95,7 +95,7 @@ if(!isset($_SESSION['usuario'])){
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                        <button type="submit" class="btn btn-primary" name="eliminar_grupo">Eliminar</button>
                     </div>
                     </div>
                 </div>

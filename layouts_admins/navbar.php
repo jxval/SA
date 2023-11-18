@@ -75,7 +75,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-register" href="../layouts/registros.php">Registrar admin</a>
+          <a class="nav-link nav-register" href="registros.php">Registrar admin</a>
         </li>
         <li class="nav-item">
           <a class="nav-link nav-link-logout" href="../php/logout.php" aria-disabled="false">Cerrar sesión</a>

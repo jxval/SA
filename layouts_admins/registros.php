@@ -14,7 +14,8 @@
 </head>
 <body class="loginbg">
   
-<form action="../php/validarusuario.php" method="post" class="formRe">
+<form action="" method="post" class="formRe">
+        <?php include('../php/backend-directores.php'); ?>
         <img class="coverimg" src="../images/LogoUTCJ.png" alt="">
         <h3 class="tittle-2">Registro</h3>
         <input class="input" type="text" name="db_nombre" id="" placeholder="Nombre" required>
@@ -25,7 +26,7 @@
         <br>
         <input class="input pass" type="password" name="db_contrasena" id="" placeholder="Contraseña" required>
         <br>
-        <button class="button btn-login" type="submit">Registrar</button>
+        <button class="button btn-login" type="submit" name="validar_admin">Registrar</button>
         
         <a href="../layouts_admins/dashboard.php" class="a-regi">Regresar</a>
         
