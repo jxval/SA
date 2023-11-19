@@ -277,5 +277,256 @@ if(isset($_POST['guardar_justificacion'])){
     $connection->close();
 }
 
+if(isset($_POST['btn_login'])){
+
+    include('connection.php');
+
+    $correo = $_POST['db_correo'];
+    $contrasena = $_POST['db_contrasena'];
+    $contrasena = hash('sha512', $contrasena);
+
+    $login_validation = mysqli_query($connection, "SELECT * FROM usuarios WHERE correo = '$correo' AND contrasena = '$contrasena'");
+
+    if(mysqli_num_rows($login_validation) > 0){
+        $row = $login_validation->fetch_assoc();
+        $_SESSION['usuario'] = $row['nombre'];
+        header("location: ../layouts_admins/dashboard.php");
+        exit;
+    }else{
+        echo '<div class="alert alert-danger">Correo y/o contraseña incorrectos, verifica la información</div>';
+    }
+}
+
+if(isset($_POST['btn_login_director'])){
+    $correo = $_POST['db_correo'];
+    $contrasena = $_POST['db_contrasena'];
+    $contrasena = hash('sha512', $contrasena);
+
+    $login_validation = mysqli_query($connection, "SELECT * FROM dir_de_carrera WHERE correo = '$correo' AND password = '$contrasena'");
+
+    if(mysqli_num_rows($login_validation) > 0){
+        $row = $login_validation->fetch_assoc();
+        $_SESSION['usuario'] = $row['nom_dir'];
+        header("location: ../layouts_directores/dashboard.php");
+        exit;
+    }else{
+        echo '<div class="alert alert-danger">Correo y/o contraseña incorrectos, verifica la información</div>';
+    }
+
+}
+
+
+
+// export a excel concentrado presencial
+if(isset($_POST['export_to_excel_CGPSJ'])){
+    header("Content-Type: application/xls");
+    header("Content-Disposition: attachment; filename=Reportes_sin_justificar_presencial" . date('Y_m_d') . ".xls");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    $output = '<table border="1">
+        <thead>
+
+            <tr>
+                <th>Fecha</th>
+                <th>Turno</th>
+                <th>aula</th>
+                <th>Hora inicial</th>
+                <th>Hora final</th>
+                <th>Profesor</th>
+                <th>Grupo</th>
+                <th>Reporte</th>
+                <th>Primera Revision</th>
+                <th>Segunda Revision</th>
+                <th>Tercera Revision </th>
+                <th>Observaciones </th>
+            </tr>
+        </thead>
+        <tbody>';
+        $query = mysqli_query($connection, "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, revisiones.hora_inicio, revisiones.hora_final, 
+        profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, 
+        revisiones.observaciones FROM revisiones
+        INNER JOIN profesores ON revisiones.profesor = profesores.id WHERE modalidad = 'presencial' AND justificado = 'no' ORDER BY id DESC") or die(mysqli_error($connection));
+
+    while ($fetch = mysqli_fetch_array($query)) {
+        $output .= "<tr>
+            <td>" . $fetch['fecha'] . "</td>
+            <td>" . $fetch['turno'] . "</td>
+            <td>" . $fetch['aula'] . "</td>
+            <td>" . $fetch['hora_inicio'] . "</td>
+            <td>" . $fetch['hora_final'] . "</td>
+            <td>" . $fetch['nomenclatura'] . "</td>
+            <td>" . $fetch['grupo'] . "</td>
+            <td>" . $fetch['reporte'] . "</td>
+            <td>" . $fetch['revision_1'] . "</td>
+            <td>" . $fetch['revision_2'] . "</td>
+            <td>" . $fetch['revision_3'] . "</td>
+            <td>" . $fetch['observaciones'] . "</td>
+        </tr>";
+    }
+
+    $output .= '</tbody></table>';
+
+    echo $output;
+}
+if(isset($_POST['export_to_excel_CGPJ'])){
+    header("Content-Type: application/xls");
+    header("Content-Disposition: attachment; filename=Reportes_justificados_presencial" . date('Y_m_d') . ".xls");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    $output = '<table border="1">
+        <thead>
+
+            <tr>
+                <th>Fecha</th>
+                <th>Turno</th>
+                <th>aula</th>
+                <th>Hora inicial</th>
+                <th>Hora final</th>
+                <th>Profesor</th>
+                <th>Grupo</th>
+                <th>Reporte</th>
+                <th>Primera Revision</th>
+                <th>Segunda Revision</th>
+                <th>Tercera Revision</th>
+                <th>Observaciones</th>
+                <th>Justificante</th>
+            </tr>
+        </thead>
+        <tbody>';
+        $query = mysqli_query($connection, "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, revisiones.hora_inicio, revisiones.hora_final, 
+        profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, 
+        revisiones.observaciones, revisiones.comentarios FROM revisiones
+        INNER JOIN profesores ON revisiones.profesor = profesores.id WHERE modalidad = 'presencial' AND justificado = 'si' ORDER BY id DESC") or die(mysqli_error($connection));
+
+    while ($fetch = mysqli_fetch_array($query)) {
+        $output .= "<tr>
+            <td>" . $fetch['fecha'] . "</td>
+            <td>" . $fetch['turno'] . "</td>
+            <td>" . $fetch['aula'] . "</td>
+            <td>" . $fetch['hora_inicio'] . "</td>
+            <td>" . $fetch['hora_final'] . "</td>
+            <td>" . $fetch['nomenclatura'] . "</td>
+            <td>" . $fetch['grupo'] . "</td>
+            <td>" . $fetch['reporte'] . "</td>
+            <td>" . $fetch['revision_1'] . "</td>
+            <td>" . $fetch['revision_2'] . "</td>
+            <td>" . $fetch['revision_3'] . "</td>
+            <td>" . $fetch['observaciones'] . "</td>
+            <td>" . $fetch['comentarios'] . "</td>
+        </tr>";
+    }
+
+    $output .= '</tbody></table>';
+
+    echo $output;
+}
+
+// export a excel concentrado en linea
+if(isset($_POST['export_to_excel_CGlSJ'])){
+    header("Content-Type: application/xls");
+    header("Content-Disposition: attachment; filename=Reportes_sin_justificar_linea" . date('Y_m_d') . ".xls");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    $output = '<table border="1">
+        <thead>
+
+            <tr>
+                <th>Fecha</th>
+                <th>Turno</th>
+                <th>Hora inicial</th>
+                <th>Hora final</th>
+                <th>Profesor</th>
+                <th>Grupo</th>
+                <th>Reporte</th>
+                <th>Primera Revision</th>
+                <th>Segunda Revision</th>
+                <th>Tercera Revision </th>
+                <th>Cuarta Revision </th>
+                <th>Observaciones </th>
+            </tr>
+        </thead>
+        <tbody>';
+        $query = mysqli_query($connection, "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.hora_inicio, revisiones.hora_final, 
+        profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, revisiones.revision_4,
+        revisiones.observaciones FROM revisiones
+        INNER JOIN profesores ON revisiones.profesor = profesores.id WHERE modalidad = 'linea' AND justificado = 'no' ORDER BY id DESC") or die(mysqli_error($connection));
+
+    while ($fetch = mysqli_fetch_array($query)) {
+        $output .= "<tr>
+            <td>" . $fetch['fecha'] . "</td>
+            <td>" . $fetch['turno'] . "</td>
+            <td>" . $fetch['hora_inicio'] . "</td>
+            <td>" . $fetch['hora_final'] . "</td>
+            <td>" . $fetch['nomenclatura'] . "</td>
+            <td>" . $fetch['grupo'] . "</td>
+            <td>" . $fetch['reporte'] . "</td>
+            <td>" . $fetch['revision_1'] . "</td>
+            <td>" . $fetch['revision_2'] . "</td>
+            <td>" . $fetch['revision_3'] . "</td>
+            <td>" . $fetch['revision_4'] . "</td>
+            <td>" . $fetch['observaciones'] . "</td>
+        </tr>";
+    }
+
+    $output .= '</tbody></table>';
+
+    echo $output;
+}
+if(isset($_POST['export_to_excel_CGlJ'])){
+    header("Content-Type: application/xls");
+    header("Content-Disposition: attachment; filename=Reportes_justificados_linea_" . date('Y_m_d') . ".xls");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    $output = '<table border="1">
+        <thead>
+
+            <tr>
+                <th>Fecha</th>
+                <th>Turno</th>
+                <th>Hora inicial</th>
+                <th>Hora final</th>
+                <th>Profesor</th>
+                <th>Grupo</th>
+                <th>Reporte</th>
+                <th>Primera Revision</th>
+                <th>Segunda Revision</th>
+                <th>Tercera Revision</th>
+                <th>Cuarta Revision</th>
+                <th>Observaciones</th>
+                <th>Justificante</th>
+            </tr>
+        </thead>
+        <tbody>';
+        $query = mysqli_query($connection, "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.hora_inicio, revisiones.hora_final, 
+        profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, revisiones.revision_4,
+        revisiones.observaciones, revisiones.comentarios FROM revisiones
+        INNER JOIN profesores ON revisiones.profesor = profesores.id WHERE modalidad = 'linea' AND justificado = 'si' ORDER BY id DESC") or die(mysqli_error($connection));
+
+    while ($fetch = mysqli_fetch_array($query)) {
+        $output .= "<tr>
+            <td>" . $fetch['fecha'] . "</td>
+            <td>" . $fetch['turno'] . "</td>
+            <td>" . $fetch['hora_inicio'] . "</td>
+            <td>" . $fetch['hora_final'] . "</td>
+            <td>" . $fetch['nomenclatura'] . "</td>
+            <td>" . $fetch['grupo'] . "</td>
+            <td>" . $fetch['reporte'] . "</td>
+            <td>" . $fetch['revision_1'] . "</td>
+            <td>" . $fetch['revision_2'] . "</td>
+            <td>" . $fetch['revision_3'] . "</td>
+            <td>" . $fetch['revision_4'] . "</td>
+            <td>" . $fetch['observaciones'] . "</td>
+            <td>" . $fetch['comentarios'] . "</td>
+        </tr>";
+    }
+
+    $output .= '</tbody></table>';
+
+    echo $output;
+}
 
 ?>

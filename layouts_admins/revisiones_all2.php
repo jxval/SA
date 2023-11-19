@@ -59,10 +59,6 @@ if(!isset($_SESSION['usuario'])){
     ?>
     </div>
   </form>
-  <form action="../php/exportacion_excel.php" method="POST">
-    <button type="submit" name="export" class="btn btn-success" >Exportar a Excel</button>  
-    </form>
-  <br>
   <!-- tabla -->
   <?php
   include ('../php/connection.php');
@@ -141,6 +137,9 @@ if(!isset($_SESSION['usuario'])){
   }else{
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <form action="../php/backend-directores.php" method="POST">
+        <button type="submit" name="export_to_excel_CGPJ" class="btn btn-success btn-sm" >Exportar a Excel</button>  
+      </form>
       <a class="btn btn-primary btn-sm" href="revisiones_all.php" role="button">Ver sin justificar</a>
     </div>
     <center><strong><h3 class="lead table-tittle">Justificados</h3></strong></center>

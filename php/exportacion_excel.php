@@ -1,9 +1,9 @@
 <?php
 require_once 'connection.php';
 
-if (isset($_POST['export'])) {
+if (isset($_POST['export_to_excel_CGP'])) {
     header("Content-Type: application/xls");
-    header("Content-Disposition: attachment; filename=Reportes_" . date('Y_m_d') . ".xls");
+    header("Content-Disposition: attachment; filename=Reportes_sin_justificar_" . date('Y_m_d') . ".xls");
     header("Pragma: no-cache");
     header("Expires: 0");
 
@@ -26,7 +26,10 @@ if (isset($_POST['export'])) {
             </tr>
         </thead>
         <tbody>';
-        $query = mysqli_query($connection, "SELECT * FROM revisiones") or die(mysqli_error($connection));
+        $query = mysqli_query($connection, "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, revisiones.hora_inicio, revisiones.hora_final, 
+        profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, 
+        revisiones.observaciones FROM revisiones
+        INNER JOIN profesores ON revisiones.profesor = profesores.id WHERE modalidad = 'presencial' AND justificado = 'no' ORDER BY id DESC") or die(mysqli_error($connection));
 
     while ($fetch = mysqli_fetch_array($query)) {
         $output .= "<tr>
@@ -35,7 +38,7 @@ if (isset($_POST['export'])) {
             <td>" . $fetch['aula'] . "</td>
             <td>" . $fetch['hora_inicio'] . "</td>
             <td>" . $fetch['hora_final'] . "</td>
-            <td>" . $fetch['profesor'] . "</td>
+            <td>" . $fetch['nomenclatura'] . "</td>
             <td>" . $fetch['grupo'] . "</td>
             <td>" . $fetch['reporte'] . "</td>
             <td>" . $fetch['revision_1'] . "</td>

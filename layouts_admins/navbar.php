@@ -50,7 +50,7 @@
             <li><a class="dropdown-item" href="revisiones_all.php">Presencial</a></li>
             <li><a class="dropdown-item" href="revisiones_all_online.php">En línea</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Concentrado universal</a></li>
+            <li><a class="dropdown-item" href="revisiones_universal">Concentrado universal</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
