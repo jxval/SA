@@ -22,7 +22,8 @@ if(isset($_SESSION['usuario'])){
 </head>
 <body class="loginbg">
   
-<form action="../php/validarusuario.php" method="post" class="formulario">
+<form action="" method="post" class="formulario">
+        <?php include('../php/backend-directores.php'); ?>
         <img class="coverimg" src="../images/LogoUTCJ.png" alt="">
         <h3 class="tittle-2">Iniciar sesión</h3>
         <input class="input" type="text" name="db_correo" id="" placeholder="Correo" required>
@@ -30,7 +31,7 @@ if(isset($_SESSION['usuario'])){
         <input class="input pass" type="password" name="db_contrasena" id="" placeholder="Contraseña" required>
         <br>
         <button class="button btn-login" type="submit" name='btn_login'>Entrar</button>
-        <a href="captura.php" class="a-regi">Inicio</a>
+        <a href="captura.php" class="a-regi">Regresar</a>
         
     </form>
     <br><br>

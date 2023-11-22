@@ -15,11 +15,8 @@ if(mysqli_num_rows($login_validation) > 0){
     header("location: ../layouts_admins/dashboard.php");
     exit;
 }else{
-    echo '<script>
-    alert ("Usuario no existe, favor de verificar credenciales");
-    window.location = "../layouts/login.php";
-    </script>';
-    exit;
+    echo '<div class="alert alert-danger">Correo y/o contraseña incorrectos, verifica la información</div>';
+
 }
 
 ?>

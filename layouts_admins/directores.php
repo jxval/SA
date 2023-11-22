@@ -23,7 +23,12 @@ if(!isset($_SESSION['usuario'])){
 <body class="admin_background">
 <!-- navbar -->
 <?php include ("navbar.php");?>
-<h1 class="h1-tittles text-muted">Directores</h1>
+<?php include('../php/backend-directores.php');?>
+<?php include('../php/connection.php');
+  $consul = "SELECT COUNT(*) AS total_directores FROM dir_de_carrera";
+  $resul = mysqli_query($connection, $consul);
+  $row = mysqli_fetch_array($resul);?>
+<h1 class="h1-tittles text-muted display-6">Directores <span class="badge bg-light text-dark"><?php echo $row['total_directores'];?></span></h1>
 <div class="div-table">
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -35,34 +40,33 @@ if(!isset($_SESSION['usuario'])){
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo director</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body modal-background">
-      <?php require_once '../php/backend-directores.php';?>
-        <form action="../php/backend-directores.php" method="POST">
+        <form action="" method="POST">
           <label for="recipient-name" class="col-form-label">Nomenclatura</label>
-          <input class="form-control" type="text" name="nom_dir" placeholder="Ingrese nomenclatura">
+          <input class="form-control" type="text" name="nom_dir" placeholder="Ingrese nomenclatura" required>
           <br>
           <label for="recipient-name" class="col-form-label">Nombres</label>
-          <input class="form-control" type="text" name="nombres" placeholder="Ingrese nombre(s)">
+          <input class="form-control" type="text" name="nombres" placeholder="Ingrese nombre(s)" required>
           <br>
           <label for="recipient-name" class="col-form-label">Primer apellido</label>
-          <input class="form-control" type="text" name="primer_apellido" placeholder="Ingrese primer apellido">
+          <input class="form-control" type="text" name="primer_apellido" placeholder="Ingrese primer apellido" required>
           <br>
           <label for="recipient-name" class="col-form-label">Segundo apellido</label>
-          <input class="form-control" type="text" name="segundo_apellido" placeholder="Ingrese segundo apellido">
+          <input class="form-control" type="text" name="segundo_apellido" placeholder="Ingrese segundo apellido" required>
             <!-- <button type="submit" name="guardar">Agregar</button> -->
             <br>
           <label for="recipient-name" class="col-form-label">Correo</label>
-          <input class="form-control" type="mail" name="correo" placeholder="Ingrese correo">
+          <input class="form-control" type="mail" name="correo" placeholder="Ingrese correo" required>
           <br>
           <label for="recipient-name" class="col-form-label">Contraseña</label>
-          <input class="form-control" type="password" name="contrasena" placeholder="Ingrese contraseña">
+          <input class="form-control" type="password" name="contrasena" placeholder="Ingrese contraseña" requires>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary" name="guardar">Guardar cambios</button>
+        <button type="submit" class="btn btn-primary" name="guardar_director">Guardar cambios</button>
       </div>
       </form>
     </div>
@@ -78,6 +82,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Nombres</th>
         <th scope="col">Primer apellido</th>
         <th scope="col">Segundo apellido</th>
+        <th scope="col">Correo</th>
         <th colspan="2">Acción</th>
       </tr>
     </thead>
@@ -91,6 +96,7 @@ if(!isset($_SESSION['usuario'])){
         <td><?php echo $row["nombres"];?></td>
         <td><?php echo $row["primer_apellido"];?></td>
         <td><?php echo $row["segundo_apellido"];?></td>
+        <td><?php echo $row["correo"];?></td>
         <td>
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id'];?>">Editar</button>
           <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id'];?>"> Eliminar</button>
@@ -105,7 +111,7 @@ if(!isset($_SESSION['usuario'])){
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body modal-background">
-              <form action="../php/editardirector.php" method="post">
+              <form action="" method="post">
                 <div class="mb-2">
                   <label for="recipient-name" class="col-form-label">Nomenclatura</label>
                   <input type="text" class="form-control" id="recipient-name" name="nomenclatura" value="<?php echo $row['nom_dir'];?>">
@@ -125,31 +131,39 @@ if(!isset($_SESSION['usuario'])){
                   <label for="recipient-name" class="col-form-label">Segundo apellido</label>
                   <input type="text" class="form-control" id="recipient-name" name="segundo_apellido" value="<?php echo $row['segundo_apellido'];?>">
                 </div>
+                <div class="mb-3">
+                  <label for="recipient-name" class="col-form-label">Correo</label>
+                  <input type="text" class="form-control" id="recipient-name" name="correo" value="<?php echo $row['correo'];?>">
+                </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                  <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                  <button type="submit" class="btn btn-primary" name="editar_director">Guardar Cambios</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
       </div>
-      <!-- modal editar -->
-      <form action="../php/eliminardirector.php" method="post">
+      <!-- modal eliminar -->
+      <form action="" method="post">
         <div class="modal fade" id="borrar_<?php echo $row['id'];?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar director</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                Seguro que desea eliminar <?php echo $row['nombres'];?>?
+                <strong>Se eliminarán todos los registros relacionados con este director.
+                  Se recomienda primero modificar el director de cada profesor antes de proceder.
+                </strong>
+                <br>
+                Seguro que desea eliminar a <?php echo $row['nombres'];?>? 
                 <input type="hidden" name="id" value="<?php echo $row['id'];?>">
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Eliminar</button>
+                <button type="submit" class="btn btn-primary" name="eliminar_director">Eliminar</button>
               </div>
             </div>
           </div>

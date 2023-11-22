@@ -86,6 +86,7 @@ if(!isset($_SESSION['usuario'])){
                 WHERE revisiones.fecha BETWEEN '$date_1' AND '$date_2'
                 AND turno = '$turno'
                 AND modalidad = 'presencial'
+                AND justificado = 'no'
                 GROUP BY profesores.primer_apellido, profesores.nombres
                 ORDER BY total DESC
                 LIMIT $limite";

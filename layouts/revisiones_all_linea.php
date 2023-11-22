@@ -10,8 +10,8 @@
 <body class="captura_background">
     <!-- navbar -->
 <?php include ("navbar.php");?>
-<?php include('../php/editar_concentrado.php');?>
-<h1 class="h1-tittles text-muted">Concentrado general presencial</h1>
+<?php include('../php/editar_concentrado_linea.php');?>
+<h1 class="h1-tittles text-muted">Concentrado general en línea </h1>
 <div class="div-table">
 <!-- tabla -->
 <table class="table table-bordered">
@@ -19,7 +19,6 @@
     <tr>
       <th scope="col">Fecha</th>
       <th scope="col">Turno</th>
-      <th scope="col">Aula</th>
       <th scope="col">Horario</th>
       <th scope="col">Profesor</th>
       <th scope="col">Grupo</th>
@@ -27,6 +26,7 @@
       <th scope="col">Revisión 1</th>
       <th scope="col">Revisión 2</th>
       <th scope="col">Revisión 3</th>
+      <th scope="col">Revisión 4</th>
       <th scope="col">Observaciones</th>
       <th scope="col">Acción</th>
     </tr>
@@ -34,10 +34,10 @@
   <tbody>
     <?php 
     include('../php/connection.php');
-    $consul = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
-    profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, 
+    $consul = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
+    profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, revisiones.revision_4, 
     revisiones.observaciones FROM revisiones
-    INNER JOIN profesores ON revisiones.profesor = profesores.id WHERE modalidad = 'presencial' ORDER BY id DESC";
+    INNER JOIN profesores ON revisiones.profesor = profesores.id WHERE modalidad = 'linea' ORDER BY id DESC";
     $result = mysqli_query($connection, $consul) or die ("Algo salio mal");
     
     if(mysqli_num_rows($result) > 0){
@@ -46,7 +46,6 @@
             <tr>
               <td><?php echo $row["fecha"]; ?></td>
               <td><?php echo $row["turno"];?></td>
-              <td><?php echo $row["aula"]; ?></td>
               <td><?php echo $row["horario"];?></td>
               <td><?php echo $row["nomenclatura"];?></td>
               <td><?php echo $row["grupo"]; ?></td>
@@ -54,6 +53,7 @@
               <td><?php echo $row["revision_1"]; ?></td>
               <td><?php echo $row["revision_2"]; ?></td>
               <td><?php echo $row["revision_3"]; ?></td>
+              <td><?php echo $row["revision_4"]; ?></td>
               <td><?php echo $row["observaciones"]; ?></td>
               <td>
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">Editar</button>
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="modal-body modal-background">
-                            <form action="" method="POST">
+                            <form action="" method="post">
                                 <div class="mb-2">
                                     <label for="recipient-name" class="col-form-label">Profesor</label>
                                     <div class="form-floating">
@@ -95,9 +95,11 @@
                                   <div class="form-floating">
                                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="profesor" value="<?php echo $row['reporte']; ?>" name="reporte" required>
                                       <option selected>Seleccionar reporte</option>
-                                      <option value="Retardo"<?php if($row['reporte']=="Retardo") echo 'selected="selected"';?>>Retardo</option>
-                                      <option value="Falta"<?php if($row['reporte']=="Falta") echo 'selected="selected"';?>>Falta</option>
-                                      <option value="Salida antes"<?php if($row['reporte']=="Salida antes") echo 'selected="selected"';?>>Salida antes</option>
+                                      <option value="No conectado"<?php if($row['reporte']=="No conectado") echo 'selected="selected"';?>>No conectado</option>
+                                      <option value="Dejo Actividad"<?php if($row['reporte']=="Dejo Actividad") echo 'selected="selected"';?>>Dejo Actividad</option>
+                                      <option value="Entro y Salio"<?php if($row['reporte']=="Entro y Salio") echo 'selected="selected"';?>>Entro y Salio</option>
+                                      <option value="Sin Alumnos"<?php if($row['reporte']=="Sin Alumnos") echo 'selected="selected"';?>>Sin Alumnos</option>
+                                      <option value="Otro"<?php if($row['reporte']=="Otro") echo 'selected="selected"';?>>Otro</option>
                                     </select>
                                     <label for="floatingSelect">Reporte</label>
                                   </div>
@@ -112,6 +114,10 @@
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Revision 3</label>
                                     <input type="time" class="form-control" id="recipient-name" name="revision_3" value="<?php echo $row['revision_3']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Revision 4</label>
+                                    <input type="time" class="form-control" id="recipient-name" name="revision_4" value="<?php echo $row['revision_4']; ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Observaciones</label>

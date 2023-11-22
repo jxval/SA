@@ -28,7 +28,7 @@
 
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="../layouts_directores/revisiones.php">
+    <a class="navbar-brand" href="../layouts_directores/dashboard.php">
       <img src="../images/LogoUTCJ.png" alt="" width="50" height="50">
     </a>
     <p class="lead nav_username">
@@ -39,8 +39,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="../layouts_directores/revisiones.php">Concentrado general</a>
+      <li class="nav-item">
+          <a class="nav-link" href="dashboard.php">Inicio</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Concentrado general
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="revisiones.php">Presencial</a></li>
+            <li><a class="dropdown-item" href="revisiones_online.php">En línea</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="registration.php">Cambiar contraseña</a>

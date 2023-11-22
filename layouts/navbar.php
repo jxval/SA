@@ -14,7 +14,7 @@
 
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="captura.php">
       <img src="../images/LogoUTCJ.png" alt="" width="50" height="50">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +24,7 @@
       <ul class="navbar-nav">
       <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Reporte de Rvisiones
+            Reporte de revisiones
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="captura.php">Presencial</a></li>
@@ -37,7 +37,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="revisiones_all.php">Presencial</a></li>
-            <li><a class="dropdown-item" href="revisinoes_all_linea.php">En línea</a></li>
+            <li><a class="dropdown-item" href="revisiones_all_linea.php">En línea</a></li>
           </ul>
         </li>
         <li class="nav-item">

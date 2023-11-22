@@ -66,9 +66,9 @@ if(!isset($_SESSION['usuario'])){
   if(isset($_POST['buscar_revi'])){
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-primary btn-sm" href="revisiones_all2.php" role="button">Ver justificados</a>
+      <a class="btn btn-primary btn-sm" href="revisiones_all.php" role="button">Ver sin justificar</a>
     </div>
-    <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
+    <center><strong><h3 class="lead table-tittle">Justificados</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -81,6 +81,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
+        <th class="justify" scope="col">Justificación</th>
       </tr>
     </thead>
     <tbody>
@@ -103,8 +104,8 @@ if(!isset($_SESSION['usuario'])){
 
     $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ',revisiones.revision_2,', ',revisiones.revision_3) AS revisiones, 
-    revisiones.observaciones FROM revisiones
-    INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro AND modalidad = 'presencial' AND justificado = 'no' ORDER BY id DESC";
+    revisiones.observaciones, revisiones.comentarios FROM revisiones
+    INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro AND modalidad = 'presencial' AND justificado = 'si' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -120,6 +121,7 @@ if(!isset($_SESSION['usuario'])){
           <td><?= $items['reporte'];?></td>
           <td><?= $items['revisiones'];?></td>
           <td><?= $items['observaciones'];?></td>
+          <td class="justify"><?= $items['comentarios'];?></td>
         </tr>
         <?php
       }
@@ -136,11 +138,11 @@ if(!isset($_SESSION['usuario'])){
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <form action="../php/backend-directores.php" method="POST">
-        <button type="submit" name="export_to_excel_CGPSJ" class="btn btn-success btn-sm" >Exportar a Excel</button>  
+        <button type="submit" name="export_to_excel_CGPJ" class="btn btn-success btn-sm" >Exportar a Excel</button>  
       </form>
-      <a class="btn btn-primary btn-sm" href="revisiones_all2.php" role="button">Ver justificados</a>
+      <a class="btn btn-primary btn-sm" href="revisiones_all.php" role="button">Ver sin justificar</a>
     </div>
-    <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
+    <center><strong><h3 class="lead table-tittle">Justificados</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -153,6 +155,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
+        <th class="justify" scope="col">Justificación</th>
       </tr>
     </thead>
     <tbody>
@@ -160,8 +163,8 @@ if(!isset($_SESSION['usuario'])){
 
     $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, CONCAT(revisiones.hora_inicio,' - ',revisiones.hora_final) AS horario, 
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ',revisiones.revision_2,', ',revisiones.revision_3) AS revisiones, 
-    revisiones.observaciones FROM revisiones
-    INNER JOIN profesores ON revisiones.profesor = profesores.id WHERE modalidad = 'presencial' AND justificado = 'no' ORDER BY id DESC";
+    revisiones.observaciones, revisiones.comentarios FROM revisiones
+    INNER JOIN profesores ON revisiones.profesor = profesores.id WHERE modalidad = 'presencial' AND justificado = 'si' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -177,6 +180,7 @@ if(!isset($_SESSION['usuario'])){
           <td><?= $items['reporte'];?></td>
           <td><?= $items['revisiones'];?></td>
           <td><?= $items['observaciones'];?></td>
+          <td class="justify"><?= $items['comentarios'];?></td>
         </tr>
         <?php
       }

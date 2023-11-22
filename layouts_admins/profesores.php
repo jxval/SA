@@ -25,7 +25,12 @@ if(!isset($_SESSION['usuario'])){
 </head>
 <body class="admin_background">
     <?php include('navbar.php'); ?>
-    <h1 class="h1-tittles text-muted">Profesores</h1>
+    <?php include('../php/backend-directores.php');?>
+    <?php include('../php/connection.php');
+        $consul = "SELECT COUNT(*) AS total_profes FROM profesores";
+        $resul = mysqli_query($connection, $consul);
+        $row = mysqli_fetch_array($resul);?>
+    <h1 class="h1-tittles text-muted display-6">Profesores <span class="badge bg-light text-dark"><?php echo $row['total_profes'];?></span></h1>
     <div class="div-table">
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-primary btn-addprofe" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -42,30 +47,29 @@ if(!isset($_SESSION['usuario'])){
     <div class="modal-dialog">  
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Agregar profesor</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Nuevo profesor</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body modal-background">
-        <?php require_once '../php/backend-directores.php';?>
-            <form action="../php/backend-directores.php" method="POST">
+            <form action="" method="POST">
                 <label for="recipient-name" class="col-form-label">Nomenclatura</label>
-                <input class="form-control" type="text" name="nomenclatura" placeholder="Ingrese nomenclatura">
+                <input class="form-control" type="text" name="nomenclatura" placeholder="Ingrese nomenclatura" required>
                 <br>
                 <label for="recipient-name" class="col-form-label">Nombre de profesor</label>
-                <input class="form-control" type="text" name="nombre" placeholder="Ingrese nombre">
+                <input class="form-control" type="text" name="nombre" placeholder="Ingrese nombre" required>
                 <br>
                 <label for="recipient-name" class="col-form-label">Primer apellido</label>
-                <input class="form-control" type="text" name="primer_apellido" placeholder="Ingrese primer apellido">
+                <input class="form-control" type="text" name="primer_apellido" placeholder="Ingrese primer apellido" required>
                 <br>
                 <label for="recipient-name" class="col-form-label">Segundo apellido</label>
-                <input class="form-control" type="text" name="segundo_apellido" placeholder="Ingrese segundo apellido">
+                <input class="form-control" type="text" name="segundo_apellido" placeholder="Ingrese segundo apellido" required>
                 <br>
                 <label for="recipient-name" class="col-form-label">Correo</label>
-                <input class="form-control" type="text" name="correo" placeholder="Ingrese correo">
+                <input class="form-control" type="text" name="correo" placeholder="Ingrese correo" required>
                 <br>
                 <label for="recipient-name" class="col-form-label">Director</label>
                 <!-- <label for="Director">Director</label> -->
-                <select class="form-select" id="docente" name="c_director">
+                <select class="form-select" id="docente" name="c_director" required>
                 <option value="">Seleccionar director</option>
                     <?php
                     include('../php/connection.php');
@@ -142,7 +146,7 @@ if(!isset($_SESSION['usuario'])){
                             </div>
 
                             <div class="modal-body modal-background">
-                            <form action="../php/editarprofesor.php" method="POST">
+                            <form action="" method="POST">
                                 <div class="mb-2">
                                     <label for="recipient-name" class="col-form-label">Nomenclatura</label>
                                     <input type="text" class="form-control" id="recipient-name" name="nomenclatura" value="<?php echo $row['nomenclatura']; ?>">
@@ -168,7 +172,7 @@ if(!isset($_SESSION['usuario'])){
                                 </div>
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Director</label>
-                                    <select class="form-select" id="docente" name="director" value="<?php echo $row['director']; ?>">
+                                    <select class="form-select" id="docente" name="director">
                                         <option value="">Seleccionar director</option>
                                             <?php
                                             include('../php/connection.php');
@@ -189,14 +193,14 @@ if(!isset($_SESSION['usuario'])){
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                <button type="submit" class="btn btn-primary" name="editar_profesor">Guardar Cambios</button>
                             </div>
                             </form>
                         </div>
                     </div>
                 </div>
                 <!-- Modal de eliminar  -->
-                <form action="../php/eliminar.php" method="post">
+                <form action="" method="post">
                 <div class="modal fade" id="borrar_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -210,7 +214,7 @@ if(!isset($_SESSION['usuario'])){
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                        <button type="submit" class="btn btn-primary" name="borrar_profesor">Eliminar</button>
                     </div>
                     </div>
                 </div>
@@ -276,7 +280,7 @@ if(!isset($_SESSION['usuario'])){
                             </div>
 
                             <div class="modal-body modal-background">
-                            <form action="../php/editarprofesor.php" method="POST">
+                            <form action="" method="POST">
                                 <div class="mb-2">
                                     <label for="recipient-name" class="col-form-label">Nomenclatura</label>
                                     <input type="text" class="form-control" id="recipient-name" name="nomenclatura" value="<?php echo $row['nomenclatura']; ?>">
@@ -323,14 +327,14 @@ if(!isset($_SESSION['usuario'])){
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                <button type="submit" class="btn btn-primary" name="editar_profesor">Guardar Cambios</button>
                             </div>
                             </form>
                         </div>
                     </div>
                 </div>
                 <!-- Modal de eliminar  -->
-                <form action="../php/eliminar.php" method="post">
+                <form action="" method="post">
                 <div class="modal fade" id="borrar_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -344,7 +348,7 @@ if(!isset($_SESSION['usuario'])){
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                        <button type="submit" class="btn btn-primary" name="borrar_profesor">Eliminar</button>
                     </div>
                     </div>
                 </div>

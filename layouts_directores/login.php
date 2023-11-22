@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(isset($_SESSION['usuario'])){
-  header("location: ../layouts_directores/revisiones.php");
+  header("location: ../layouts_directores/dashboard.php");
 }
 ?>
 
@@ -22,7 +22,8 @@ if(isset($_SESSION['usuario'])){
 </head>
 <body class="loginbg">
   
-<form action="../php/validar_usuario_director.php" method="post" class="formulario">
+<form action="" method="post" class="formulario">
+        <?php include('../php/backend-directores.php'); ?>
         <img class="coverimg" src="../images/LogoUTCJ.png" alt="">
         <h3 class="tittle-2">Iniciar sesión como director</h3>
         <input class="input" type="text" name="db_correo" id="" placeholder="Correo" required>

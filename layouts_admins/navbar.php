@@ -50,7 +50,7 @@
             <li><a class="dropdown-item" href="revisiones_all.php">Presencial</a></li>
             <li><a class="dropdown-item" href="revisiones_all_online.php">En línea</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Concentrado universal</a></li>
+            <li><a class="dropdown-item" href="revisiones_universal">Concentrado universal</a></li>
           </ul>
         </li>
         <li class="nav-item dropdown">
@@ -70,12 +70,12 @@
             <li><a class="dropdown-item" href="profesores.php">Profesores</a></li>
             <li><a class="dropdown-item" href="carreras.php">Carreras</a></li>
             <li><a class="dropdown-item" href="directores.php">Directores</a></li>
-            <li><a class="dropdown-item" href="#">Grupos</a></li>
-            <li><a class="dropdown-item" href="#">Aulas</a></li>
+            <li><a class="dropdown-item" href="grupos.php">Grupos</a></li>
+            <li><a class="dropdown-item" href="aulas.php">Aulas</a></li>
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link nav-register" href="../layouts/registros.php">Registrar admin</a>
+          <a class="nav-link nav-register" href="registros.php">Registrar admin</a>
         </li>
         <li class="nav-item">
           <a class="nav-link nav-link-logout" href="../php/logout.php" aria-disabled="false">Cerrar sesión</a>

@@ -23,7 +23,12 @@ if(!isset($_SESSION['usuario'])){
 <body class="admin_background">
 <!-- navbar -->
 <?php include ("navbar.php");?>
-<h1 class="h1-tittles text-muted">Aulas</h1>
+<?php include('../php/backend-directores.php');?>
+<?php include('../php/connection.php');
+  $consul = "SELECT COUNT(*) AS total_aulas FROM aulas";
+  $resul = mysqli_query($connection, $consul);
+  $row = mysqli_fetch_array($resul);?>
+<h1 class="h1-tittles text-muted display-6">Aulas <span class="badge bg-light text-dark"><?php echo $row['total_aulas'];?></span></h1>
 <div class="div-table">
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -35,14 +40,13 @@ if(!isset($_SESSION['usuario'])){
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Nueva aula</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body modal-background">
-      <?php require_once '../php/backend-directores.php';?>
-        <form action="../php/backend-directores.php" method="POST">
-          <label for="recipient-name" class="col-form-label">Grupo</label>
-          <input class="form-control" type="text" name="aula" placeholder="Ingrese el Grupo">
+        <form action="" method="POST">
+          <label for="recipient-name" class="col-form-label">Aula</label>
+          <input class="form-control" type="text" name="aula" placeholder="Ingrese el aula">
           <br>
       </div>
       <div class="modal-footer">
@@ -60,7 +64,7 @@ if(!isset($_SESSION['usuario'])){
     <thead class="table-dark">
       <tr>
         <th scope="col">Aulas</th>
-        <th scope="col">Accion</th>
+        <th scope="col" style="width:10rem;">Accion</th>
       </tr>
     </thead>
     <tbody>
@@ -77,7 +81,7 @@ if(!isset($_SESSION['usuario'])){
       
       </div>
     <!-- Modal de eliminar  -->
-    <form action="../php/eliminaraula.php" method="post">
+    <form action="" method="post">
                 <div class="modal fade" id="borrar_<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -91,7 +95,7 @@ if(!isset($_SESSION['usuario'])){
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                        <button type="submit" class="btn btn-primary" name="eliminar_aula">Eliminar</button>
                     </div>
                     </div>
                 </div>

@@ -17,14 +17,14 @@ if(!isset($_SESSION['usuario'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <title>Revisiones presencial</title>
+    <title>Revisiones </title>
 </head>
 <body class="admin_background">
     <!-- navbar -->
 <?php include ("navbar.php");?>
 <?php include ("../php/backend-directores.php");?>
 <?php include ("../php/connection.php");?>
-<h1 class="h1-tittles text-muted">Concentrado general | Presencial</h1>
+<h1 class="h1-tittles text-muted">Concentrado general | En línea</h1>
 <div class="div-table">
   <form action="" method="POST">
     <div class="lead">
@@ -77,7 +77,7 @@ if(!isset($_SESSION['usuario'])){
   if(isset($_POST['buscar_revi'])){
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-primary btn-sm" href="revisiones1.php" role="button">Ver justificados</a>
+      <a class="btn btn-primary btn-sm" href="revisiones_online1.php" role="button">Ver justificados</a>
     </div>
     <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
     <table class="table table-bordered">
@@ -85,7 +85,6 @@ if(!isset($_SESSION['usuario'])){
       <tr>
         <th scope="col">Fecha</th>
         <th scope="col">Turno</th>
-        <th scope="col">Aula</th>
         <th scope="col">Horario</th>
         <th scope="col">Profesor</th>
         <th scope="col">Grupo</th>
@@ -114,11 +113,11 @@ if(!isset($_SESSION['usuario'])){
     if($date_1 == '' AND $date_2 == '' AND $turno !=='' AND $profesor !==''){$filtro = "AND profesor = '$profesor' AND turno = '$turno'";}
   }
 
-    $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, CONCAT(revisiones.hora_inicio,' - ', revisiones.hora_final) AS horario, 
-    profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3) AS revisiones, 
+    $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, CONCAT(revisiones.hora_inicio,' - ', revisiones.hora_final) AS horario, 
+    profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3,', ', revisiones.revision_4) AS revisiones, 
     revisiones.observaciones, revisiones.comentarios FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id
-    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'presencial' AND justificado = 'no' ORDER BY id DESC";
+    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'linea' AND justificado = 'no' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -127,7 +126,6 @@ if(!isset($_SESSION['usuario'])){
         <tr>
           <td class="toJustify"><?= $column['fecha'];?></td>
           <td class="toJustify"><?= $column['turno'];?></td>
-          <td class="toJustify"><?= $column['aula'];?></td>
           <td class="toJustify"><?= $column['horario'];?></td>
           <td class="toJustify"><?= $column['nomenclatura'];?></td>
           <td class="toJustify"><?= $column['grupo'];?></td>
@@ -187,7 +185,7 @@ if(!isset($_SESSION['usuario'])){
   }else{
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <a class="btn btn-primary btn-sm" href="revisiones1.php" role="button">Ver justificados</a>
+      <a class="btn btn-primary btn-sm" href="revisiones_online1.php" role="button">Ver justificados</a>
     </div>
     <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
     <table class="table table-bordered">
@@ -195,7 +193,6 @@ if(!isset($_SESSION['usuario'])){
       <tr>
         <th scope="col">Fecha</th>
         <th scope="col">Turno</th>
-        <th scope="col">Aula</th>
         <th scope="col">Horario</th>
         <th scope="col">Profesor</th>
         <th scope="col">Grupo</th>
@@ -208,11 +205,11 @@ if(!isset($_SESSION['usuario'])){
     <tbody>
     <?php
 
-    $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, CONCAT(revisiones.hora_inicio,' - ', revisiones.hora_final) AS horario, 
-    profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3) AS revisiones, 
+    $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, CONCAT(revisiones.hora_inicio,' - ', revisiones.hora_final) AS horario, 
+    profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3,', ', revisiones.revision_4) AS revisiones, 
     revisiones.observaciones, revisiones.comentarios FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id
-    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'presencial' AND justificado = 'no' ORDER BY id DESC";
+    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'linea' AND justificado = 'no' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -221,7 +218,6 @@ if(!isset($_SESSION['usuario'])){
         <tr>
           <td class="toJustify"><?= $column['fecha'];?></td>
           <td class="toJustify"><?= $column['turno'];?></td>
-          <td class="toJustify"><?= $column['aula'];?></td>
           <td class="toJustify"><?= $column['horario'];?></td>
           <td class="toJustify"><?= $column['nomenclatura'];?></td>
           <td class="toJustify"><?= $column['grupo'];?></td>

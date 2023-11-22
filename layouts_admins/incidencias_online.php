@@ -60,9 +60,11 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Fecha</th>
         <th scope="col">Profesor</th>
         <th scope="col">Turno</th>
-        <th scope="col">Retardo</th>
-        <th scope="col">Falta</th>
-        <th scope="col">Salida antes</th>
+        <th scope="col">No conectado</th>
+        <th scope="col">Dejo actividad</th>
+        <th scope="col">Entro y salio</th>
+        <th scope="col">Sin alumnos</th>
+        <th scope="col">Otros</th>
         <th scope="col">Total</th>
       </tr>
     </thead>
@@ -76,9 +78,11 @@ if(!isset($_SESSION['usuario'])){
 
     $query = "SELECT revisiones.fecha AS fecha, CONCAT(profesores.primer_apellido, ' ', profesores.nombres) AS Profesor,
                 revisiones.turno AS turno,
-                SUM(CASE WHEN revisiones.reporte = 'Retardo' THEN 1 ELSE 0 END) AS Retardo,
-                SUM(CASE WHEN revisiones.reporte = 'Falta' THEN 1 ELSE 0 END) AS Falta,
-                SUM(CASE WHEN revisiones.reporte = 'Salida Antes' THEN 1 ELSE 0 END) AS Salida_antes,
+                SUM(CASE WHEN revisiones.reporte = 'no conectado' THEN 1 ELSE 0 END) AS no_conectado,
+                SUM(CASE WHEN revisiones.reporte = 'dejo actividad' THEN 1 ELSE 0 END) AS dejo_actividad,
+                SUM(CASE WHEN revisiones.reporte = 'entro y salio' THEN 1 ELSE 0 END) AS entro_y_salio,
+                SUM(CASE WHEN revisiones.reporte = 'sin alumnos' THEN 1 ELSE 0 END) AS sin_alumnos,
+                SUM(CASE WHEN revisiones.reporte = 'otros' THEN 1 ELSE 0 END) AS otros,
                 COUNT(revisiones.reporte) AS total
                 FROM revisiones
                 JOIN profesores
@@ -86,6 +90,7 @@ if(!isset($_SESSION['usuario'])){
                 WHERE revisiones.fecha BETWEEN '$date_1' AND '$date_2'
                 AND turno = '$turno'
                 AND modalidad = 'linea'
+                AND justificado = 'no'
                 GROUP BY profesores.primer_apellido, profesores.nombres
                 ORDER BY total DESC
                 LIMIT $limite";
@@ -99,9 +104,11 @@ if(!isset($_SESSION['usuario'])){
           <td><?= $items['fecha'];?></td>
           <td><?= $items['Profesor'];?></td>
           <td><?= $items['turno'];?></td>
-          <td><?= $items['Retardo'];?></td>
-          <td><?= $items['Falta'];?></td>
-          <td><?= $items['Salida_antes'];?></td>
+          <td><?= $items['no_conectado'];?></td>
+          <td><?= $items['dejo_actividad'];?></td>
+          <td><?= $items['entro_y_salio'];?></td>
+          <td><?= $items['sin_alumnos'];?></td>
+          <td><?= $items['otros'];?></td>
           <td><?= $items['total'];?></td>
         </tr>
         <?php
@@ -109,17 +116,17 @@ if(!isset($_SESSION['usuario'])){
     }else{
       ?>
       <tr>
-        <td class="else-results" colspan="7" style="color:red;">No se encontraron resultados</td>
+        <td class="else-results" colspan="9" style="color:red;">No se encontraron resultados</td>
       </tr>
       <?php
     }
     ?>
     <figure class="text-left">
       <blockquote class="blockquote">
-      Top <strong><?php echo $limite?></strong>de incidencias del <strong><?php echo $date_1?></strong> al <strong><?php echo $date_2?></strong> del <strong><strong><?php echo $turno?></strong></strong></p>
+      Top <strong><?php echo $limite?></strong> de incidencias del <strong><?php echo $date_1?></strong> al <strong><?php echo $date_2?></strong> del <strong><strong><?php echo $turno?></strong></strong></p>
       </blockquote>
     </figure>
-      <a href="incidencias.php"><button type="submit" class="btn btn-danger">Borrar filtro</button></a>
+      <a href="incidencias_online.php"><button type="submit" class="btn btn-danger">Borrar filtro</button></a>
     <br><br>
     <?php
 

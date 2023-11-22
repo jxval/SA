@@ -119,12 +119,36 @@
 /* admins dashboard */
 .card{
     float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    padding: 1%;
+}
+.dashboard_admins{
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+
+/* directores dashboard */
+.dashboard-directores{
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.card-img-top{
+    height: 30%;
+    width: 30%;
+    display: block;
+    margin: auto;
     
+}
+.toJustify{
+    font-style: italic;
+    font-weight: bold;
 }
 
 /* admin pages concentrado general*/
 .admin_background{
-    background-color: #cafaed;
+    background-color: #dcfff6;
 }
 .selectDateAdmin{
     width: 15%;
@@ -140,14 +164,20 @@
 }
 .btn-enviar-admin{
     background-color: #009286;
-    width: 100px;
+
     border: #026058;
     display: inline-block;
 }
 .btn-enviar-admin:hover{
     background-color: #00655d;
 }
-
+.table-tittle{
+    font-weight: bold;
+    color: #767676;
+}
+.justify{
+    font-style: italic;
+}
 /* pagina top 10 */
 .div-filtro{
     text-align: center;

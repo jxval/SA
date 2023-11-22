@@ -28,16 +28,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tercerarevision = $_POST["tercerarevision"];
     $observaciones = $_POST["observaciones"];
 
-    // Preparar y ejecutar la consulta SQL para insertar los datos en la base de datos
-    $sql = "INSERT INTO revisiones (id, fecha, turno, aula, hora_inicio, hora_final, modalidad, profesor, grupo, reporte, revision_1, revision_2, revision_3, observaciones)
-            VALUES ('', '$fecha', '$turno', '$aula', '$hora_inicio', '$hora_final', 'presencial', '$profesor', '$grupo', '$reporte', '$primerarevision', '$segundarevision', '$tercerarevision', '$observaciones')";
+    $query = "SELECT * FROM revisiones WHERE fecha = '$fecha' AND turno = '$turno' 
+    AND aula = '$aula' AND hora_inicio = '$hora_inicio' AND hora_final = '$hora_final' 
+    AND modalidad = 'presencial' AND profesor = '$profesor' AND grupo = '$grupo' 
+    AND reporte = '$reporte' AND revision_1 = '$primerarevision' AND revision_2 = '$segundarevision' 
+    AND revision_3 = '$tercerarevision' AND observaciones = '$observaciones'";
+    $result = $conn->query($query);
 
-    if ($conn->query($sql) === TRUE) {
-        echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts/captura.php";</script>';
-    } else {
-        echo "Error al guardar los datos: " . $conn->error;
+    if($result->num_rows > 0){
+        echo '<div class="alert alert-danger">Ya existe un registro con la información ingresada</div>';        
+    }else{
+        // Preparar y ejecutar la consulta SQL para insertar los datos en la base de datos
+        $sql = "INSERT INTO revisiones (id, fecha, turno, aula, hora_inicio, hora_final, modalidad, profesor, grupo, reporte, revision_1, revision_2, revision_3, observaciones, justificado)
+        VALUES ('', '$fecha', '$turno', '$aula', '$hora_inicio', '$hora_final', 'presencial', '$profesor', '$grupo', '$reporte', '$primerarevision', '$segundarevision', '$tercerarevision', '$observaciones', 'no')";
+
+        if ($conn->query($sql) === TRUE) {
+            echo '<div class="alert alert-success">Registro guardado correctamente!</div>';
+            // echo '<script>alert("Registro guardado correctamente"); window.location = "../layouts/captura.php";</script>';
+        } else {
+            echo '<div class="alert alert-danger">Hubo un error al guardar los datos, por favor verifica</div>';
+            // echo "Error al guardar los datos: " . $conn->error;
+        }  
     }
-
     // Cerrar la conexión
     $conn->close();
 }
