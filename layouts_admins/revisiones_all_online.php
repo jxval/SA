@@ -65,7 +65,7 @@ if(!isset($_SESSION['usuario'])){
 
   if(isset($_POST['buscar_revi'])){
     ?>
-    <a class="btn-delete-filter" href="revisiones_all.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
+    <a class="btn-delete-filter" href="revisiones_all_online.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
     <br><br>
     <table class="table table-bordered">
     <thead class="table-dark">
