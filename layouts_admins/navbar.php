@@ -74,8 +74,14 @@
             <li><a class="dropdown-item" href="aulas.php">Aulas</a></li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a class="nav-link nav-register" href="registros.php">Registrar admin</a>
+        <li class="nav-item dropdown nav-register">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Aministradores
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="registros.php">Registrar nuevo</a></li>
+            <li><a class="dropdown-item" href="recuperar.php">Recuperar contraseñas</a></li>
+          </ul>
         </li>
         <li class="nav-item">
           <a class="nav-link nav-link-logout" href="../php/logout.php" aria-disabled="false">Cerrar sesión</a>

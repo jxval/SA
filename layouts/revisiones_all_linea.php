@@ -57,7 +57,7 @@
               <td><?php echo $row["revision_4"]; ?></td>
               <td><?php echo $row["observaciones"]; ?></td>
               <td>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">Editar</button>
+                  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">Editar</button>
               </td>
             </tr>
                 <!-- Modal editar -->

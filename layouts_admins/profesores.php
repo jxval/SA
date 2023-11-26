@@ -42,6 +42,13 @@ if(!isset($_SESSION['usuario'])){
         <input name="buscar-profe" class="form-control mr-sm-2 input-busquedaprofe" type="search" placeholder="Buscar" aria-label="Search">
         <button name="buscar-profesor" class="btn btn-success" type="submit">Buscar</button>
     </form>
+    <?php
+      if(isset($_POST['buscar-profesor'])){
+        ?>
+        <a class="btn-delete-filter" href="profesores.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
+        <?php
+      }
+    ?>
     <br><br>
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -97,8 +104,6 @@ if(!isset($_SESSION['usuario'])){
     include ('../php/connection.php');
     if(isset($_POST['buscar-profesor'])){
         ?>
-        <a class="btn-delete-filter" href="profesores.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
-        <br><br>
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead class="table-dark">
             <tr>
@@ -133,8 +138,8 @@ if(!isset($_SESSION['usuario'])){
                     <td><?php echo $row["correo"];?></td>
                     <td><?php echo $row["nom_dir"]; ?></td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">Editar</button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id']; ?>"> Eliminar</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">Editar</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id']; ?>"> Eliminar</button>
                     </td>
                 </tr>
                 <!-- Modal editar -->
@@ -266,8 +271,8 @@ if(!isset($_SESSION['usuario'])){
                     <td><?php echo $row["correo"];?></td>
                     <td><?php echo $row["nom_dir"]; ?></td>
                     <td>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">Editar</button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id']; ?>"> Eliminar</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>">Editar</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id']; ?>"> Eliminar</button>
                     </td>
                 </tr>
 

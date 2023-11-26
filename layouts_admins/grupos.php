@@ -76,7 +76,7 @@ if(!isset($_SESSION['usuario'])){
       <tr>
         <td><?php echo $row["grupo"];?></td>
         <td>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id'];?>"> Eliminar</button>
+            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $row['id'];?>"> Eliminar</button>
         </td>
       </tr>
       

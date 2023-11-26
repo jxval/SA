@@ -2,6 +2,38 @@
 $connection = mysqli_connect("localhost", "root", "", "SUPERVSIONACAD");
 $connection -> set_charset("utf8");
 
+if(isset($_POST['restore_AdminPass'])){
+    $newPassword = $_POST['resetP'];
+    $newPassword1 = $_POST['resetP1'];
+
+    if($newPassword === $newPassword1){
+
+        $adminEmail = $_POST['email'];
+
+        $query = "SELECT * FROM usuarios WHERE correo = '$adminEmail'";
+        $result = $connection->query($query);
+
+        if($result->num_rows > 0){
+            $adminEmail = $_POST['email'];
+            $newPassword = $_POST['resetP'];
+            $newPassword = hash('sha512', $newPassword);
+
+            $sql = "UPDATE usuarios SET contrasena = '$newPassword' WHERE correo = '$adminEmail'";
+            if($connection->query($sql) === TRUE){
+                echo '<div class="alert alert-success">¡La contraseña se ha cambiado con éxito!</div>';        
+
+            }else{
+                echo '<div class="alert alert-danger">Error al cambiar la contraseña, favor de verificar datos</div>';        
+            }
+        }else{
+            echo '<div class="alert alert-danger">Error: Favor de verificar el correo</div>';        
+        }
+
+    }else{
+        echo '<div class="alert alert-danger">Error: Las contraseñas no coinciden intenta de nuevo</div>';        
+    }
+}
+
 if(isset($_POST['guardar_director'])){
     $nom_dir = $_POST['nom_dir'];
     $nombres = $_POST['nombres'];
