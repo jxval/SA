@@ -16,6 +16,7 @@ if(!isset($_SESSION['usuario'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/LogoUTCJ.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Revisiones en línea</title>
 </head>
@@ -65,8 +66,10 @@ if(!isset($_SESSION['usuario'])){
 
   if(isset($_POST['buscar_revi'])){
     ?>
-    <a class="btn-delete-filter" href="revisiones_all_online.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
-    <br><br>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <a class="btn btn-primary btn-sm" href="revisiones_all_online2.php" role="button">Ver justificados</a>
+    </div>
+    <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>

@@ -15,14 +15,15 @@ if(!isset($_SESSION['usuario'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/LogoUTCJ.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
     <title>Concentrado general</title>
 </head>
-<body class="captura_background">
+<body class="admin_background">
     <!-- navbar -->
 <?php include ("navbar.php");?>
-<h1 class="h1-tittles text-muted">Concentrado general </h1>
+<h1 class="h1-tittles text-muted">Concentrado general universal</h1>
 
 <div class="div-table">
   <form action="" method="POST">
@@ -52,9 +53,7 @@ if(!isset($_SESSION['usuario'])){
     <button type="submit" class="btn btn-primary btn-enviar-admin" name="buscar_revi" id="enviar">Buscar</button>
     </div>
   </form>
-  <form action="../php/exportacion_excel.php" method="POST">
-    <button type="submit" name="export" class="btn btn-success" >Exportar a Excel</button>  
-    </form>
+
   <br>
 
 
@@ -110,7 +109,7 @@ if(!isset($_SESSION['usuario'])){
     revisiones.modalidad, profesores.nomenclatura, revisiones.grupo, revisiones.reporte, 
     revisiones.revision_1,revisiones.revision_2, revisiones.revision_3, 
     revisiones.observaciones FROM revisiones
-    INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro  ORDER BY fecha DESC";
+    INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro  ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
     ?>
     <?php
@@ -253,7 +252,9 @@ if(!isset($_SESSION['usuario'])){
     
   }else{
     ?>
-
+  <form action="../php/backend-directores.php" method="POST">
+    <button type="submit" name="export_universal" class="btn btn-success" >Exportar a Excel</button>  
+    </form>
 <div class="div-table">
 <!-- tabla -->
 <table class="table table-bordered">

@@ -1,11 +1,3 @@
-<?php
-session_start();
-if(isset($_SESSION['usuario'])){
-  header("location: ../layouts_directores/dashboard.php");
-}
-?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,16 +15,20 @@ if(isset($_SESSION['usuario'])){
 </head>
 <body class="loginbg">
   
-<form action="" method="post" class="formulario">
-        <?php include('../php/backend-directores.php'); ?>
+<form action="../php/validarusuario.php" method="post" class="formRe">
         <img class="coverimg" src="../images/LogoUTCJ.png" alt="">
-        <h3 class="tittle-2">Iniciar sesión como director</h3>
+        <h3 class="tittle-2">Registro</h3>
+        <input class="input" type="text" name="db_nombre" id="" placeholder="Nombre" required>
+        <br>
+        <input class="input" type="text" name="db_apellido" id="" placeholder="Apellido" required>
+        <br>
         <input class="input" type="text" name="db_correo" id="" placeholder="Correo" required>
         <br>
         <input class="input pass" type="password" name="db_contrasena" id="" placeholder="Contraseña" required>
         <br>
-        <button class="button btn-login" type="submit" name='btn_login_director'>Entrar</button>
-        <a href="../layouts/captura.php" class="a-regi">Regresar</a>
+        <button class="button btn-login" type="submit">Registrar</button>
+        
+        <a href="../layouts_admins/dashboard.php" class="a-regi">Regresar</a>
         
     </form>
     <br><br>

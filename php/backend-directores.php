@@ -27,7 +27,6 @@ if(isset($_POST['guardar_director'])){
         }
     }
 
-    $connection->close();
 }
 if(isset($_POST['editar_director'])){
     $nomenclatura = $_POST['nomenclatura'];
@@ -45,8 +44,6 @@ if(isset($_POST['editar_director'])){
     } else {
         echo '<div class="alert alert-danger">Hubo un error, verifica datos ingresados</div>';
     }
-
-    $connection->close();
 }
 if(isset($_POST['eliminar_director'])){
     $id = $_POST['id'];
@@ -59,6 +56,59 @@ if(isset($_POST['eliminar_director'])){
         echo '<div class="alert alert-danger">Error al eliminar</div>';
     }
     $connection->close();
+}
+if(isset($_POST['change_passwordDir'])){
+    $newPassword1 = $_POST['nueva_pass1'];
+    $newPassword = $_POST['nueva_pass'];
+
+    if($newPassword1 === $newPassword){
+
+        $director = $_SESSION['usuario'];
+        $newPassword = $_POST['nueva_pass'];
+        $newPassword = hash('sha512', $newPassword);
+
+        $sql = "UPDATE dir_de_carrera SET password = '$newPassword' WHERE nom_dir = '$director'";
+            if($connection->query($sql) === TRUE){
+                echo '<div class="alert alert-success">¡La contraseña se ha cambiado con éxito!</div>';        
+
+            }else{
+                echo '<div class="alert alert-danger">Error al cambiar la contraseña, favor de verificar datos</div>';        
+            }
+
+    }else{
+        echo '<div class="alert alert-danger">Las contraseñas no coinciden</div>';        
+    }
+}
+if(isset($_POST['restore_dirPassword'])){
+    $newPassword = $_POST['rest-password'];
+    $newPassword2 = $_POST['rest-password2'];
+
+    if($newPassword === $newPassword2){
+
+        $dirEmail = $_POST['dirEmail'];
+
+        $query = "SELECT * FROM dir_de_carrera WHERE correo = '$dirEmail'";
+        $result = $connection->query($query);
+
+        if($result->num_rows > 0){
+            $dirEmail = $_POST['dirEmail'];
+            $newPassword = $_POST['rest-password'];
+            $newPassword = hash('sha512', $newPassword);
+
+            $sql = "UPDATE dir_de_carrera SET password = '$newPassword' WHERE correo = '$dirEmail'";
+            if($connection->query($sql) === TRUE){
+                echo '<div class="alert alert-success">¡La contraseña se ha cambiado con éxito!</div>';        
+
+            }else{
+                echo '<div class="alert alert-danger">Error al cambiar la contraseña, favor de verificar datos</div>';        
+            }
+        }else{
+            echo '<div class="alert alert-danger">Error: Favor de verificar el correo</div>';        
+        }
+
+    }else{
+        echo '<div class="alert alert-danger">Error: Las contraseñas no coinciden intenta de nuevo</div>';        
+    }
 }
 
 if(isset($_POST['guardar_carrera'])){
@@ -520,6 +570,65 @@ if(isset($_POST['export_to_excel_CGlJ'])){
             <td>" . $fetch['revision_3'] . "</td>
             <td>" . $fetch['revision_4'] . "</td>
             <td>" . $fetch['observaciones'] . "</td>
+            <td>" . $fetch['comentarios'] . "</td>
+        </tr>";
+    }
+
+    $output .= '</tbody></table>';
+
+    echo $output;
+}
+if(isset($_POST['export_universal'])){
+    header("Content-Type: application/xls");
+    header("Content-Disposition: attachment; filename=Reporte_universal_" . date('Y_m_d') . ".xls");
+    header("Pragma: no-cache");
+    header("Expires: 0");
+
+    $output = '<table border="1">
+        <thead>
+
+            <tr>
+                <th>Fecha</th>
+                <th>Turno</th>
+                <th>Aula</th>
+                <th>Hora inicial</th>
+                <th>Hora final</th>
+                <th>Modalidad</th>
+                <th>Profesor</th>
+                <th>Grupo</th>
+                <th>Reporte</th>
+                <th>Primera Revision</th>
+                <th>Segunda Revision</th>
+                <th>Tercera Revision</th>
+                <th>Cuarta Revision</th>
+                <th>Observaciones</th>
+                <th>Justificado</th>
+                <th>Comentarios</th>
+            </tr>
+        </thead>
+        <tbody>';
+        $query = mysqli_query($connection, "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, revisiones.hora_inicio, revisiones.hora_final, revisiones.modalidad,
+        profesores.nomenclatura, revisiones.grupo, revisiones.reporte, revisiones.revision_1, revisiones.revision_2, revisiones.revision_3, revisiones.revision_4,
+        revisiones.observaciones, revisiones.observaciones, revisiones.justificado, revisiones.comentarios FROM revisiones
+        INNER JOIN profesores ON revisiones.profesor = profesores.id ORDER BY id DESC") or die(mysqli_error($connection));
+
+    while ($fetch = mysqli_fetch_array($query)) {
+        $output .= "<tr>
+            <td>" . $fetch['fecha'] . "</td>
+            <td>" . $fetch['turno'] . "</td>
+            <td>" . $fetch['aula'] . "</td>
+            <td>" . $fetch['hora_inicio'] . "</td>
+            <td>" . $fetch['hora_final'] . "</td>
+            <td>" . $fetch['modalidad'] . "</td>
+            <td>" . $fetch['nomenclatura'] . "</td>
+            <td>" . $fetch['grupo'] . "</td>
+            <td>" . $fetch['reporte'] . "</td>
+            <td>" . $fetch['revision_1'] . "</td>
+            <td>" . $fetch['revision_2'] . "</td>
+            <td>" . $fetch['revision_3'] . "</td>
+            <td>" . $fetch['revision_4'] . "</td>
+            <td>" . $fetch['observaciones'] . "</td>
+            <td>" . $fetch['justificado'] . "</td>
             <td>" . $fetch['comentarios'] . "</td>
         </tr>";
     }

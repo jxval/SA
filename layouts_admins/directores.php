@@ -17,6 +17,7 @@ if(!isset($_SESSION['usuario'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../images/LogoUTCJ.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Directores test</title>
 </head>
@@ -33,6 +34,10 @@ if(!isset($_SESSION['usuario'])){
     <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Agregar director
+</button>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Recuperar contraseña
 </button>
 <br><br>
 <!-- Modal -->
@@ -68,6 +73,44 @@ if(!isset($_SESSION['usuario'])){
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         <button type="submit" class="btn btn-primary" name="guardar_director">Guardar cambios</button>
       </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Modal restore password-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Restaurar contraseña de directores</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body modal-background">
+      <form action="" method="post" class="">
+          <?php include('../php/backend-directores.php');?>
+          <div class="mb-3 row">
+            <label for="inputEmail" class="form-label">Correo</label>
+            <div class="col-sm-10">
+              <input type="mail" class="form-control" id="inputEmail" name="dirEmail" placeholder="Ingrese correo del director" required>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="inputPassword" class="form-label">Contraseña</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword" name="rest-password" placeholder="Ingrese contraseña" required>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="inputPassword" class="form-label">Confirmar contraseña</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" id="inputPassword" name="rest-password2" placeholder="ingrese de nuevo contraseña" required>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="submit" class="btn btn-primary" name="restore_dirPassword">Guardar cambios</button>
+        </div>
       </form>
     </div>
   </div>

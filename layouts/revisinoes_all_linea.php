@@ -11,7 +11,6 @@
 <body class="captura_background">
     <!-- navbar -->
 <?php include ("navbar.php");?>
-<?php include('../php/editar_concentrado_linea.php');?>
 <h1 class="h1-tittles text-muted">Concentrado general en línea </h1>
 <div class="div-table">
 <!-- tabla -->
@@ -70,7 +69,7 @@
                             </div>
 
                             <div class="modal-body modal-background">
-                            <form action="" method="post">
+                            <form action="../php/editar_concentrado.php" method="POST">
                                 <div class="mb-2">
                                     <label for="recipient-name" class="col-form-label">Profesor</label>
                                     <div class="form-floating">
@@ -96,11 +95,11 @@
                                   <div class="form-floating">
                                     <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="profesor" value="<?php echo $row['reporte']; ?>" name="reporte" required>
                                       <option selected>Seleccionar reporte</option>
-                                      <option value="No conectado"<?php if($row['reporte']=="No conectado") echo 'selected="selected"';?>>No conectado</option>
-                                      <option value="Dejo Actividad"<?php if($row['reporte']=="Dejo Actividad") echo 'selected="selected"';?>>Dejo Actividad</option>
-                                      <option value="Entro y Salio"<?php if($row['reporte']=="Entro y Salio") echo 'selected="selected"';?>>Entro y Salio</option>
-                                      <option value="Sin Alumnos"<?php if($row['reporte']=="Sin Alumnos") echo 'selected="selected"';?>>Sin Alumnos</option>
-                                      <option value="Otro"<?php if($row['reporte']=="Otro") echo 'selected="selected"';?>>Otro</option>
+                                      <option value="Retardo"<?php if($row['reporte']=="No conectado") echo 'selected="selected"';?>>No conectado</option>
+                                      <option value="Retardo"<?php if($row['reporte']=="Dejo Actividad") echo 'selected="selected"';?>>Dejo Actividad</option>
+                                      <option value="Retardo"<?php if($row['reporte']=="Entro y Salio") echo 'selected="selected"';?>>Entro y Salio</option>
+                                      <option value="Falta"<?php if($row['reporte']=="Sin Alumnos") echo 'selected="selected"';?>>Sin Alumnos</option>
+                                      <option value="Salida antes"<?php if($row['reporte']=="Otro") echo 'selected="selected"';?>>Otro</option>
                                     </select>
                                     <label for="floatingSelect">Reporte</label>
                                   </div>
