@@ -51,21 +51,22 @@ if(!isset($_SESSION['usuario'])){
         <option value="T.V">T.V</option>
       </select>
     <button type="submit" class="btn btn-primary btn-enviar-admin" name="buscar_revi" id="enviar">Buscar</button>
+    <?php
+      if(isset($_POST['buscar_revi'])){
+        ?>
+        <a class="btn-delete-filter" href="concentrado.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
+        <?php
+      }
+    ?>
     </div>
   </form>
-
   <br>
-
-
-
   <!-- tabla -->
   <?php
   include ('../php/connection.php');
 
   if(isset($_POST['buscar_revi'])){
     ?>
-    <a class="btn-delete-filter" href="concentrado.php"><button type="submit" class="btn btn-danger btn-delete-filter">Borrar busqueda</button></a>
-    <br><br>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -118,22 +119,23 @@ if(!isset($_SESSION['usuario'])){
         ?>
         
         <tr>
-          <td><?= $items['fecha'];?></td>
-          <td><?= $items['turno'];?></td>
-          <td><?= $items['aula'];?></td>
-          <td><?= $items['hora_inicio'];?></td>
-          <td><?= $items['hora_final'];?></td>
-          <td><?= $items['modalidad'];?></td>
-          <td><?= $items['nomenclatura'];?></td>
-          <td><?= $items['grupo'];?></td>
-          <td><?= $items['reporte'];?></td>
-          <td><?= $items['revision_1'];?></td>
-          <td><?= $items['revision_2'];?></td>
-          <td><?= $items['revision_3'];?></td>
-          <td><?= $items['observaciones'];?></td>
+          <td><?php echo $items['fecha'];?></td>
+          <td><?php echo $items['turno'];?></td>
+          <td><?php echo $items['aula'];?></td>
+          <td><?php echo $items['hora_inicio'];?></td>
+          <td><?php echo $items['hora_final'];?></td>
+          <td><?php echo $items['modalidad'];?></td>
+          <td><?php echo $items['nomenclatura'];?></td>
+          <td><?php echo $items['grupo'];?></td>
+          <td><?php echo $items['reporte'];?></td>
+          <td><?php echo $items['revision_1'];?></td>
+          <td><?php echo $items['revision_2'];?></td>
+          <td><?php echo $items['revision_3'];?></td>
+          <td><?php echo $items['observaciones'];?></td>
           <td>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalfiltro_<?php echo $items['id']; ?>">Editar</button>
-              </td>
+                <img src="../images/editar.png" alt="Editar" class="btn-img" data-bs-toggle="modal" data-bs-target="#exampleModalfiltro_<?php echo $items['id']; ?>" onclick="openModal('<?php echo $items['id']; ?>', 'editar')">
+                <img src="../images/eliminar.png" alt="Eliminar" class="btn-img" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $items['id']; ?>" onclick="openModal('<?php echo $items['id']; ?>', 'eliminar')">
+            </td>
         </tr>
 
                 <!-- Modal editar -->
@@ -235,6 +237,27 @@ if(!isset($_SESSION['usuario'])){
                         </div>
                     </div>
                 </div>
+                                <!-- Modal de eliminar  -->
+                                <form action="../php/eliminar_concentrado.php" method="post">
+                <div class="modal fade" id="borrar_<?php echo $items['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Eliminar</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            Seguro que desea eliminar el reporte para <?php echo $items['nomenclatura']; ?>?
+                        <input type="hidden" name="id" value="<?php echo $items['id']; ?>">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                </form>
 
          
         
@@ -253,9 +276,9 @@ if(!isset($_SESSION['usuario'])){
   }else{
     ?>
   <form action="../php/backend-directores.php" method="POST">
-    <button type="submit" name="export_universal" class="btn btn-success" >Exportar a Excel</button>  
-    </form>
-<div class="div-table">
+    <button type="submit" name="export_universal" class="btn btn-success btn-sm" >Exportar a Excel</button>  
+  </form>
+  <br>
 <!-- tabla -->
 <table class="table table-bordered">
   <thead class="table-dark">
@@ -419,7 +442,7 @@ if(!isset($_SESSION['usuario'])){
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                            Seguro que desea eliminar a <?php echo $row['nomenclatura']; ?>?
+                            Seguro que desea eliminar el reporte para <?php echo $row['nomenclatura']; ?>?
                         <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
                     </div>
                     <div class="modal-footer">
@@ -435,7 +458,6 @@ if(!isset($_SESSION['usuario'])){
     ?>
         </tbody>
     </table>
-    </div>
 
     <?php 
     }}
