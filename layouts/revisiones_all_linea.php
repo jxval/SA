@@ -24,10 +24,10 @@
       <th scope="col">Profesor</th>
       <th scope="col">Grupo</th>
       <th scope="col">Reporte</th>
-      <th scope="col">Revisión 1</th>
-      <th scope="col">Revisión 2</th>
-      <th scope="col">Revisión 3</th>
-      <th scope="col">Revisión 4</th>
+      <th scope="col">R1</th>
+      <th scope="col">R2</th>
+      <th scope="col">R3</th>
+      <th scope="col">R4</th>
       <th scope="col">Observaciones</th>
       <th scope="col">Acción</th>
     </tr>
@@ -65,14 +65,14 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar reporte de <?php echo $row['nomenclatura'];?></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
                             <div class="modal-body modal-background">
                             <form action="" method="post">
                                 <div class="mb-2">
-                                    <label for="recipient-name" class="col-form-label">Profesor</label>
+                                    <label for="recipient-name" class="col-form-label">Profesor <label style="color:red;">(Selecciona un profesor)</label></label>
                                     <div class="form-floating">
                                       <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="profesor" value="<?php echo $row['nomenclatura']; ?>" name="profesor" required>
                                           <option selected>Seleccionar profesor</option>

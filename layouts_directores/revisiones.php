@@ -75,7 +75,7 @@ if(!isset($_SESSION['usuario'])){
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <a class="btn btn-primary btn-sm" href="revisiones1.php" role="button">Ver justificados</a>
     </div>
-    <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
+    <center><strong><h3 class="lead table-tittle">Para justificar</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -185,7 +185,7 @@ if(!isset($_SESSION['usuario'])){
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <a class="btn btn-primary btn-sm" href="revisiones1.php" role="button">Ver justificados</a>
     </div>
-    <center><strong><h3 class="lead table-tittle">Sin justificar</h3></strong></center>
+    <center><strong><h3 class="lead table-tittle">Para justificar</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>

@@ -79,9 +79,10 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Profesor</th>
         <th scope="col">Grupo</th>
         <th scope="col">Reporte</th>
-        <th scope="col">Revision_1</th>
-        <th scope="col">Revision_2</th>
-        <th scope="col">Revision_3</th>
+        <th scope="col">R1</th>
+        <th scope="col">R2</th>
+        <th scope="col">R3</th>
+        <th scope="col">R4</th>
         <th scope="col">Observaciones</th>
         <th scope="col">Accion</th>
         
@@ -108,7 +109,7 @@ if(!isset($_SESSION['usuario'])){
     $query = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, 
     revisiones.hora_inicio, revisiones.hora_final, 
     revisiones.modalidad, profesores.nomenclatura, revisiones.grupo, revisiones.reporte, 
-    revisiones.revision_1,revisiones.revision_2, revisiones.revision_3, 
+    revisiones.revision_1,revisiones.revision_2, revisiones.revision_3, revisiones.revision_4, 
     revisiones.observaciones FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id $filtro  ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
@@ -131,6 +132,7 @@ if(!isset($_SESSION['usuario'])){
           <td><?php echo $items['revision_1'];?></td>
           <td><?php echo $items['revision_2'];?></td>
           <td><?php echo $items['revision_3'];?></td>
+          <td><?php echo $items['revision_4'];?></td>
           <td><?php echo $items['observaciones'];?></td>
           <td>
                 <img src="../images/editar.png" alt="Editar" class="btn-img" data-bs-toggle="modal" data-bs-target="#exampleModalfiltro_<?php echo $items['id']; ?>" onclick="openModal('<?php echo $items['id']; ?>', 'editar')">
@@ -143,7 +145,7 @@ if(!isset($_SESSION['usuario'])){
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar reporte de <?php echo $items['nomenclatura']; ?></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
@@ -174,7 +176,7 @@ if(!isset($_SESSION['usuario'])){
                                     <input type="text" class="form-control" id="recipient-name" name="modalidad" value="<?php echo $items['modalidad']; ?>">
                                 </div>
                                 <div class="mb-2">
-                                    <label for="recipient-name" class="col-form-label">Profesor</label>
+                                    <label for="recipient-name" class="col-form-label">Profesor <label style="color:red;">(Selecciona un profesor)</label></label>
                                     <div class="form-floating">
                                       <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="profesor" value="<?php echo $items['nomenclatura']; ?>" name="profesor" required>
                                           <option selected > Seleccione un Profesor</option>
@@ -223,6 +225,10 @@ if(!isset($_SESSION['usuario'])){
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Revision 3</label>
                                     <input type="time" class="form-control" id="recipient-name" name="revision_3" value="<?php echo $items['revision_3']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Revision 4</label>
+                                    <input type="time" class="form-control" id="recipient-name" name="revision_4" value="<?php echo $items['revision_4']; ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Observaciones</label>
@@ -292,9 +298,10 @@ if(!isset($_SESSION['usuario'])){
       <th scope="col">Profesor</th>
       <th scope="col">Grupo</th>
       <th scope="col">Reporte</th>
-      <th scope="col">Revisión 1</th>
-      <th scope="col">Revisión 2</th>
-      <th scope="col">Revisión 3</th>
+      <th scope="col">R1</th>
+      <th scope="col">R2</th>
+      <th scope="col">R3</th>
+      <th scope="col">R4</th>
       <th scope="col">Observaciones</th>
       <th scope="col">Acción</th>
     </tr>
@@ -305,7 +312,7 @@ if(!isset($_SESSION['usuario'])){
     $consul = "SELECT revisiones.id, revisiones.fecha, revisiones.turno, revisiones.aula, 
     revisiones.hora_inicio,revisiones.hora_final, revisiones.modalidad,
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, 
-    revisiones.revision_1,revisiones.revision_2, revisiones.revision_3, 
+    revisiones.revision_1,revisiones.revision_2, revisiones.revision_3, revisiones.revision_4,
     revisiones.observaciones FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id  ORDER BY id DESC";
     $result = mysqli_query($connection, $consul) or die ("Algo salio mal");
@@ -326,6 +333,7 @@ if(!isset($_SESSION['usuario'])){
               <td><?php echo $row["revision_1"]; ?></td>
               <td><?php echo $row["revision_2"]; ?></td>
               <td><?php echo $row["revision_3"]; ?></td>
+              <td><?php echo $row["revision_4"]; ?></td>
               <td><?php echo $row["observaciones"]; ?></td>
               <td>
                 <img src="../images/editar.png" alt="Editar" class="btn-img" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $row['id']; ?>" onclick="openModal('<?php echo $row['id']; ?>', 'editar')">
@@ -339,7 +347,7 @@ if(!isset($_SESSION['usuario'])){
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar</h1>
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Editar reporte de  <?php echo $row['nomenclatura']; ?></h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
 
@@ -370,7 +378,7 @@ if(!isset($_SESSION['usuario'])){
                                     <input type="text" class="form-control" id="recipient-name" name="modalidad" value="<?php echo $row['modalidad']; ?>">
                                 </div>
                                 <div class="mb-2">
-                                    <label for="recipient-name" class="col-form-label">Profesor</label>
+                                <label for="recipient-name" class="col-form-label">Profesor <label style="color:red;">(Selecciona un profesor)</label></label>
                                     <div class="form-floating">
                                       <select class="form-select" id="floatingSelect" aria-label="Floating label select example" id="profesor" value="<?php echo $row['nomenclatura']; ?>" name="profesor" required>
                                           <option selected > Seleccione un Profesor</option>
@@ -418,6 +426,10 @@ if(!isset($_SESSION['usuario'])){
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Revision 3</label>
                                     <input type="time" class="form-control" id="recipient-name" name="revision_3" value="<?php echo $row['revision_3']; ?>">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="recipient-name" class="col-form-label">Revision 4</label>
+                                    <input type="time" class="form-control" id="recipient-name" name="revision_4" value="<?php echo $row['revision_4']; ?>">
                                 </div>
                                 <div class="mb-3">
                                     <label for="recipient-name" class="col-form-label">Observaciones</label>
