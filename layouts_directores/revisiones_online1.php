@@ -59,7 +59,7 @@ if(!isset($_SESSION['usuario'])){
     <?php
       if(isset($_POST['buscar_revi'])){
         ?>
-        <a class="btn-delete-filter" href="revisiones.php"><button type="submit" class="btn btn-danger">Borrar busqueda</button></a>
+        <a class="btn-delete-filter" href="revisiones_online1.php"><button type="submit" class="btn btn-danger">Borrar busqueda</button></a>
         <?php
 
       }
@@ -73,7 +73,8 @@ if(!isset($_SESSION['usuario'])){
   if(isset($_POST['buscar_revi'])){
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-primary btn-sm" href="revisiones_online.php" role="button">Ver sin justificante</a>
+        <a class="btn btn-primary btn-sm" href="revisiones_online.php" role="button">Ver para justificar</a>
+        <a class="btn btn-primary btn-sm" href="revisiones_no_justificadasONL.php" role="button">Ver no justificados</a>
     </div>
     <center><strong><h3 class="lead table-tittle">Justificados</h3></strong></center>
     <table class="table table-bordered">
@@ -144,7 +145,8 @@ if(!isset($_SESSION['usuario'])){
   }else{
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-primary btn-sm" href="revisiones_online.php" role="button">Ver sin justificante</a>
+        <a class="btn btn-primary btn-sm" href="revisiones_online.php" role="button">Ver para justificar</a>
+        <a class="btn btn-primary btn-sm" href="revisiones_no_justificadasONL.php" role="button">Ver no justificados</a>
     </div>
     <center><strong><h3 class="lead table-tittle">Justificados</h3></strong></center>
     <table class="table table-bordered">

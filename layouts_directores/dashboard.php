@@ -30,7 +30,7 @@ if(!isset($_SESSION['usuario'])){
                 $director = $_SESSION['usuario'];
                 $consul = "SELECT COUNT(revisiones.profesor) AS total FROM revisiones
                 INNER JOIN profesores ON revisiones.profesor = profesores.id
-                INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND revisiones.modalidad = 'presencial' AND justificado = 'no'";
+                INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND revisiones.modalidad = 'presencial' AND justificado = 'no' AND toJustify = 'si'";
                 $resul = mysqli_query($connection, $consul);
                 $row = mysqli_fetch_array($resul);?>
                 <h1 class="display-5">Concentrado general presencial</h1>
@@ -45,7 +45,7 @@ if(!isset($_SESSION['usuario'])){
                 $director = $_SESSION['usuario'];
                 $consul = "SELECT COUNT(revisiones.profesor) AS total FROM revisiones
                 INNER JOIN profesores ON revisiones.profesor = profesores.id
-                INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND revisiones.modalidad = 'linea' AND justificado = 'no'";
+                INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND revisiones.modalidad = 'linea' AND justificado = 'no' AND toJustify = 'si'";
                 $resul = mysqli_query($connection, $consul);
                 $row = mysqli_fetch_array($resul);?>
                 <h1 class="display-5">Concentrado general en línea </h1>

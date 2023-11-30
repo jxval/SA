@@ -59,7 +59,7 @@ if(!isset($_SESSION['usuario'])){
     <?php
       if(isset($_POST['buscar_revi'])){
         ?>
-        <a class="btn-delete-filter" href="revisiones.php"><button type="submit" class="btn btn-danger">Borrar busqueda</button></a>
+        <a class="btn-delete-filter" href="revisiones_online.php"><button type="submit" class="btn btn-danger">Borrar busqueda</button></a>
         <?php
 
       }
@@ -74,6 +74,7 @@ if(!isset($_SESSION['usuario'])){
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <a class="btn btn-primary btn-sm" href="revisiones_online1.php" role="button">Ver justificados</a>
+      <a class="btn btn-primary btn-sm" href="revisiones_no_justificadasONL.php" role="button">Ver no justificados</a>
     </div>
     <center><strong><h3 class="lead table-tittle">Para justificar</h3></strong></center>
     <table class="table table-bordered">
@@ -113,7 +114,7 @@ if(!isset($_SESSION['usuario'])){
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3,', ', revisiones.revision_4) AS revisiones, 
     revisiones.observaciones, revisiones.comentarios FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id
-    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'linea' AND justificado = 'no' ORDER BY id DESC";
+    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'linea' AND justificado = 'no' AND toJustify = 'si' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -129,12 +130,13 @@ if(!isset($_SESSION['usuario'])){
           <td class="toJustify"><?= $column['revisiones'];?></td>
           <td class="toJustify"><?= $column['observaciones'];?></td>
           <td>
-            <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
+            <button type="button" class="btn btn-primary position-relative btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
               Justificar
               <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                 <span class="visually-hidden">New alerts</span>
               </span>
             </button>
+            <img src="../images/eliminar.png" alt="Eliminar" class="btn-img" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $column['id']; ?>" onclick="openModal('<?php echo $column['id']; ?>', 'eliminar')">
           </td>
 
           <!-- modal editar -->
@@ -166,6 +168,28 @@ if(!isset($_SESSION['usuario'])){
             </div>
         </div>
 
+          <!-- Modal de eliminar  -->
+          <form action="" method="post">
+          <div class="modal fade" id="borrar_<?php echo $column['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">No justificar</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <strong>Seguro que NO desea justificar el reporte para <?php echo $column['nomenclatura']; ?>?</strong>
+                  <input type="hidden" name="id" value="<?php echo $column['id']; ?>">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary" name="no_justificar">Confirmar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
         </tr>
         <?php
       }
@@ -182,6 +206,7 @@ if(!isset($_SESSION['usuario'])){
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <a class="btn btn-primary btn-sm" href="revisiones_online1.php" role="button">Ver justificados</a>
+      <a class="btn btn-primary btn-sm" href="revisiones_no_justificadasONL.php" role="button">Ver no justificados</a>
     </div>
     <center><strong><h3 class="lead table-tittle">Para justificar</h3></strong></center>
     <table class="table table-bordered">
@@ -205,7 +230,7 @@ if(!isset($_SESSION['usuario'])){
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3,', ', revisiones.revision_4) AS revisiones, 
     revisiones.observaciones, revisiones.comentarios FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id
-    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'linea' AND justificado = 'no' ORDER BY id DESC";
+    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'linea' AND justificado = 'no' AND toJustify = 'si' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -221,12 +246,13 @@ if(!isset($_SESSION['usuario'])){
           <td class="toJustify"><?= $column['revisiones'];?></td>
           <td class="toJustify"><?= $column['observaciones'];?></td>
           <td>
-            <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
+            <button type="button" class="btn btn-primary position-relative btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
               Justificar
               <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                 <span class="visually-hidden">New alerts</span>
               </span>
             </button>
+            <img src="../images/eliminar.png" alt="Eliminar" class="btn-img" data-bs-toggle="modal" data-bs-target="#borrar_<?php echo $column['id']; ?>" onclick="openModal('<?php echo $column['id']; ?>', 'eliminar')">
           </td>
 
           <!-- modal editar -->
@@ -257,6 +283,28 @@ if(!isset($_SESSION['usuario'])){
                 </div>
             </div>
         </div>
+
+          <!-- Modal de eliminar  -->
+          <form action="" method="post">
+          <div class="modal fade" id="borrar_<?php echo $column['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">No justificar</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <strong>Seguro que NO desea justificar el reporte para <?php echo $column['nomenclatura']; ?>?</strong>
+                  <input type="hidden" name="id" value="<?php echo $column['id']; ?>">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-primary" name="no_justificar">Confirmar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
 
         </tr>
         <?php

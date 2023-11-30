@@ -348,12 +348,26 @@ if(isset($_POST['guardar_justificacion'])){
     $id = $_POST['id'];
 
   
-    $sql = "UPDATE revisiones SET justificado = 'si', comentarios ='$comentarios' WHERE id='$id'";
+    $sql = "UPDATE revisiones SET justificado = 'si', toJustify = 'no', comentarios ='$comentarios' WHERE id='$id'";
 
     if ($connection->query($sql) === TRUE) {
         echo '<div class="alert alert-success">Se justificó correctamente!</div>';        
     } else {
         echo '<div class="alert alert-danger">Error al justificar, favor de verificar</div>';
+    }
+
+    $connection->close();
+}
+if(isset($_POST['no_justificar'])){
+    $id = $_POST['id'];
+
+  
+    $sql = "UPDATE revisiones SET toJustify = 'no' WHERE id='$id'";
+
+    if ($connection->query($sql) === TRUE) {
+        echo '<div class="alert alert-success">Reporte NO justificado!</div>';        
+    } else {
+        echo '<div class="alert alert-danger">Error al NO justificar, favor de verificar</div>';
     }
 
     $connection->close();

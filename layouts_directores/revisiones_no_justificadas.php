@@ -18,7 +18,7 @@ if(!isset($_SESSION['usuario'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="../images/LogoUTCJ.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <title>Revisiones </title>
+    <title>Revisiones presencial</title>
 </head>
 <body class="admin_background">
     <!-- navbar -->
@@ -59,7 +59,7 @@ if(!isset($_SESSION['usuario'])){
     <?php
       if(isset($_POST['buscar_revi'])){
         ?>
-        <a class="btn-delete-filter" href="revisiones1.php"><button type="submit" class="btn btn-danger">Borrar busqueda</button></a>
+        <a class="btn-delete-filter" href="revisiones_no_justificadas.php"><button type="submit" class="btn btn-danger">Borrar busqueda</button></a>
         <?php
 
       }
@@ -73,10 +73,11 @@ if(!isset($_SESSION['usuario'])){
   if(isset($_POST['buscar_revi'])){
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-primary btn-sm" href="revisiones.php" role="button">Ver para justificar</a>
-        <a class="btn btn-primary btn-sm" href="revisiones_no_justificadas.php" role="button">Ver no justificados</a>
+      <a class="btn btn-primary btn-sm" href="revisiones1.php" role="button">Ver justificados</a>
+      <a class="btn btn-primary btn-sm" href="revisiones.php" role="button">Ver para justificar</a>
+
     </div>
-    <center><strong><h3 class="lead table-tittle">Justificados</h3></strong></center>
+    <center><strong><h3 class="lead table-tittle">No justificados</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
       <tr>
@@ -89,7 +90,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
-        <th scope="col" class="justify">Justificante</th>
+        <th scope="col">Acción</th>
       </tr>
     </thead>
     <tbody>
@@ -115,7 +116,7 @@ if(!isset($_SESSION['usuario'])){
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3) AS revisiones, 
     revisiones.observaciones, revisiones.comentarios FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id
-    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'presencial' AND justificado = 'si' AND toJustify = 'no' ORDER BY id DESC";
+    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' $filtro AND modalidad = 'presencial' AND justificado = 'no' AND toJustify = 'no' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -131,7 +132,44 @@ if(!isset($_SESSION['usuario'])){
           <td class=""><?= $column['reporte'];?></td>
           <td class=""><?= $column['revisiones'];?></td>
           <td class=""><?= $column['observaciones'];?></td>
-          <td class="justify"><?= $column['comentarios'];?></td>
+          <td>
+            <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
+              Justificar
+              <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            </button>
+          </td>
+
+          <!-- modal editar -->
+          <div class="modal fade" id="exampleModal_<?php echo $column['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Justificar profesor <?php echo $column['nomenclatura']; ?></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body modal-background">
+                    <form action="" method="POST">
+                    <p class="justify">"<?php echo $column['observaciones'];?>"</p>
+                        <div class="mb-2">
+                            <label for="recipient-name" class="lead">Comentarios</label>
+                            <textarea name="comentarios" class="form-control" id="" value="<?php echo $column['comentarios']; ?>" placeholder="Agrege un comentario de justificación" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" id="recipient-name" name="id" value="<?php echo $column['id']; ?>">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" name="guardar_justificacion">Guardar Cambios</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         </tr>
         <?php
       }
@@ -147,13 +185,13 @@ if(!isset($_SESSION['usuario'])){
   }else{
     ?>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-primary btn-sm" href="revisiones.php" role="button">Ver para justificar</a>
-        <a class="btn btn-primary btn-sm" href="revisiones_no_justificadas.php" role="button">Ver no justificados</a>
+      <a class="btn btn-primary btn-sm" href="revisiones1.php" role="button">Ver justificados</a>
+      <a class="btn btn-primary btn-sm" href="revisiones.php" role="button">Ver para justificar</a>
     </div>
-    <center><strong><h3 class="lead table-tittle">Justificados</h3></strong></center>
+    <center><strong><h3 class="lead table-tittle">No justificados</h3></strong></center>
     <table class="table table-bordered">
     <thead class="table-dark">
-    <tr>
+      <tr>
         <th scope="col">Fecha</th>
         <th scope="col">Turno</th>
         <th scope="col">Aula</th>
@@ -163,7 +201,7 @@ if(!isset($_SESSION['usuario'])){
         <th scope="col">Reporte</th>
         <th scope="col">Revisiones</th>
         <th scope="col">Observaciones</th>
-        <th scope="col" class="justify">Justificante</th>
+        <th scope="col">Acción</th>
       </tr>
     </thead>
     <tbody>
@@ -173,7 +211,7 @@ if(!isset($_SESSION['usuario'])){
     profesores.nomenclatura, revisiones.grupo, revisiones.reporte, CONCAT(revisiones.revision_1,', ', revisiones.revision_2,', ', revisiones.revision_3) AS revisiones, 
     revisiones.observaciones, revisiones.comentarios FROM revisiones
     INNER JOIN profesores ON revisiones.profesor = profesores.id
-    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'presencial' AND justificado = 'si' AND toJustify = 'no' ORDER BY id DESC";
+    INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND modalidad = 'presencial' AND justificado = 'no' AND toJustify = 'no' ORDER BY id DESC";
     $query_run = mysqli_query($connection, $query);
 
     if(mysqli_num_rows($query_run) > 0){
@@ -189,14 +227,51 @@ if(!isset($_SESSION['usuario'])){
           <td class=""><?= $column['reporte'];?></td>
           <td class=""><?= $column['revisiones'];?></td>
           <td class=""><?= $column['observaciones'];?></td>
-          <td class="justify"><?= $column['comentarios'];?></td>
+          <td>
+            <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
+              Justificar
+              <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                <span class="visually-hidden">New alerts</span>
+              </span>
+            </button>
+          </td>
+
+          <!-- modal editar -->
+          <div class="modal fade" id="exampleModal_<?php echo $column['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Justificar profesor <?php echo $column['nomenclatura']; ?></h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body modal-background">
+                    <form action="" method="POST">
+                    <p class="justify">"<?php echo $column['observaciones'];?>"</p>
+                        <div class="mb-2">
+                            <label for="recipient-name" class="lead">Comentarios</label>
+                            <textarea name="comentarios" class="form-control" id="" value="<?php echo $column['comentarios']; ?>" placeholder="Agrege un comentario de justificación" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <input type="hidden" class="form-control" id="recipient-name" name="id" value="<?php echo $column['id']; ?>">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary" name="guardar_justificacion">Guardar Cambios</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
         </tr>
         <?php
       }
     }else{
       ?>
       <tr>
-        <td class="else-results" colspan="13" style="color:green;">No hay registros justificados</td>
+        <td class="else-results" colspan="13" style="color:green;">No hay registros</td>
       </tr>
       <?php
     }
