@@ -325,14 +325,37 @@ if(isset($_POST['validar_admin'])){
     $contrasena = $_POST['db_contrasena'];
     $contrasena = hash('sha512', $contrasena);
 
-    $query = "SELECT * FROM usuarios WHERE correo = '$correo'";
+    $query = "SELECT * FROM usuarios WHERE correo = '$correo' ";
     $result = $connection->query($query);
 
     if($result->num_rows > 0){
         echo '<div class="alert alert-danger">Ya existe un usuario con el correo ingresado</div>';        
     }else{
-        $sql = "INSERT INTO usuarios (id, nombre, apellido, correo, contrasena) 
-        Values ('', '$nombre', '$apellido', '$correo', '$contrasena')";
+        $sql = "INSERT INTO usuarios (id, rol, nombre, apellido, correo, contrasena) 
+        Values ('', 'administrador', '$nombre', '$apellido', '$correo', '$contrasena')";
+         if ($connection->query($sql) === TRUE) {
+            echo '<div class="alert alert-success">¡Se registro administrador correctamente!</div>';    
+        } else {
+            echo '<div class="alert alert-danger">Error: Favor de verificar</div>';
+        }
+    }
+
+}
+if(isset($_POST['validar_supervisor'])){
+    $nombre = $_POST['db_nombre'];
+    $apellido = $_POST['db_apellido'];
+    $correo = $_POST['db_correo'];
+    $contrasena = $_POST['db_contrasena'];
+    $contrasena = hash('sha512', $contrasena);
+
+    $query = "SELECT * FROM usuarios WHERE correo = '$correo' ";
+    $result = $connection->query($query);
+
+    if($result->num_rows > 0){
+        echo '<div class="alert alert-danger">Ya existe un usuario con el correo ingresado</div>';        
+    }else{
+        $sql = "INSERT INTO usuarios (id, rol, nombre, apellido, correo, contrasena) 
+        Values ('', 'supervisor', '$nombre', '$apellido', '$correo', '$contrasena')";
          if ($connection->query($sql) === TRUE) {
             echo '<div class="alert alert-success">¡Se registro administrador correctamente!</div>';    
         } else {
@@ -381,12 +404,31 @@ if(isset($_POST['btn_login'])){
     $contrasena = $_POST['db_contrasena'];
     $contrasena = hash('sha512', $contrasena);
 
-    $login_validation = mysqli_query($connection, "SELECT * FROM usuarios WHERE correo = '$correo' AND contrasena = '$contrasena'");
+    $login_validation = mysqli_query($connection, "SELECT * FROM usuarios WHERE correo = '$correo' AND contrasena = '$contrasena' AND rol = 'administrador'");
 
     if(mysqli_num_rows($login_validation) > 0){
         $row = $login_validation->fetch_assoc();
         $_SESSION['usuario'] = $row['nombre'];
         header("location: ../layouts_admins/dashboard.php");
+        exit;
+    }else{
+        echo '<div class="alert alert-danger">Correo y/o contraseña incorrectos, verifica la información</div>';
+    }
+}
+if(isset($_POST['btn_login_supervisor'])){
+
+    include('connection.php');
+
+    $correo = $_POST['db_correo'];
+    $contrasena = $_POST['db_contrasena'];
+    $contrasena = hash('sha512', $contrasena);
+
+    $login_validation = mysqli_query($connection, "SELECT * FROM usuarios WHERE correo = '$correo'AND contrasena = '$contrasena'AND rol = 'supervisor'");
+
+    if(mysqli_num_rows($login_validation) > 0){
+        $row = $login_validation->fetch_assoc();
+        $_SESSION['usuario'] = $row['nombre'];
+        header("location: ../layouts/captura.php");
         exit;
     }else{
         echo '<div class="alert alert-danger">Correo y/o contraseña incorrectos, verifica la información</div>';

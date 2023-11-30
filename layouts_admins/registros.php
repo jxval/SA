@@ -18,7 +18,8 @@
 <form action="" method="post" class="formRe">
         <?php include('../php/backend-directores.php'); ?>
         <img class="coverimg" src="../images/LogoUTCJ.png" alt="">
-        <h3 class="tittle-2">Registro</h3>
+        <h3 class="tittle-2">Nuevo Administrador</h3>
+        <br>
         <input class="input" type="text" name="db_nombre" id="" placeholder="Nombre" required>
         <br>
         <input class="input" type="text" name="db_apellido" id="" placeholder="Apellido" required>

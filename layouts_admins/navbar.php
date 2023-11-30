@@ -79,7 +79,8 @@
             Aministradores
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="registros.php">Registrar nuevo</a></li>
+            <li><a class="dropdown-item" href="registros.php">Registrar nuevo administrador</a></li>
+            <li><a class="dropdown-item" href="registro_supervisor.php">Registrar nuevo supervisor</a></li>
             <li><a class="dropdown-item" href="recuperar.php">Recuperar contraseñas</a></li>
           </ul>
         </li>

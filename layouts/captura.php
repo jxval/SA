@@ -1,3 +1,15 @@
+<?php
+session_start();
+if(!isset($_SESSION['usuario'])){
+    echo '<script>
+    alert ("Por favor inicia una una sesión");
+    window.location = "../layouts/inico.php";
+    </script>';
+    session_destroy();
+    die();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
