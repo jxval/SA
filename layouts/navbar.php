@@ -17,6 +17,9 @@
     <a class="navbar-brand" href="captura.php">
       <img src="../images/LogoUTCJ.png" alt="" width="50" height="50">
     </a>
+    <p class="lead nav_username">
+      Hola <?php echo ucwords($_SESSION['usuario']." ");?>
+    </p>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -41,10 +44,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="login.php" aria-disabled="false">Iniciar sesión como administrador</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="../layouts_directores/login.php" aria-disabled="false">Iniciar sesión como director</a>
+          <a class="nav-link nav-link-logout" href="../php/logout_supervisor.php" aria-disabled="false">Cerrar sesión</a>
         </li>
       </ul>
     </div>

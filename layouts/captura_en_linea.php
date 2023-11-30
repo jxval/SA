@@ -1,3 +1,15 @@
+<?php
+session_start();
+if(!isset($_SESSION['usuario'])){
+    echo '<script>
+    alert ("Por favor inicia una una sesión");
+    window.location = "../layouts/inico.php";
+    </script>';
+    session_destroy();
+    die();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -103,15 +115,17 @@ include("../php/capturas_en_linea.php");
                     <input type="text" class="form-control" id="floatingInput" placeholder="Grupo" name="grupo" required>
                     <label for="floatingInput">Grupo</label>
                 </div>
-            </div>
-            </div>
-        </div>
-        <div class="div_revisiones">
+                <br>
                 <p class="lead">Primera revisión</p> 
                 <div class="cs-form">
                     <input type="time" name="primerarevision" class="form-control" />
                 </div>
-                <br>
+            </div>
+            </div>
+        </div>
+        <div class="div_revisiones">
+                
+                
                 <p class="lead">Segunda revisión</p> 
                 <div class="cs-form">
                     <input type="time" name="segundarevision" class="form-control" />
