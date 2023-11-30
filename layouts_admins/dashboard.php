@@ -84,7 +84,7 @@ if(!isset($_SESSION['usuario'])){
                     FROM revisiones
                     INNER JOIN profesores ON revisiones.profesor = profesores.id
                     WHERE justificado = 'no'
-                    -- AND MONTH(fecha) = MONTH(NOW())
+                    AND MONTH(fecha) = MONTH(NOW())
                     GROUP BY profesores.primer_apellido, profesores.nombres
                     ORDER BY total DESC
                     LIMIT 5;";
