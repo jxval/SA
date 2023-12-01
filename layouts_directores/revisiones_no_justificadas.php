@@ -133,7 +133,7 @@ if(!isset($_SESSION['usuario'])){
           <td class=""><?= $column['revisiones'];?></td>
           <td class=""><?= $column['observaciones'];?></td>
           <td>
-            <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
+            <button type="button" class="btn btn-primary position-relative btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
               Justificar
               <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                 <span class="visually-hidden">New alerts</span>
@@ -228,7 +228,7 @@ if(!isset($_SESSION['usuario'])){
           <td class=""><?= $column['revisiones'];?></td>
           <td class=""><?= $column['observaciones'];?></td>
           <td>
-            <button type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
+            <button type="button" class="btn btn-primary position-relative btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal_<?php echo $column['id']; ?>">
               Justificar
               <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
                 <span class="visually-hidden">New alerts</span>
