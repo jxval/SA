@@ -136,7 +136,7 @@
 .dashboard-directores{
     margin-left: 5%;
     margin-right: 5%;
-    display: block;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
