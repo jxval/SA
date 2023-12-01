@@ -126,6 +126,9 @@
 .dashboard_admins{
     margin-left: 2%;
     margin-right: 2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -133,6 +136,9 @@
 .dashboard-directores{
     margin-left: 5%;
     margin-right: 5%;
+    display: block;
+    justify-content: center;
+    align-items: center;
 }
 .card-img-top{
     height: 30%;
