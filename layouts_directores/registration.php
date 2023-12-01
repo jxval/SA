@@ -38,7 +38,7 @@ if(!isset($_SESSION['usuario'])){
       <input class="input" type="password" name="nueva_pass" id="" placeholder="Confirmar nueva contraseña" required>
       <br>
       <button class="button btn-login" type="submit" name="change_passwordDir">Cambiar</button>
-      <a href="revisiones.php" class="a-regi">Regresar</a>
+      <a href="dashboard.php" class="a-regi">Regresar al inicio</a>
   </form>
     <br><br>
     <br>
