@@ -27,7 +27,7 @@ if(isset($_SESSION['usuario'])){
 
 <form action="" method="post" class="formulario">
         <?php include('../php/backend-directores.php'); ?>
-        <img class="coverimg" src="../images/LogoUTCJ.png" alt="">
+        <img class="coverimg" src="../images/LogoUTCJ.png" alt="" style="height:20%;">
         <h3 class="tittle-2">Iniciar sesión Director</h3>
         <input class="input" type="text" name="db_correo" id="" placeholder="Correo" required>
         <br>

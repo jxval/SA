@@ -33,7 +33,7 @@ if(!isset($_SESSION['usuario'])){
                 INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND revisiones.modalidad = 'presencial' AND justificado = 'no' AND toJustify = 'si'";
                 $resul = mysqli_query($connection, $consul);
                 $row = mysqli_fetch_array($resul);?>
-                <h1 class="display-5">Concentrado general presencial</h1>
+                <h1 class="display-5" style="text-align:center;">Concentrado general presencial</h1>
                 <h4>Incidencias para justificar <span class="badge bg-secondary"><?php echo $row['total'];?></span></h4>
                 <a href="revisiones.php" class="btn btn-primary">Ir a la página </a>
             </div>
@@ -48,7 +48,7 @@ if(!isset($_SESSION['usuario'])){
                 INNER JOIN dir_de_carrera ON profesores.director = dir_de_carrera.id WHERE dir_de_carrera.nom_dir = '$director' AND revisiones.modalidad = 'linea' AND justificado = 'no' AND toJustify = 'si'";
                 $resul = mysqli_query($connection, $consul);
                 $row = mysqli_fetch_array($resul);?>
-                <h1 class="display-5">Concentrado general en línea </h1>
+                <h1 class="display-5" style="text-align:center;">Concentrado general en línea </h1>
                 <h4>Incidencias para justificar <span class="badge bg-secondary"><?php echo $row['total'];?></span></h4>
                 <a href="revisiones_online.php" class="btn btn-primary">Ir a la página </a>
             </div>

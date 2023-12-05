@@ -29,16 +29,16 @@ if(!isset($_SESSION['usuario'])){
                 <?php include('../php/connection.php');
                 $consul = "SELECT COUNT(revisiones.profesor) AS total_SJ FROM revisiones
                 INNER JOIN profesores ON revisiones.profesor = profesores.id
-                WHERE revisiones.modalidad = 'presencial' AND justificado = 'no'";
+                WHERE revisiones.modalidad = 'presencial' AND justificado = 'no' AND MONTH(fecha) = MONTH(NOW())";
                 $resul = mysqli_query($connection, $consul);
                 $row = mysqli_fetch_array($resul);
 
                 $consul2 = "SELECT COUNT(revisiones.profesor) AS total_J FROM revisiones
                 INNER JOIN profesores ON revisiones.profesor = profesores.id
-                WHERE revisiones.modalidad = 'presencial' AND justificado = 'si'";
+                WHERE revisiones.modalidad = 'presencial' AND justificado = 'si' AND MONTH(fecha) = MONTH(NOW())";
                 $resul2 = mysqli_query($connection, $consul2);
                 $row2 = mysqli_fetch_array($resul2);?>
-                <h1 class="display-6">Concentrado general presencial</h1>
+                <h1 class="display-6" style="text-align:center;">Concentrado general presencial</h1>
                 <h4>Incidencias sin justificar <span class="badge bg-secondary"><?php echo $row['total_SJ'];?></span></h4>
                 <h4>Incidencias justificadas <span class="badge bg-success"><?php echo $row2['total_J'];?></span></h4>
                 <a href="revisiones_all.php" class="btn btn-primary">Ir a la página</a>
@@ -50,16 +50,16 @@ if(!isset($_SESSION['usuario'])){
                 <?php include('../php/connection.php');
                 $consul = "SELECT COUNT(revisiones.profesor) AS total_SJ FROM revisiones
                 INNER JOIN profesores ON revisiones.profesor = profesores.id
-                WHERE revisiones.modalidad = 'linea' AND justificado = 'no'";
+                WHERE revisiones.modalidad = 'linea' AND justificado = 'no' AND MONTH(fecha) = MONTH(NOW())";
                 $resul = mysqli_query($connection, $consul);
                 $row = mysqli_fetch_array($resul);
 
                 $consul2 = "SELECT COUNT(revisiones.profesor) AS total_J FROM revisiones
                 INNER JOIN profesores ON revisiones.profesor = profesores.id
-                WHERE revisiones.modalidad = 'linea' AND justificado = 'si'";
+                WHERE revisiones.modalidad = 'linea' AND justificado = 'si' AND MONTH(fecha) = MONTH(NOW())";
                 $resul2 = mysqli_query($connection, $consul2);
                 $row2 = mysqli_fetch_array($resul2);?>
-                <h1 class="display-6">Concentrado general en línea</h1>
+                <h1 class="display-6" style="text-align:center;">Concentrado general en línea</h1>
                 <h4>Incidencias sin justificar <span class="badge bg-secondary"><?php echo $row['total_SJ'];?></span></h4>
                 <h4>Incidencias justificadas <span class="badge bg-success"><?php echo $row2['total_J'];?></span></h4>
                 <a href="revisiones_all_online.php" class="btn btn-primary">Ir a la página </a>
@@ -67,7 +67,7 @@ if(!isset($_SESSION['usuario'])){
         </div>
         <div class="card" style="width: 30rem; height: 30rem">
             <div class="card-body">
-            <h1 class="display-6">Top 5: Incidencias del mes en curso (universal)</h1>
+            <h1 class="display-6" style="text-align:center;">Top 5: Incidencias del mes en curso (universal)</h1>
             <br>
             <table class="">
                 <thead class="">

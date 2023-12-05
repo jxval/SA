@@ -30,7 +30,7 @@ if(!isset($_SESSION['usuario'])){
   
   <form action="" method="post" class="formRe">
     <?php include('../php/backend-directores.php');?>
-      <img class="coverimg" src="../images/LogoUTCJ.png" alt="">
+      <img class="coverimg" src="../images/LogoUTCJ.png" alt="" style="height:20%;>
       <h3 class="tittle-2">Recuperar contraseña</h3>
       <br>
       <input class="input" type="mail" name="email" id="" placeholder="Ingrese correo" required>

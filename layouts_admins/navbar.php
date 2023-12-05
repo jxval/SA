@@ -29,7 +29,7 @@
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="dashboard.php">
-      <img src="../images/LogoUTCJ.png" alt="" width="50" height="50">
+      <img src="../images/LogoUTCJ.png" alt="" height="40">
     </a>
     <p class="lead nav_username">
       Hola <?php echo ucwords($_SESSION['usuario']." ");?>
@@ -76,7 +76,7 @@
         </li>
         <li class="nav-item dropdown nav-register">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Aministradores
+            Administradores
           </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="registros.php">Registrar nuevo administrador</a></li>
